@@ -117,7 +117,7 @@
 <div class="header">
   <h1>📊 Revenue Intelligence Dashboard</h1>
   <div class="meta">
-    As of June 7, 2026 &nbsp;·&nbsp; Data window: Apr – Jun 2026<br>
+    As of June 8, 2026 &nbsp;·&nbsp; Data window: Apr – Jun 2026<br>
     <span class="badge badge-actual">ACTUAL</span> Apr &nbsp;
     <span class="badge badge-forecast">FORECAST</span> May (full month) &nbsp;
     <span class="badge badge-mtd">MTD 5/22 BD</span> Jun
@@ -139,8 +139,8 @@
   </div>
   <div class="kpi-card">
     <div class="label">Jun Projected</div>
-    <div class="value">$4.67M</div>
-    <div class="delta delta-up">▲ 8.6% vs May</div>
+    <div class="value">$4.79M</div>
+    <div class="delta delta-up">▲ 11.3% vs May</div>
     <div class="sub"><span class="badge badge-mtd">5 of 22 BD elapsed</span></div>
   </div>
   <div class="kpi-card">
@@ -161,7 +161,7 @@
   </div>
   <div class="kpi-card">
     <div class="label">Jun MTD Margin</div>
-    <div class="value">66.8%</div>
+    <div class="value">66.6%</div>
     <div class="sub">5 BD elapsed</div>
   </div>
   <div class="kpi-card">
@@ -347,8 +347,8 @@
     </div>
     <div class="kpi-card">
       <div class="label">Jun vs May Deviation</div>
-      <div class="value" style="color:var(--red)">-$90.6K</div>
-      <div class="delta delta-down">-7.9% behind May pace</div>
+      <div class="value" style="color:var(--red)">-$91.7K</div>
+      <div class="delta delta-down">-8.0% behind May pace</div>
     </div>
   </div>
 
@@ -387,30 +387,30 @@ const industryMeta = {
 };
 
 const indRevenue = {
-  'Small Business Lending': [2026278, 2456944, 626114],
-  'Mortgage':               [1239626, 1193027, 293141],
-  'Consumer':               [402128,  444167,  91110],
-  'Professional Services':  [172244,  132739,  33275],
-  'Property Management':    [0,       42952,   9894],
-  'Medicaid':               [13039,   15878,   5000],
-  'Banking/KYC':            [2013,    10899,   1571],
-  'Other Lending':          [4503,    3467,    1064]
+  'Small Business Lending': [2026278, 2456944, 633553],
+  'Mortgage':               [1239626, 1193027, 301793],
+  'Consumer':               [402128,  444167,  100266],
+  'Professional Services':  [172244,  132739,  33230],
+  'Property Management':    [0,       42952,   11325],
+  'Medicaid':               [13039,   15878,   5018],
+  'Banking/KYC':            [2013,    10899,   1700],
+  'Other Lending':          [4503,    3467,    1070]
 };
 
 const indGM = {
-  'Small Business Lending': [74.0, 78.6, 77.0],
-  'Mortgage':               [46.0, 40.9, 42.4],
-  'Consumer':               [66.1, 70.8, 69.3],
+  'Small Business Lending': [74.0, 78.6, 76.7],
+  'Mortgage':               [46.0, 40.9, 42.6],
+  'Consumer':               [66.1, 70.8, 69.6],
   'Professional Services':  [80.0, 80.4, 79.0],
-  'Property Management':    [null, 78.8, 79.1],
-  'Medicaid':               [51.6, 57.9, 57.7],
-  'Banking/KYC':            [88.4, 88.9, 88.1],
-  'Other Lending':          [71.9, 80.5, 67.7]
+  'Property Management':    [null, 78.8, 79.0],
+  'Medicaid':               [51.6, 57.9, 57.6],
+  'Banking/KYC':            [88.4, 88.9, 88.4],
+  'Other Lending':          [71.9, 80.5, 67.1]
 };
 
-const compRev    = [3859831, 4300073, 1061169];
-const compRevAdj = [3859831, 4300073, 4669144]; // Jun projected
-const compGM     = [64.4, 67.3, 66.8];
+const compRev    = [3859831, 4300073, 1087955];
+const compRevAdj = [3859831, 4300073, 4787002]; // Jun projected
+const compGM     = [64.4, 67.3, 66.6];
 
 /* 12-month ARR trend (FINANCE_RAMP — not subject to 3-month window; Jun projected) */
 const arrMonthly = [
@@ -424,11 +424,11 @@ const arrMonthly = [
   {m:'Feb 2026', arr:49012410, projected:false},
   {m:'Mar 2026', arr:49113175, projected:false},
   {m:'Apr 2026', arr:47878397, projected:false},
-  {m:'May 2026', arr:51032994, projected:false},
+  {m:'May 2026', arr:51015815, projected:false},
   {m:'Jun 2026 (MTD)', arr:null, projected:true}  // ARR not yet available — month still open
 ];
 // GM% aligned to arrMonthly (null = outside 3-month window)
-const gmByMonth = [null,null,null,null,null,null,null,null,null, 64.4, 67.3, 66.8];
+const gmByMonth = [null,null,null,null,null,null,null,null,null, 64.4, 67.3, 66.6];
 
 /* Section 2 */
 const top10Arr = [
@@ -470,64 +470,64 @@ const top10Rev = {
     {rank:10,name:'CoreLogic Sandbox',         ind:'Mortgage',               rev:86360,  gm:-57.4}
   ],
   'Jun 2026 (Proj)': [
-    {rank:1, name:'Rapid Finance',             ind:'Small Business Lending', rev:560850, gm:92.0},
-    {rank:2, name:'OnDeck',                    ind:'Small Business Lending', rev:259785, gm:77.2},
-    {rank:3, name:'Expansion Capital Group',   ind:'Small Business Lending', rev:235070, gm:74.2},
-    {rank:4, name:'Funding Metrics',           ind:'Small Business Lending', rev:143150, gm:70.5},
-    {rank:5, name:'Marlin Leasing',            ind:'Small Business Lending', rev:137280, gm:83.3},
-    {rank:6, name:'Fora Financial',            ind:'Small Business Lending', rev:136783, gm:88.6},
-    {rank:7, name:'Kalamata Capital',          ind:'Small Business Lending', rev:114580, gm:83.3},
-    {rank:8, name:'Nova Credit',               ind:'Consumer',               rev:109054, gm:74.4},
-    {rank:9, name:'Zillow – Encompass',        ind:'Mortgage',               rev:98340,  gm:-12.4},
-    {rank:10,name:'Lendr',                     ind:'Small Business Lending', rev:86086,  gm:78.8}
+    {rank:1, name:'Rapid Finance',             ind:'Small Business Lending', rev:567046, gm:91.8},
+    {rank:2, name:'OnDeck',                    ind:'Small Business Lending', rev:264409, gm:77.0},
+    {rank:3, name:'Expansion Capital Group',   ind:'Small Business Lending', rev:237635, gm:73.8},
+    {rank:4, name:'Funding Metrics',           ind:'Small Business Lending', rev:143198, gm:69.9},
+    {rank:5, name:'Marlin Leasing',            ind:'Small Business Lending', rev:138411, gm:83.1},
+    {rank:6, name:'Fora Financial',            ind:'Small Business Lending', rev:137262, gm:88.2},
+    {rank:7, name:'Nova Credit',               ind:'Consumer',               rev:122518, gm:74.6},
+    {rank:8, name:'Kalamata Capital',          ind:'Small Business Lending', rev:113577, gm:82.7},
+    {rank:9, name:'Zillow – Encompass',        ind:'Mortgage',               rev:105279, gm:-11.6},
+    {rank:10,name:'Lendr',                     ind:'Small Business Lending', rev:85413,  gm:78.2}
   ]
 };
 
 /* Section 3 */
 const revDrops = [
-  {name:'Fresh Funding Solutions',     pk:'1638',  ind:'Small Business Lending',  revApr:8308,   revMay:0,     pct:-100,  junProj:16304,  note:'Effectively churned in May'},
-  {name:'Cardiff',                     pk:'1998',  ind:'Small Business Lending',  revApr:5652,   revMay:28,    pct:-99.5, junProj:86,     note:'Near-zero May revenue'},
-  {name:'Better Mortgage (BSIC)',      pk:'13801', ind:'Mortgage',                revApr:5976,   revMay:341,   pct:-94.3, junProj:232,    note:'Separate billing entity'},
+  {name:'Fresh Funding Solutions',     pk:'1638',  ind:'Small Business Lending',  revApr:8308,   revMay:0,     pct:-100,  junProj:16284,  note:'Effectively churned in May'},
+  {name:'Cardiff',                     pk:'1998',  ind:'Small Business Lending',  revApr:5652,   revMay:28,    pct:-99.5, junProj:88,     note:'Near-zero May revenue'},
+  {name:'Better Mortgage (BSIC)',      pk:'13801', ind:'Mortgage',                revApr:5976,   revMay:341,   pct:-94.3, junProj:233,    note:'Separate billing entity'},
   {name:'Rapid Finance 2026 Retro',   pk:'14733', ind:'Small Business Lending',  revApr:52015,  revMay:6137,  pct:-88.2, junProj:null,   note:'One-time retro billing in Apr'},
-  {name:'Basepoint Production',        pk:'11356', ind:'Small Business Lending',  revApr:94645,  revMay:17082, pct:-82.0, junProj:16918,  note:'High ARR client – volume drop'},
-  {name:'Kapitus',                     pk:'460',   ind:'Small Business Lending',  revApr:73266,  revMay:13812, pct:-81.1, junProj:16111,  note:'Significant volume pullback'},
-  {name:'CrossCountry Mortgage',       pk:'4017',  ind:'Mortgage',                revApr:53849,  revMay:11110, pct:-79.4, junProj:15483,  note:'Volume pullback'},
-  {name:'Loan Scorecard',             pk:'3794',  ind:'Mortgage',                revApr:11678,  revMay:2858,  pct:-75.5, junProj:1170,   note:''},
-  {name:'Sage Forensic Accounting',   pk:'9674',  ind:'Professional Services',   revApr:5538,   revMay:2185,  pct:-60.5, junProj:3554,   note:''},
-  {name:'CliftonLarsonAllen',         pk:'1231',  ind:'Professional Services',   revApr:20426,  revMay:8578,  pct:-58.0, junProj:8143,   note:''},
-  {name:'JS Held LLC',                pk:'2325',  ind:'Professional Services',   revApr:7412,   revMay:3390,  pct:-54.3, junProj:7045,   note:''},
-  {name:'Fundworks',                   pk:'749',   ind:'Small Business Lending',  revApr:32967,  revMay:16475, pct:-50.0, junProj:18338,  note:''}
+  {name:'Basepoint Production',        pk:'11356', ind:'Small Business Lending',  revApr:94645,  revMay:17082, pct:-82.0, junProj:16896,  note:'High ARR client – volume drop'},
+  {name:'Kapitus',                     pk:'460',   ind:'Small Business Lending',  revApr:73266,  revMay:13812, pct:-81.1, junProj:16091,  note:'Significant volume pullback'},
+  {name:'CrossCountry Mortgage',       pk:'4017',  ind:'Mortgage',                revApr:53849,  revMay:11110, pct:-79.4, junProj:15462,  note:'Volume pullback'},
+  {name:'Loan Scorecard',             pk:'3794',  ind:'Mortgage',                revApr:11678,  revMay:2858,  pct:-75.5, junProj:1166,   note:''},
+  {name:'Sage Forensic Accounting',   pk:'9674',  ind:'Professional Services',   revApr:5538,   revMay:2185,  pct:-60.5, junProj:3551,   note:''},
+  {name:'CliftonLarsonAllen',         pk:'1231',  ind:'Professional Services',   revApr:20426,  revMay:8578,  pct:-58.0, junProj:8131,   note:''},
+  {name:'JS Held LLC',                pk:'2325',  ind:'Professional Services',   revApr:7412,   revMay:3390,  pct:-54.3, junProj:7040,   note:''},
+  {name:'Fundworks',                   pk:'749',   ind:'Small Business Lending',  revApr:32967,  revMay:16475, pct:-50.0, junProj:18313,  note:''}
 ];
 
 /* Section 4 */
 const marginWatch = [
-  {name:'CoreLogic Sandbox',         ind:'Mortgage',              revApr:70205, revMay:86360, gmApr:-57.4, gmMay:-58.7, gmCur:-64.4, mDelta:-1.3, rDelta:23},
-  {name:'Dragin',                    ind:'Small Business Lending', revApr:20866, revMay:25070, gmApr:-30.9, gmMay:-47.5, gmCur:-58.4, mDelta:-16.6, rDelta:20.1},
-  {name:'First Community Mortgage',  ind:'Mortgage',              revApr:41160, revMay:34559, gmApr:-35.0, gmMay:-47.8, gmCur:-77.8, mDelta:-12.8, rDelta:-16},
-  {name:'Mulligan Funding',          ind:'Small Business Lending', revApr:25127, revMay:30610, gmApr:35.1,  gmMay:23.5,  gmCur:23.3,  mDelta:-11.6, rDelta:21.8},
-  {name:'Sofi – Encompass',          ind:'Mortgage',              revApr:56003, revMay:53383, gmApr:75.6,  gmMay:64.1,  gmCur:62.9,  mDelta:-11.5, rDelta:-4.7},
-  {name:'Channel Partners',          ind:'Small Business Lending', revApr:28344, revMay:30269, gmApr:79.2,  gmMay:72.2,  gmCur:72.9,  mDelta:-7.0,  rDelta:6.8},
-  {name:'Lendio',                    ind:'Small Business Lending', revApr:27442, revMay:34289, gmApr:60.8,  gmMay:55.2,  gmCur:49.3,  mDelta:-5.6,  rDelta:25.0},
-  {name:'Cake Mortgage',             ind:'Mortgage',              revApr:18113, revMay:14631, gmApr:50.7,  gmMay:46.2,  gmCur:49.9,  mDelta:-4.5,  rDelta:-19.2},
-  {name:'Zillow – Encompass',        ind:'Mortgage',              revApr:97393, revMay:99193, gmApr:-1.9,  gmMay:-6.2,  gmCur:-12.4, mDelta:-4.3,  rDelta:1.8},
-  {name:'Pearl Capital',             ind:'Small Business Lending', revApr:59664, revMay:58196, gmApr:69.5,  gmMay:66.0,  gmCur:62.4,  mDelta:-3.5,  rDelta:-2.5},
-  {name:'OnDeck',                    ind:'Small Business Lending', revApr:227472,revMay:232631,gmApr:83.8,  gmMay:80.4,  gmCur:77.2,  mDelta:-3.4,  rDelta:2.3},
-  {name:'National Funding',          ind:'Small Business Lending', revApr:14786, revMay:13654, gmApr:86.8,  gmMay:83.5,  gmCur:79.0,  mDelta:-3.3,  rDelta:-7.7},
-  {name:'SoFi',                      ind:'Consumer',              revApr:27624, revMay:24572, gmApr:73.1,  gmMay:70.1,  gmCur:74.2,  mDelta:-3.0,  rDelta:-11.0},
-  {name:'Nations Direct – Encompass',ind:'Mortgage',              revApr:15640, revMay:12137, gmApr:21.8,  gmMay:19.0,  gmCur:19.1,  mDelta:-2.8,  rDelta:-22.4},
-  {name:'GVA BOX',                   ind:'Small Business Lending', revApr:11475, revMay:10042, gmApr:78.6,  gmMay:76.1,  gmCur:74.9,  mDelta:-2.5,  rDelta:-12.5},
-  {name:'Libertas Funding',          ind:'Small Business Lending', revApr:67479, revMay:54859, gmApr:84.2,  gmMay:81.8,  gmCur:84.0,  mDelta:-2.4,  rDelta:-18.7},
-  {name:'ForwardLine',               ind:'Small Business Lending', revApr:43448, revMay:50426, gmApr:74.9,  gmMay:72.7,  gmCur:69.8,  mDelta:-2.2,  rDelta:16.1},
-  {name:'Newrez',                    ind:'Mortgage',              revApr:33108, revMay:35657, gmApr:71.7,  gmMay:69.6,  gmCur:63.5,  mDelta:-2.1,  rDelta:7.7},
-  {name:'BHG',                       ind:'Small Business Lending', revApr:31940, revMay:34458, gmApr:69.4,  gmMay:67.8,  gmCur:66.5,  mDelta:-1.6,  rDelta:7.9},
-  {name:'Wayflyer',                  ind:'Small Business Lending', revApr:22387, revMay:26766, gmApr:70.2,  gmMay:68.8,  gmCur:66.4,  mDelta:-1.4,  rDelta:19.6},
-  {name:'Neighborhood Loans',        ind:'Mortgage',              revApr:11781, revMay:11031, gmApr:38.3,  gmMay:36.9,  gmCur:42.7,  mDelta:-1.4,  rDelta:-6.4},
-  {name:'Idea Financial',            ind:'Small Business Lending', revApr:26781, revMay:27730, gmApr:82.1,  gmMay:80.7,  gmCur:78.2,  mDelta:-1.4,  rDelta:3.5},
-  {name:'Boom Pay',                  ind:'Consumer',              revApr:40863, revMay:42914, gmApr:60.1,  gmMay:59.1,  gmCur:59.6,  mDelta:-1.0,  rDelta:5.0},
-  {name:'Plaid',                     ind:'Consumer',              revApr:58069, revMay:60731, gmApr:70.9,  gmMay:70.2,  gmCur:67.6,  mDelta:-0.7,  rDelta:4.6},
-  {name:'Union Home Mortgage',       ind:'Mortgage',              revApr:25312, revMay:24263, gmApr:46.4,  gmMay:45.7,  gmCur:38.1,  mDelta:-0.7,  rDelta:-4.1},
-  {name:'Expansion Capital Group',   ind:'Small Business Lending', revApr:180568,revMay:195528,gmApr:74.5,  gmMay:73.9,  gmCur:74.2,  mDelta:-0.6,  rDelta:8.3},
-  {name:'AnnieMac Home Mortgage',    ind:'Mortgage',              revApr:34320, revMay:35758, gmApr:79.4,  gmMay:78.9,  gmCur:83.1,  mDelta:-0.5,  rDelta:4.2}
+  {name:'CoreLogic Sandbox',         ind:'Mortgage',              revApr:70205, revMay:86360, revCur:19137, gmApr:7.0,   gmMay:-57.4, gmCur:-58.1, mDelta:-64.4, rDelta:23.0},
+  {name:'Dragin',                    ind:'Small Business Lending', revApr:20866, revMay:25070, revCur:6531,  gmApr:-30.9, gmMay:-47.5, gmCur:-64.1, mDelta:-16.6, rDelta:20.1},
+  {name:'First Community Mortgage',  ind:'Mortgage',              revApr:41160, revMay:34559, revCur:8458,  gmApr:-35.0, gmMay:-47.8, gmCur:-73.3, mDelta:-12.8, rDelta:-16.0},
+  {name:'Mulligan Funding',          ind:'Small Business Lending', revApr:25127, revMay:30610, revCur:6923,  gmApr:35.1,  gmMay:23.5,  gmCur:21.6,  mDelta:-11.6, rDelta:21.8},
+  {name:'Sofi – Encompass',          ind:'Mortgage',              revApr:56003, revMay:53383, revCur:12618, gmApr:75.6,  gmMay:64.1,  gmCur:63.1,  mDelta:-11.5, rDelta:-4.7},
+  {name:'Channel Partners',          ind:'Small Business Lending', revApr:28344, revMay:30269, revCur:8769,  gmApr:79.2,  gmMay:72.2,  gmCur:72.6,  mDelta:-7.0,  rDelta:6.8},
+  {name:'Lendio',                    ind:'Small Business Lending', revApr:27442, revMay:34289, revCur:7812,  gmApr:60.8,  gmMay:55.2,  gmCur:50.0,  mDelta:-5.6,  rDelta:24.9},
+  {name:'Cake Mortgage',             ind:'Mortgage',              revApr:18113, revMay:14631, revCur:3115,  gmApr:50.7,  gmMay:46.2,  gmCur:49.7,  mDelta:-4.5,  rDelta:-19.2},
+  {name:'Zillow – Encompass',        ind:'Mortgage',              revApr:97393, revMay:99193, revCur:23927, gmApr:-1.9,  gmMay:-6.2,  gmCur:-11.6, mDelta:-4.3,  rDelta:1.8},
+  {name:'Pearl Capital',             ind:'Small Business Lending', revApr:59664, revMay:58196, revCur:16657, gmApr:69.5,  gmMay:66.0,  gmCur:61.5,  mDelta:-3.5,  rDelta:-2.5},
+  {name:'OnDeck',                    ind:'Small Business Lending', revApr:227472,revMay:232631,revCur:60093, gmApr:83.8,  gmMay:80.4,  gmCur:77.0,  mDelta:-3.4,  rDelta:2.3},
+  {name:'National Funding',          ind:'Small Business Lending', revApr:14786, revMay:13654, revCur:2648,  gmApr:86.8,  gmMay:83.5,  gmCur:78.9,  mDelta:-3.3,  rDelta:-7.7},
+  {name:'SoFi',                      ind:'Consumer',              revApr:27624, revMay:24572, revCur:5945,  gmApr:73.1,  gmMay:70.1,  gmCur:74.3,  mDelta:-3.0,  rDelta:-11.0},
+  {name:'Nations Direct – Encompass',ind:'Mortgage',              revApr:15640, revMay:12137, revCur:2798,  gmApr:21.8,  gmMay:19.0,  gmCur:19.3,  mDelta:-2.8,  rDelta:-22.4},
+  {name:'GVA BOX',                   ind:'Small Business Lending', revApr:11475, revMay:10042, revCur:3384,  gmApr:78.6,  gmMay:76.1,  gmCur:74.4,  mDelta:-2.5,  rDelta:-12.5},
+  {name:'Libertas Funding',          ind:'Small Business Lending', revApr:67479, revMay:54859, revCur:16855, gmApr:84.2,  gmMay:81.8,  gmCur:83.8,  mDelta:-2.4,  rDelta:-18.7},
+  {name:'ForwardLine',               ind:'Small Business Lending', revApr:43448, revMay:50426, revCur:11659, gmApr:74.9,  gmMay:72.7,  gmCur:69.0,  mDelta:-2.2,  rDelta:16.1},
+  {name:'Newrez',                    ind:'Mortgage',              revApr:33108, revMay:35657, revCur:12886, gmApr:71.7,  gmMay:69.6,  gmCur:62.9,  mDelta:-2.1,  rDelta:7.7},
+  {name:'BHG',                       ind:'Small Business Lending', revApr:31940, revMay:34458, revCur:7648,  gmApr:69.4,  gmMay:67.8,  gmCur:66.4,  mDelta:-1.6,  rDelta:7.9},
+  {name:'Wayflyer',                  ind:'Small Business Lending', revApr:22387, revMay:26766, revCur:9508,  gmApr:70.2,  gmMay:68.8,  gmCur:66.3,  mDelta:-1.4,  rDelta:19.6},
+  {name:'Neighborhood Loans',        ind:'Mortgage',              revApr:11781, revMay:11031, revCur:3089,  gmApr:38.3,  gmMay:36.9,  gmCur:42.5,  mDelta:-1.4,  rDelta:-6.4},
+  {name:'Idea Financial',            ind:'Small Business Lending', revApr:26781, revMay:27730, revCur:7114,  gmApr:82.1,  gmMay:80.7,  gmCur:77.8,  mDelta:-1.4,  rDelta:3.5},
+  {name:'Boom Pay',                  ind:'Consumer',              revApr:40863, revMay:42914, revCur:9330,  gmApr:60.1,  gmMay:59.1,  gmCur:59.6,  mDelta:-1.0,  rDelta:5.0},
+  {name:'Union Home Mortgage',       ind:'Mortgage',              revApr:25312, revMay:24263, revCur:7252,  gmApr:46.4,  gmMay:45.7,  gmCur:37.5,  mDelta:-0.7,  rDelta:-4.1},
+  {name:'Plaid',                     ind:'Consumer',              revApr:58069, revMay:60731, revCur:13348, gmApr:70.9,  gmMay:70.2,  gmCur:67.5,  mDelta:-0.7,  rDelta:4.6},
+  {name:'Expansion Capital Group',   ind:'Small Business Lending', revApr:180568,revMay:195528,revCur:54008, gmApr:74.5,  gmMay:73.9,  gmCur:73.8,  mDelta:-0.6,  rDelta:8.3},
+  {name:'AnnieMac Home Mortgage',    ind:'Mortgage',              revApr:34320, revMay:35758, revCur:7811,  gmApr:79.4,  gmMay:78.9,  gmCur:83.5,  mDelta:-0.5,  rDelta:4.2}
 ];
 
 /* Section 5 – daily data */
@@ -545,8 +545,9 @@ const mayDays = [
   {d:'05/31',w:0,rev:24161,gm:65.4}
 ];
 const junDays = [
-  {d:'06/01',w:1,rev:219568,gm:66.2},{d:'06/02',w:1,rev:224114,gm:68.3},
-  {d:'06/03',w:1,rev:227615,gm:68.1},{d:'06/04',w:1,rev:214962,gm:67.5},{d:'06/05',w:1,rev:174910,gm:63.1}
+  {d:'06/01',w:1,rev:219513,gm:66.0},{d:'06/02',w:1,rev:224129,gm:68.1},
+  {d:'06/03',w:1,rev:227581,gm:67.9},{d:'06/04',w:1,rev:214939,gm:67.3},{d:'06/05',w:1,rev:174943,gm:63.0},
+  {d:'06/06',w:0,rev:26850, gm:65.1}
 ];
 
 /* ═══════════════════════ HELPERS ═══════════════════════ */
@@ -761,13 +762,13 @@ new C(document.getElementById('chartMoM'), {
     labels: ['Apr 2026 (Actual)', 'May 2026 (Full Mo.)', 'Jun 2026 (Projected)'],
     datasets: [{
       label: 'Revenue',
-      data: [3859831, 4300073, 4669144],
+      data: [3859831, 4300073, 4787002],
       backgroundColor: ['rgba(63,185,80,.7)', 'rgba(79,156,249,.7)', 'rgba(210,153,34,.7)'],
       borderColor:     ['rgba(63,185,80,1)',   'rgba(79,156,249,1)',  'rgba(210,153,34,1)'],
       borderWidth: 1, borderRadius: 4
     }, {
       label: 'GM% (right axis)',
-      data: [64.4, 67.3, 66.8],
+      data: [64.4, 67.3, 66.6],
       type: 'line', yAxisID: 'y2',
       borderColor: '#fb923c', backgroundColor: 'rgba(251,146,60,.1)',
       pointBackgroundColor: '#fb923c', tension: .3, borderWidth: 2,
@@ -928,13 +929,4 @@ new C(document.getElementById('chartMayDaily'), {
   }
 });
 
-/* ═══════════════════════ TAB NAVIGATION ═══════════════════════ */
-function showTab(id, btn) {
-  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('tab-'+id).classList.add('active');
-  if(btn) btn.classList.add('active');
-}
-</script>
-</body>
-</html>
+/* ═════════════════════
