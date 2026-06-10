@@ -6,146 +6,69 @@
 <title>Ocrolus Revenue Intelligence Dashboard</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
-  :root {
-    --bg: #0d1117; --card: #161b22; --border: #21262d; --accent: #4f9cf9;
-    --green: #3fb950; --yellow: #d29922; --red: #f85149; --orange: #e3703a;
-    --text: #c9d1d9; --muted: #8b949e; --white: #f0f6fc;
-    --sbl: #4f9cf9; --mortgage: #a78bfa; --consumer: #34d399;
-    --profserv: #fbbf24; --other: #fb7185;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 13px; }
-
-  .header { padding: 18px 24px 14px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-  .header h1 { font-size: 18px; font-weight: 600; color: var(--white); }
-  .header .meta { font-size: 11px; color: var(--muted); text-align: right; line-height: 1.6; }
-  .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 600; }
-  .badge-actual { background: rgba(63,185,80,.2); color: var(--green); }
-  .badge-forecast { background: rgba(79,156,249,.2); color: var(--accent); }
-  .badge-mtd { background: rgba(210,153,34,.2); color: var(--yellow); }
-
-  .kpi-strip { display: flex; gap: 10px; padding: 14px 24px; overflow-x: auto; border-bottom: 1px solid var(--border); }
-  .kpi-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; min-width: 130px; flex-shrink: 0; }
-  .kpi-card .label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
-  .kpi-card .value { font-size: 20px; font-weight: 700; color: var(--white); }
-  .kpi-card .sub { font-size: 10px; color: var(--muted); margin-top: 3px; }
-  .kpi-card .delta { font-size: 11px; font-weight: 600; margin-top: 2px; }
-  .delta-up { color: var(--green); }
-  .delta-down { color: var(--red); }
-  .delta-neutral { color: var(--yellow); }
-
-  .tabs { display: flex; gap: 2px; padding: 12px 24px 0; border-bottom: 1px solid var(--border); background: var(--bg); position: sticky; top: 0; z-index: 100; }
-  .tab-btn { background: transparent; border: none; color: var(--muted); padding: 8px 14px; border-radius: 6px 6px 0 0; cursor: pointer; font-size: 12px; font-weight: 500; border-bottom: 2px solid transparent; transition: all .15s; }
-  .tab-btn:hover { color: var(--text); background: rgba(255,255,255,.04); }
-  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); background: rgba(79,156,249,.06); }
-
-  .tab-content { display: none; padding: 20px 24px; }
-  .tab-content.active { display: block; }
-
-  .section-title { font-size: 13px; font-weight: 600; color: var(--white); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-  .section-sub { font-size: 11px; color: var(--muted); font-weight: 400; }
-
-  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
-  .card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
-  .card-title { font-size: 12px; font-weight: 600; color: var(--white); margin-bottom: 12px; }
-
-  .tbl { width: 100%; border-collapse: collapse; font-size: 12px; }
-  .tbl th { text-align: left; padding: 7px 10px; color: var(--muted); font-weight: 500; border-bottom: 1px solid var(--border); font-size: 10px; text-transform: uppercase; letter-spacing: .4px; white-space: nowrap; }
-  .tbl td { padding: 7px 10px; border-bottom: 1px solid rgba(33,38,45,.6); white-space: nowrap; }
-  .tbl tr:last-child td { border-bottom: none; }
-  .tbl tr:hover td { background: rgba(255,255,255,.03); }
-  .tbl .right { text-align: right; }
-  .rank-badge { display: inline-block; width: 20px; height: 20px; border-radius: 50%; font-size: 10px; font-weight: 700; line-height: 20px; text-align: center; background: rgba(79,156,249,.2); color: var(--accent); }
-  .rank-gold { background: rgba(255,215,0,.2); color: #ffd700; }
-  .rank-silver { background: rgba(192,192,192,.2); color: #c0c0c0; }
-  .rank-bronze { background: rgba(205,127,50,.2); color: #cd7f32; }
-
-  .gm-green { color: var(--green); font-weight: 600; }
-  .gm-yellow { color: var(--yellow); font-weight: 600; }
-  .gm-red { color: var(--red); font-weight: 600; }
-
-  .alert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin-bottom: 20px; }
-  .alert-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 14px; border-left: 3px solid var(--red); }
-  .alert-card .client-name { font-size: 13px; font-weight: 600; color: var(--white); margin-bottom: 6px; }
-  .alert-card .client-ind { font-size: 10px; color: var(--muted); margin-bottom: 8px; }
-  .alert-card .rev-row { display: flex; justify-content: space-between; align-items: center; font-size: 11px; margin-top: 4px; }
-  .alert-card .rev-label { color: var(--muted); }
-  .alert-card .rev-val { font-weight: 600; color: var(--white); }
-  .alert-card .drop-pct { font-size: 16px; font-weight: 700; color: var(--red); }
-
-  .month-switcher { display: flex; gap: 6px; margin-bottom: 14px; }
-  .month-btn { background: var(--card); border: 1px solid var(--border); color: var(--muted); padding: 5px 12px; border-radius: 4px; cursor: pointer; font-size: 11px; font-weight: 500; transition: all .15s; }
-  .month-btn.active { background: rgba(79,156,249,.15); border-color: var(--accent); color: var(--accent); }
-
-  .pill { display: inline-block; padding: 1px 7px; border-radius: 10px; font-size: 10px; font-weight: 500; }
-  .pill-sbl { background: rgba(79,156,249,.15); color: var(--sbl); }
-  .pill-mortgage { background: rgba(167,139,250,.15); color: var(--mortgage); }
-  .pill-consumer { background: rgba(52,211,153,.15); color: var(--consumer); }
-  .pill-profserv { background: rgba(251,191,36,.15); color: var(--profserv); }
-  .pill-other { background: rgba(251,113,133,.15); color: var(--other); }
-  .pill-medicaid { background: rgba(249,115,22,.15); color: #fb923c; }
-  .pill-propman { background: rgba(34,211,238,.15); color: #22d3ee; }
-
-  canvas { display: block; }
-  .chart-wrap { position: relative; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #0d1117; color: #e6edf3; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; line-height: 1.5; }
+.header { background: #161b22; border-bottom: 1px solid #30363d; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
+.header h1 { font-size: 18px; font-weight: 600; color: #e6edf3; }
+.header .meta { font-size: 12px; color: #8b949e; margin-top: 2px; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+.tabs { display: flex; background: #161b22; border-bottom: 1px solid #30363d; padding: 0 24px; overflow-x: auto; }
+.tab-btn { padding: 12px 16px; border: none; background: none; color: #8b949e; font-size: 14px; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; }
+.tab-btn:hover { color: #e6edf3; }
+.tab-btn.active { color: #58a6ff; border-bottom-color: #58a6ff; }
+.tab-content { display: none; padding: 24px; }
+.tab-content.active { display: block; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 24px; }
+.card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; }
+.card-header { font-size: 12px; color: #8b949e; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.card-value { font-size: 28px; font-weight: 700; color: #e6edf3; }
+.card-sub { font-size: 12px; color: #8b949e; margin-top: 4px; }
+.card-change { font-size: 13px; margin-top: 6px; }
+.change-up { color: #3fb950; }
+.change-down { color: #f85149; }
+.section-title { font-size: 15px; font-weight: 600; color: #e6edf3; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.section-title span { font-size: 12px; font-weight: 400; color: #8b949e; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+thead th { background: #1c2128; color: #8b949e; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; padding: 10px 12px; text-align: left; border-bottom: 1px solid #30363d; white-space: nowrap; }
+tbody tr { border-bottom: 1px solid #21262d; transition: background 0.15s; }
+tbody tr:hover { background: #1c2128; }
+tbody td { padding: 10px 12px; color: #c9d1d9; }
+td.client-name { color: #e6edf3; font-weight: 500; max-width: 240px; }
+.gm-green { color: #3fb950; font-weight: 600; }
+.gm-yellow { color: #d29922; font-weight: 600; }
+.gm-red { color: #f85149; font-weight: 600; }
+.chart-wrap { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 24px; }
+.month-switcher { display: flex; gap: 8px; margin-bottom: 16px; }
+.month-btn { padding: 6px 16px; border: 1px solid #30363d; background: none; color: #8b949e; border-radius: 6px; cursor: pointer; font-size: 13px; }
+.month-btn.active { background: #0d2a4e; border-color: #58a6ff; color: #58a6ff; }
+.month-btn:hover:not(.active) { color: #e6edf3; border-color: #8b949e; }
+.alert-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+.alert-card { background: #1a0909; border: 1px solid #5a1a1a; border-radius: 8px; padding: 20px; text-align: center; }
+.alert-card .val { font-size: 32px; font-weight: 700; color: #f85149; }
+.alert-card .lbl { font-size: 12px; color: #8b949e; margin-top: 4px; }
+.rank-badge { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; background: #1c2128; border-radius: 50%; font-size: 11px; color: #8b949e; }
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+.tag { display: inline-block; padding: 1px 8px; border-radius: 4px; font-size: 11px; }
+.tag-actual   { background: #1a4731; color: #3fb950; }
+.tag-forecast { background: #0d2a4e; color: #58a6ff; }
+.tag-projected { background: #2d2a04; color: #d29922; }
+footer { text-align: center; padding: 16px; color: #8b949e; font-size: 12px; border-top: 1px solid #21262d; margin-top: 8px; }
 </style>
 </head>
 <body>
 
 <div class="header">
   <div>
-    <h1>Ocrolus Revenue Intelligence Dashboard</h1>
-    <div style="font-size:11px;color:var(--muted);margin-top:3px;">Automated refresh · All figures in USD</div>
+    <h1>⚡ Ocrolus Revenue Intelligence Dashboard</h1>
+    <div class="meta">Powered by live Snowflake data &nbsp;·&nbsp; 3-month rolling window (Apr–Jun 2026) &nbsp;·&nbsp; 12-month ARR trend</div>
   </div>
-  <div class="meta">
-    As of <strong style="color:var(--white)">June 10, 2026</strong><br>
-    <span class="badge badge-actual">ACTUAL</span> Apr &nbsp;
-    <span class="badge badge-forecast">FORECAST</span> May &nbsp;
-    <span class="badge badge-mtd">MTD</span> Jun
+  <div style="text-align:right">
+    <div style="color:#e6edf3;font-weight:600;font-size:15px;">As of June 10, 2026</div>
+    <div class="meta">Auto-refreshed daily via scheduled task</div>
   </div>
 </div>
 
-<!-- KPI STRIP -->
-<div class="kpi-strip">
-  <div class="kpi-card">
-    <div class="label">Latest ARR</div>
-    <div class="value">$51.8M</div>
-    <div class="delta delta-up">▲ +6.6% MoM</div>
-    <div class="sub">May 2026 · 414 clients</div>
-  </div>
-  <div class="kpi-card">
-    <div class="label">Apr Revenue</div>
-    <div class="value">$3.86M</div>
-    <div class="delta delta-neutral">Actual</div>
-    <div class="sub">Blended GM: 64.4%</div>
-  </div>
-  <div class="kpi-card">
-    <div class="label">May Revenue</div>
-    <div class="value">$4.30M</div>
-    <div class="delta delta-up">▲ +11.4% vs Apr</div>
-    <div class="sub">Forecast · GM: 67.3%</div>
-  </div>
-  <div class="kpi-card">
-    <div class="label">Jun MTD Revenue</div>
-    <div class="value">$1.11M</div>
-    <div class="delta delta-neutral">5 of 22 BDs</div>
-    <div class="sub">Blended GM: 66.4%</div>
-  </div>
-  <div class="kpi-card">
-    <div class="label">Revenue Alerts</div>
-    <div class="value" style="color:var(--red)">12</div>
-    <div class="delta delta-down">▼ &gt;50% drop (Apr→May)</div>
-    <div class="sub">Clients to investigate</div>
-  </div>
-  <div class="kpi-card">
-    <div class="label">Margin Watch</div>
-    <div class="value" style="color:var(--yellow)">27</div>
-    <div class="delta delta-neutral">Stable rev, declining GM</div>
-    <div class="sub">Apr→May squeeze</div>
-  </div>
-</div>
-
-<!-- TABS -->
 <div class="tabs">
   <button class="tab-btn active" onclick="showTab('overview',this)">📊 Overview</button>
   <button class="tab-btn" onclick="showTab('topclients',this)">🏆 Top Clients</button>
@@ -154,487 +77,566 @@
   <button class="tab-btn" onclick="showTab('daily',this)">📅 Daily Trend</button>
 </div>
 
-<!-- ============================================================ TAB 1: OVERVIEW -->
+<!-- ════════════════════════════════════════════ TAB 1: OVERVIEW -->
 <div id="tab-overview" class="tab-content active">
-
-  <div class="card" style="margin-bottom:20px;">
-    <div class="card-title">12-Month ARR Trend <span class="section-sub">— Jul 2025 → Jun 2026</span></div>
-    <div class="chart-wrap" style="height:220px;"><canvas id="arrChart"></canvas></div>
-  </div>
-
-  <div class="grid-2">
+  <div class="grid-3">
     <div class="card">
-      <div class="card-title">Revenue &amp; Margin — Month over Month</div>
-      <table class="tbl">
-        <thead><tr>
-          <th>Month</th><th>Status</th><th class="right">Revenue</th><th class="right">GM%</th><th class="right">Clients</th>
-        </tr></thead>
-        <tbody>
-          <tr>
-            <td><strong style="color:var(--white)">Apr 2026</strong></td>
-            <td><span class="badge badge-actual">ACTUAL</span></td>
-            <td class="right">$3,859,831</td>
-            <td class="right"><span class="gm-yellow">64.4%</span></td>
-            <td class="right">429</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--white)">May 2026</strong></td>
-            <td><span class="badge badge-forecast">FORECAST</span></td>
-            <td class="right">$4,300,073</td>
-            <td class="right"><span class="gm-yellow">67.3%</span></td>
-            <td class="right">419</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--white)">Jun 2026</strong></td>
-            <td><span class="badge badge-mtd">MTD</span></td>
-            <td class="right">$1,111,412</td>
-            <td class="right"><span class="gm-yellow">66.4%</span></td>
-            <td class="right">356</td>
-          </tr>
-        </tbody>
-      </table>
-      <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:11px;color:var(--muted);">
-        May +11.4% vs Apr &nbsp;|&nbsp; Jun on pace for ~$4.89M (5/22 BDs)
-      </div>
+      <div class="card-header">April 2026 <span class="tag tag-actual">Actual</span></div>
+      <div class="card-value">$3.86M</div>
+      <div class="card-sub">426 billed orgs</div>
+      <div class="card-change"><span class="gm-yellow">64.4% Gross Margin</span></div>
     </div>
-
     <div class="card">
-      <div class="card-title">ARR Mix — Latest Month by Industry</div>
-      <div class="chart-wrap" style="height:160px;"><canvas id="arrDonut"></canvas></div>
+      <div class="card-header">May 2026 <span class="tag tag-forecast">Final</span></div>
+      <div class="card-value">$4.30M</div>
+      <div class="card-sub">419 billed orgs</div>
+      <div class="card-change"><span class="change-up">▲ 11.4% MoM</span> &nbsp; <span class="gm-yellow">67.3% GM</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header">June 2026 <span class="tag tag-projected">Projected · 7/22 BDs</span></div>
+      <div class="card-value">$4.87M</div>
+      <div class="card-sub">367 billed orgs MTD</div>
+      <div class="card-change"><span class="change-up">▲ 13.3% vs May</span> &nbsp; <span class="gm-yellow">67.7% GM MTD</span></div>
     </div>
   </div>
 
+  <div class="chart-wrap">
+    <div class="section-title">12-Month ARR Trend <span>Net ARR &amp; active client count by month</span></div>
+    <div style="height:260px"><canvas id="arrTrendChart"></canvas></div>
+  </div>
+
   <div class="grid-2">
-    <div class="card">
-      <div class="card-title">Revenue by Industry <span class="section-sub">— 3-month view</span></div>
-      <div class="chart-wrap" style="height:200px;"><canvas id="industryBar"></canvas></div>
+    <div class="chart-wrap" style="margin-bottom:0">
+      <div class="section-title">Revenue by Industry <span>3-month stacked (MTD for Jun)</span></div>
+      <div style="height:280px"><canvas id="industryStackedChart"></canvas></div>
     </div>
-    <div class="card">
-      <div class="card-title">Industry Detail — May 2026 (Forecast)</div>
-      <table class="tbl">
-        <thead><tr>
-          <th>Industry</th><th class="right">Revenue</th><th class="right">GM%</th><th class="right">Clients</th>
-        </tr></thead>
-        <tbody>
-          <tr><td><span class="pill pill-sbl">Small Business Lending</span></td><td class="right">$2,456,944</td><td class="right"><span class="gm-green">78.6%</span></td><td class="right">153</td></tr>
-          <tr><td><span class="pill pill-mortgage">Mortgage</span></td><td class="right">$1,193,027</td><td class="right"><span class="gm-red">40.9%</span></td><td class="right">167</td></tr>
-          <tr><td><span class="pill pill-consumer">Consumer</span></td><td class="right">$444,167</td><td class="right"><span class="gm-green">70.8%</span></td><td class="right">46</td></tr>
-          <tr><td><span class="pill pill-profserv">Professional Services</span></td><td class="right">$132,739</td><td class="right"><span class="gm-green">80.4%</span></td><td class="right">44</td></tr>
-          <tr><td><span class="pill pill-propman">Property Management</span></td><td class="right">$42,952</td><td class="right"><span class="gm-green">78.8%</span></td><td class="right">1</td></tr>
-          <tr><td><span class="pill pill-medicaid">Medicaid</span></td><td class="right">$15,878</td><td class="right"><span class="gm-yellow">57.9%</span></td><td class="right">1</td></tr>
-          <tr><td><span class="pill pill-other">Banking/KYC</span></td><td class="right">$10,899</td><td class="right"><span class="gm-green">88.9%</span></td><td class="right">3</td></tr>
-          <tr><td><span class="pill pill-other">Other Lending</span></td><td class="right">$3,467</td><td class="right"><span class="gm-green">80.5%</span></td><td class="right">4</td></tr>
-        </tbody>
-      </table>
+    <div class="chart-wrap" style="margin-bottom:0">
+      <div class="section-title">May 2026 Revenue Mix <span>By industry — final month donut</span></div>
+      <div style="height:280px"><canvas id="industryDonutChart"></canvas></div>
     </div>
+  </div>
+
+  <div class="chart-wrap" style="margin-top:24px">
+    <div class="section-title">Industry Breakdown <span>Revenue &amp; Gross Margin % across 3 months</span></div>
+    <table>
+      <thead>
+        <tr>
+          <th>Industry</th>
+          <th>Apr Revenue</th><th>Apr GM%</th>
+          <th>May Revenue</th><th>May GM%</th>
+          <th>Jun MTD</th><th>Jun GM%</th>
+        </tr>
+      </thead>
+      <tbody id="industryTableBody"></tbody>
+    </table>
   </div>
 </div>
 
-<!-- ============================================================ TAB 2: TOP CLIENTS -->
+<!-- ════════════════════════════════════════════ TAB 2: TOP CLIENTS -->
 <div id="tab-topclients" class="tab-content">
-
-  <div class="card" style="margin-bottom:20px;">
-    <div class="card-title">Top Clients by ARR <span class="section-sub">— Latest available snapshot</span></div>
-    <table class="tbl">
-      <thead><tr>
-        <th>#</th><th>Client</th><th>Segment</th><th class="right">Annual Recurring Revenue</th>
-      </tr></thead>
-      <tbody id="arrTable"></tbody>
+  <div class="section-title">Top 10 Clients by Revenue <span>Full-month projected where applicable</span></div>
+  <div class="month-switcher">
+    <button class="month-btn active" onclick="switchTopMonth('apr',this)">April 2026 (Actual)</button>
+    <button class="month-btn" onclick="switchTopMonth('may',this)">May 2026 (Final)</button>
+    <button class="month-btn" onclick="switchTopMonth('jun',this)">June 2026 (Projected)</button>
+  </div>
+  <div class="card" style="margin-bottom:24px">
+    <table>
+      <thead>
+        <tr><th>#</th><th>Client</th><th>Industry</th><th>Revenue</th><th>GM%</th></tr>
+      </thead>
+      <tbody id="topClientTableBody"></tbody>
     </table>
   </div>
 
+  <div class="section-title">Top Clients by ARR <span>Latest available ARR data from FINANCE_RAMP</span></div>
   <div class="card">
-    <div class="card-title">Top 10 Clients by Revenue</div>
-    <div class="month-switcher">
-      <button class="month-btn active" onclick="switchRevMonth('Apr 26',this)">Apr 2026 (Actual)</button>
-      <button class="month-btn" onclick="switchRevMonth('May 26',this)">May 2026 (Forecast)</button>
-      <button class="month-btn" onclick="switchRevMonth('Jun 26',this)">Jun 2026 (MTD)</button>
-    </div>
-    <table class="tbl">
-      <thead><tr>
-        <th>#</th><th>Client</th><th>Segment</th><th class="right">Revenue</th><th class="right">Gross Margin</th>
-      </tr></thead>
-      <tbody id="revTable"></tbody>
+    <table>
+      <thead>
+        <tr><th>#</th><th>Client</th><th>Industry</th><th>Net ARR</th></tr>
+      </thead>
+      <tbody id="arrTopTableBody"></tbody>
     </table>
   </div>
 </div>
 
-<!-- ============================================================ TAB 3: REVENUE ALERTS -->
+<!-- ════════════════════════════════════════════ TAB 3: REVENUE ALERTS -->
 <div id="tab-alerts" class="tab-content">
-  <div class="section-title">
-    Revenue Alert: &gt;50% Drop <span class="section-sub">— April → May 2026 (projected)</span>
+  <div class="section-title">Revenue Drop Alerts <span>Clients with &gt;50% revenue decline — April → May projected</span></div>
+  <div class="alert-cards">
+    <div class="alert-card">
+      <div class="val" id="alertCount">—</div>
+      <div class="lbl">Clients at Risk</div>
+    </div>
+    <div class="alert-card">
+      <div class="val" id="alertRevAtRisk">—</div>
+      <div class="lbl">April Revenue at Risk</div>
+    </div>
+    <div class="alert-card">
+      <div class="val" id="alertAvgDrop">—</div>
+      <div class="lbl">Avg Revenue Drop</div>
+    </div>
   </div>
-  <div class="alert-grid" id="alertCards"></div>
   <div class="card">
-    <div class="card-title">Alert Summary Table</div>
-    <table class="tbl">
-      <thead><tr>
-        <th>#</th><th>Client</th><th>Segment</th>
-        <th class="right">Apr Revenue</th>
-        <th class="right">May Projected</th>
-        <th class="right">Jun MTD</th>
-        <th class="right">Drop %</th>
-      </tr></thead>
-      <tbody id="alertTable"></tbody>
+    <table>
+      <thead>
+        <tr>
+          <th>Client</th><th>Industry</th>
+          <th>Apr Revenue</th><th>May Projected</th><th>Jun Projected</th><th>Drop %</th>
+        </tr>
+      </thead>
+      <tbody id="alertTableBody"></tbody>
     </table>
   </div>
 </div>
 
-<!-- ============================================================ TAB 4: MARGIN WATCH -->
+<!-- ════════════════════════════════════════════ TAB 4: MARGIN WATCH -->
 <div id="tab-margins" class="tab-content">
-  <div class="section-title">
-    Margin Watch <span class="section-sub">— Stable revenue (&lt;30% swing), declining GM (Apr→May)</span>
-  </div>
+  <div class="section-title">Margin Watch <span>Stable revenue (±30% MoM) with declining margins — Apr to May</span></div>
   <div class="card">
-    <table class="tbl">
-      <thead><tr>
-        <th>#</th><th>Client</th><th>Segment</th>
-        <th class="right">Apr Rev</th>
-        <th class="right">May Rev</th>
-        <th class="right">Apr GM%</th>
-        <th class="right">May GM%</th>
-        <th class="right">Jun GM%</th>
-        <th class="right">Δ GM (pp)</th>
-      </tr></thead>
-      <tbody id="marginTable"></tbody>
+    <table>
+      <thead>
+        <tr>
+          <th>Client</th><th>Industry</th>
+          <th>Apr Rev</th><th>May Rev</th><th>Jun Rev</th>
+          <th>Apr GM%</th><th>May GM%</th><th>Jun GM%</th>
+          <th>Margin Δ (pp)</th>
+        </tr>
+      </thead>
+      <tbody id="marginTableBody"></tbody>
     </table>
   </div>
 </div>
 
-<!-- ============================================================ TAB 5: DAILY TREND -->
+<!-- ════════════════════════════════════════════ TAB 5: DAILY TREND -->
 <div id="tab-daily" class="tab-content">
-  <div class="section-title">
-    Daily Revenue Trend <span class="section-sub">— May 2026 vs Jun 2026 (business-day aligned)</span>
+  <div class="section-title">Cumulative Revenue — Jun vs May <span>Business-day aligned</span></div>
+  <div class="chart-wrap">
+    <div style="height:280px"><canvas id="dailyCumRevChart"></canvas></div>
   </div>
-  <div class="card" style="margin-bottom:20px;">
-    <div class="card-title">Cumulative Revenue — Business Day Comparison</div>
-    <div class="chart-wrap" style="height:260px;"><canvas id="cumRevChart"></canvas></div>
-  </div>
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-title">Daily Revenue by Business Day</div>
-      <div class="chart-wrap" style="height:220px;"><canvas id="dailyRevBar"></canvas></div>
-    </div>
-    <div class="card">
-      <div class="card-title">Daily Gross Margin %</div>
-      <div class="chart-wrap" style="height:220px;"><canvas id="dailyGmChart"></canvas></div>
-    </div>
-  </div>
-  <div class="card" style="margin-top:0;">
-    <div class="card-title">June 2026 Daily Detail</div>
-    <table class="tbl">
-      <thead><tr>
-        <th>Date</th><th>Day Type</th><th class="right">Revenue</th><th class="right">GM%</th><th class="right">Cumul Revenue</th>
-      </tr></thead>
-      <tbody id="juneDailyTable"></tbody>
-    </table>
+  <div class="section-title">Daily Gross Margin % <span>Business days — June vs May</span></div>
+  <div class="chart-wrap">
+    <div style="height:220px"><canvas id="dailyGmChart"></canvas></div>
   </div>
 </div>
 
-<!-- ============================= DATA & LOGIC ============================= -->
+<footer>Ocrolus Internal Analytics &nbsp;·&nbsp; Snowflake Data &nbsp;·&nbsp; Refreshed: June 10, 2026 &nbsp;·&nbsp; Auto-scheduled daily</footer>
+
 <script>
-// ── Q1: 12-month ARR trend ──────────────────────────────────────────────────
-const ARR_TREND = [
-  {m:'Jul 25',clients:378,arr:34762939},
-  {m:'Aug 25',clients:401,arr:36672528},
-  {m:'Sep 25',clients:397,arr:39696705},
-  {m:'Oct 25',clients:401,arr:38507630},
-  {m:'Nov 25',clients:399,arr:45572067},
-  {m:'Dec 25',clients:401,arr:44998140},
-  {m:'Jan 26',clients:410,arr:48964915},
-  {m:'Feb 26',clients:408,arr:49814910},
-  {m:'Mar 26',clients:406,arr:49915675},
-  {m:'Apr 26',clients:414,arr:48680897},
-  {m:'May 26',clients:414,arr:51818315},
-  {m:'Jun 26',clients:3,arr:1052500},
+// ═══════════════════════════════════════════════════════════
+// DATA CONSTANTS (all embedded — no server calls)
+// ═══════════════════════════════════════════════════════════
+
+const arrTrend = [
+  { month:"Jul '25", arr:34762939, clients:378 },
+  { month:"Aug '25", arr:36672528, clients:401 },
+  { month:"Sep '25", arr:39696705, clients:397 },
+  { month:"Oct '25", arr:38507630, clients:401 },
+  { month:"Nov '25", arr:45572067, clients:399 },
+  { month:"Dec '25", arr:44998140, clients:401 },
+  { month:"Jan '26", arr:48964915, clients:410 },
+  { month:"Feb '26", arr:49814910, clients:408 },
+  { month:"Mar '26", arr:49915675, clients:406 },
+  { month:"Apr '26", arr:48680897, clients:414 },
+  { month:"May '26", arr:51818315, clients:414 },
 ];
 
-// ── Q3: Top 10 clients by revenue (3 months) ────────────────────────────────
-const TOP_CLIENTS_REV = {
-  'Apr 26': [
-    {name:'OnDeck',industry:'Small Business Lending',rev:227472,gm:83.8},
-    {name:'Expansion Capital Group',industry:'Small Business Lending',rev:180568,gm:74.5},
-    {name:'Rapid Finance',industry:'Small Business Lending',rev:167214,gm:79.3},
-    {name:'The Business Backer',industry:'Small Business Lending',rev:99519,gm:75.6},
-    {name:'Marlin Leasing',industry:'Small Business Lending',rev:97977,gm:83.7},
-    {name:'Zillow - Encompass',industry:'Mortgage',rev:97393,gm:-1.9},
-    {name:'Basepoint',industry:'Small Business Lending',rev:94645,gm:96.8},
-    {name:'Better Mortgage',industry:'Mortgage',rev:84178,gm:56.9},
-    {name:'Kapitus',industry:'Small Business Lending',rev:73266,gm:54.5},
-    {name:'Veterans United Home Loans',industry:'Mortgage',rev:72928,gm:31.7},
+const revenueByIndustry = {
+  apr: [
+    { industry:"Small Business Lending", revenue:2026278, gm:74.0, orgs:154 },
+    { industry:"Mortgage",               revenue:1239626, gm:46.0, orgs:161 },
+    { industry:"Consumer",               revenue:402128,  gm:66.1, orgs:50  },
+    { industry:"Professional Services",  revenue:172244,  gm:80.0, orgs:47  },
+    { industry:"Medicaid",               revenue:13039,   gm:51.6, orgs:2   },
+    { industry:"Other Lending",          revenue:4503,    gm:71.9, orgs:5   },
+    { industry:"Banking/KYC",            revenue:2013,    gm:88.4, orgs:3   },
   ],
-  'May 26': [
-    {name:'Rapid Finance',industry:'Small Business Lending',rev:542706,gm:92.8},
-    {name:'OnDeck',industry:'Small Business Lending',rev:232631,gm:80.4},
-    {name:'Expansion Capital Group',industry:'Small Business Lending',rev:195528,gm:73.9},
-    {name:'Fora Financial',industry:'Small Business Lending',rev:133091,gm:89.8},
-    {name:'Nova Credit',industry:'Consumer',rev:128835,gm:74.1},
-    {name:'Marlin Leasing',industry:'Small Business Lending',rev:115112,gm:84.2},
-    {name:'Zillow - Encompass',industry:'Mortgage',rev:99193,gm:-6.2},
-    {name:'Funding Metrics',industry:'Small Business Lending',rev:99186,gm:71.0},
-    {name:'Kalamata Capital Group',industry:'Small Business Lending',rev:98417,gm:85.1},
-    {name:'CoreLogic - Sandbox',industry:'Mortgage',rev:86360,gm:-57.4},
+  may: [
+    { industry:"Small Business Lending", revenue:2456944, gm:78.6, orgs:153 },
+    { industry:"Mortgage",               revenue:1193027, gm:40.9, orgs:167 },
+    { industry:"Consumer",               revenue:444167,  gm:70.8, orgs:46  },
+    { industry:"Professional Services",  revenue:132739,  gm:80.4, orgs:44  },
+    { industry:"Property Management",    revenue:42952,   gm:78.8, orgs:1   },
+    { industry:"Medicaid",               revenue:15878,   gm:57.9, orgs:1   },
+    { industry:"Banking/KYC",            revenue:10899,   gm:88.9, orgs:3   },
+    { industry:"Other Lending",          revenue:3467,    gm:80.5, orgs:4   },
   ],
-  'Jun 26': [
-    {name:'Rapid Finance',industry:'Small Business Lending',rev:571908,gm:91.5},
-    {name:'OnDeck',industry:'Small Business Lending',rev:269465,gm:76.7},
-    {name:'Expansion Capital Group',industry:'Small Business Lending',rev:240363,gm:73.3},
-    {name:'Funding Metrics',industry:'Small Business Lending',rev:144228,gm:69.3},
-    {name:'Marlin Leasing',industry:'Small Business Lending',rev:140254,gm:82.8},
-    {name:'Fora Financial',industry:'Small Business Lending',rev:138160,gm:87.8},
-    {name:'Nova Credit',industry:'Consumer',rev:132048,gm:74.6},
-    {name:'Kalamata Capital Group',industry:'Small Business Lending',rev:112697,gm:82.2},
-    {name:'Zillow - Encompass',industry:'Mortgage',rev:110304,gm:-9.9},
-    {name:'Lendr',industry:'Small Business Lending',rev:85070,gm:77.6},
-  ],
+  jun: [
+    { industry:"Small Business Lending", revenue:901959,  gm:77.6, orgs:132 },
+    { industry:"Mortgage",               revenue:426927,  gm:44.1, orgs:155 },
+    { industry:"Consumer",               revenue:146633,  gm:70.3, orgs:41  },
+    { industry:"Professional Services",  revenue:48693,   gm:80.3, orgs:32  },
+    { industry:"Property Management",    revenue:15347,   gm:79.5, orgs:1   },
+    { industry:"Medicaid",               revenue:6765,    gm:57.2, orgs:1   },
+    { industry:"Other Lending",          revenue:1345,    gm:71.2, orgs:2   },
+    { industry:"Banking/KYC",            revenue:2299,    gm:88.9, orgs:3   },
+  ]
 };
 
-// ── Q4: Top ARR clients (latest available snapshot) ─────────────────────────
-const TOP_ARR = [
-  {name:'Jackson Hewitt',industry:'Consumer',arr:500000},
-  {name:'Block, Inc.',industry:'Small Business Lending',arr:500000},
-  {name:'Global Economics Group',industry:'Professional Services',arr:52500},
+const topClients = {
+  apr: [
+    { name:"OnDeck",                               industry:"Small Business Lending", revenue:227472, gm:83.8 },
+    { name:"Expansion Capital Group",              industry:"Small Business Lending", revenue:180568, gm:74.5 },
+    { name:"Rapid Finance (Production)",           industry:"Small Business Lending", revenue:167214, gm:79.3 },
+    { name:"The Business Backer",                  industry:"Small Business Lending", revenue:99519,  gm:75.6 },
+    { name:"Marlin Leasing Production",            industry:"Small Business Lending", revenue:97977,  gm:83.7 },
+    { name:"Zillow – Encompass – Production",      industry:"Mortgage",               revenue:97393,  gm:-1.9 },
+    { name:"Basepoint Production",                 industry:"Small Business Lending", revenue:94645,  gm:96.8 },
+    { name:"Better Mortgage – Production",         industry:"Mortgage",               revenue:84178,  gm:56.9 },
+    { name:"Kapitus",                              industry:"Small Business Lending", revenue:73266,  gm:54.5 },
+    { name:"Veterans United Home Loans",           industry:"Mortgage",               revenue:72928,  gm:31.7 },
+  ],
+  may: [
+    { name:"Rapid Finance (Production)",           industry:"Small Business Lending", revenue:542706, gm:92.8 },
+    { name:"OnDeck",                               industry:"Small Business Lending", revenue:232631, gm:80.4 },
+    { name:"Expansion Capital Group",              industry:"Small Business Lending", revenue:195528, gm:73.9 },
+    { name:"Fora Financial",                       industry:"Small Business Lending", revenue:133091, gm:89.8 },
+    { name:"Nova Credit",                          industry:"Consumer",               revenue:128835, gm:74.1 },
+    { name:"Marlin Leasing Production",            industry:"Small Business Lending", revenue:115112, gm:84.2 },
+    { name:"Zillow – Encompass – Production",      industry:"Mortgage",               revenue:99193,  gm:-6.2 },
+    { name:"Funding Metrics Production",           industry:"Small Business Lending", revenue:99186,  gm:71.0 },
+    { name:"Kalamata Capital Group",               industry:"Small Business Lending", revenue:98417,  gm:85.1 },
+    { name:"CoreLogic – Sandbox",                  industry:"Mortgage",               revenue:86360,  gm:-57.4},
+  ],
+  jun: [
+    { name:"Rapid Finance (Production)",           industry:"Small Business Lending", revenue:573329, gm:92.1 },
+    { name:"OnDeck",                               industry:"Small Business Lending", revenue:269321, gm:77.3 },
+    { name:"Expansion Capital Group",              industry:"Small Business Lending", revenue:245683, gm:75.0 },
+    { name:"Funding Metrics Production",           industry:"Small Business Lending", revenue:142689, gm:71.3 },
+    { name:"Fora Financial",                       industry:"Small Business Lending", revenue:138188, gm:88.8 },
+    { name:"Marlin Leasing Production",            industry:"Small Business Lending", revenue:136915, gm:83.9 },
+    { name:"Nova Credit",                          industry:"Consumer",               revenue:123898, gm:74.7 },
+    { name:"Kalamata Capital Group",               industry:"Small Business Lending", revenue:114167, gm:83.7 },
+    { name:"Zillow – Encompass – Production",      industry:"Mortgage",               revenue:111879, gm:-4.0 },
+    { name:"CoreLogic – Sandbox",                  industry:"Mortgage",               revenue:85926,  gm:-54.9},
+  ]
+};
+
+const topArrClients = [
+  { name:"Jackson Hewitt",                      industry:"Consumer",              arr:500000 },
+  { name:"Block, Inc. (fka Square, Inc.)",      industry:"Small Business Lending",arr:500000 },
+  { name:"Global Economics Group",              industry:"Professional Services", arr:52500  },
 ];
 
-// ── Q5: Revenue drops >50% ──────────────────────────────────────────────────
-const REV_DROPS = [
-  {name:'Fresh Funding Solutions',industry:'Small Business Lending',revM2:8308,revM1:0,revCur:16267},
-  {name:'Cardiff',industry:'Small Business Lending',revM2:5652,revM1:28,revCur:88},
-  {name:'Better Mortgage (BSIC)',industry:'Mortgage',revM2:5976,revM1:341,revCur:246},
-  {name:'Rapid Finance 2026 Retro',industry:'Small Business Lending',revM2:52015,revM1:6137,revCur:null},
-  {name:'Basepoint Production',industry:'Small Business Lending',revM2:94645,revM1:17082,revCur:16878},
-  {name:'Kapitus',industry:'Small Business Lending',revM2:73266,revM1:13812,revCur:16073},
-  {name:'CrossCountry Mortgage',industry:'Mortgage',revM2:53849,revM1:11110,revCur:15607},
-  {name:'Loan Scorecard',industry:'Mortgage',revM2:11678,revM1:2858,revCur:1166},
-  {name:'Sage Forensic Accounting',industry:'Professional Services',revM2:5538,revM1:2185,revCur:3546},
-  {name:'CliftonLarsonAllen',industry:'Professional Services',revM2:20426,revM1:8578,revCur:8122},
-  {name:'JS Held LLC',industry:'Professional Services',revM2:7412,revM1:3390,revCur:7029},
-  {name:'Fundworks',industry:'Small Business Lending',revM2:32967,revM1:16475,revCur:18291},
+const revenueAlerts = [
+  { name:"Fresh Funding Solutions Inc",                   industry:"Small Business Lending", revM2:8308,  revM1:0,     revCur:16896 },
+  { name:"Cardiff",                                       industry:"Small Business Lending", revM2:5652,  revM1:28,    revCur:88    },
+  { name:"Better Mortgage (BSIC) – Production",          industry:"Mortgage",               revM2:5976,  revM1:341,   revCur:292   },
+  { name:"Rapid Finance 2026 Bank Statement Retro",      industry:"Small Business Lending", revM2:52015, revM1:6137,  revCur:0     },
+  { name:"Basepoint Production",                         industry:"Small Business Lending", revM2:94645, revM1:17082, revCur:17515 },
+  { name:"Kapitus",                                      industry:"Small Business Lending", revM2:73266, revM1:13812, revCur:16692 },
+  { name:"CrossCountry Mortgage – Production",           industry:"Mortgage",               revM2:53849, revM1:11110, revCur:13159 },
+  { name:"Loan Scorecard",                               industry:"Mortgage",               revM2:11678, revM1:2858,  revCur:996   },
+  { name:"Sage Forensic Accounting",                     industry:"Professional Services",  revM2:5538,  revM1:2185,  revCur:4287  },
+  { name:"CliftonLarsonAllen",                           industry:"Professional Services",  revM2:20426, revM1:8578,  revCur:8122  },
+  { name:"JS Held LLC",                                  industry:"Professional Services",  revM2:7412,  revM1:3390,  revCur:2018  },
+  { name:"Fundworks",                                    industry:"Small Business Lending", revM2:32967, revM1:16475, revCur:18276 },
 ];
 
-// ── Q6: Margin Watch ────────────────────────────────────────────────────────
-const MARGIN_WATCH = [
-  {name:'CoreLogic - Sandbox',industry:'Mortgage',revM2:70205,revM1:86360,revCur:19226,gmM2:7.0,gmM1:-57.4,gmCur:-57.2,delta:-64.4},
-  {name:'Dragin',industry:'Small Business Lending',revM2:20866,revM1:25070,revCur:6524,gmM2:-30.9,gmM1:-47.5,gmCur:-69.4,delta:-16.6},
-  {name:'First Community Mortgage (FCM)',industry:'Mortgage',revM2:41160,revM1:34559,revCur:8699,gmM2:-35.0,gmM1:-47.8,gmCur:-70.4,delta:-12.8},
-  {name:'Mulligan Funding',industry:'Small Business Lending',revM2:25127,revM1:30610,revCur:6975,gmM2:35.1,gmM1:23.5,gmCur:19.9,delta:-11.6},
-  {name:'SoFi - Encompass',industry:'Mortgage',revM2:56003,revM1:53383,revCur:12753,gmM2:75.6,gmM1:64.1,gmCur:62.3,delta:-11.5},
-  {name:'Channel Partners',industry:'Small Business Lending',revM2:28344,revM1:30269,revCur:8785,gmM2:79.2,gmM1:72.2,gmCur:72.3,delta:-7.0},
-  {name:'Lendio',industry:'Small Business Lending',revM2:27442,revM1:34289,revCur:8593,gmM2:60.8,gmM1:55.2,gmCur:50.6,delta:-5.6},
-  {name:'Cake Mortgage',industry:'Mortgage',revM2:18113,revM1:14631,revCur:3210,gmM2:50.7,gmM1:46.2,gmCur:50.2,delta:-4.5},
-  {name:'Zillow - Encompass',industry:'Mortgage',revM2:97393,revM1:99193,revCur:25069,gmM2:-1.9,gmM1:-6.2,gmCur:-9.9,delta:-4.3},
-  {name:'Pearl Capital',industry:'Small Business Lending',revM2:59664,revM1:58196,revCur:16755,gmM2:69.5,gmM1:66.0,gmCur:60.6,delta:-3.5},
-  {name:'OnDeck',industry:'Small Business Lending',revM2:227472,revM1:232631,revCur:61242,gmM2:83.8,gmM1:80.4,gmCur:76.7,delta:-3.4},
-  {name:'National Funding',industry:'Small Business Lending',revM2:14786,revM1:13654,revCur:2697,gmM2:86.8,gmM1:83.5,gmCur:78.9,delta:-3.3},
-  {name:'SoFi',industry:'Consumer',revM2:27624,revM1:24572,revCur:6612,gmM2:73.1,gmM1:70.1,gmCur:74.4,delta:-3.0},
-  {name:'Nations Direct - Encompass',industry:'Mortgage',revM2:15640,revM1:12137,revCur:2921,gmM2:21.8,gmM1:19.0,gmCur:19.5,delta:-2.8},
-  {name:'GVA BOX',industry:'Small Business Lending',revM2:11475,revM1:10042,revCur:3380,gmM2:78.6,gmM1:76.1,gmCur:73.9,delta:-2.5},
-  {name:'Libertas Funding',industry:'Small Business Lending',revM2:67479,revM1:54859,revCur:16868,gmM2:84.2,gmM1:81.8,gmCur:83.6,delta:-2.4},
-  {name:'ForwardLine',industry:'Small Business Lending',revM2:43448,revM1:50426,revCur:11989,gmM2:74.9,gmM1:72.7,gmCur:67.9,delta:-2.2},
-  {name:'Newrez',industry:'Mortgage',revM2:33108,revM1:35657,revCur:12926,gmM2:71.7,gmM1:69.6,gmCur:62.3,delta:-2.1},
-  {name:'BHG',industry:'Small Business Lending',revM2:31940,revM1:34458,revCur:7968,gmM2:69.4,gmM1:67.8,gmCur:65.8,delta:-1.6},
-  {name:'Idea Financial',industry:'Small Business Lending',revM2:26781,revM1:27730,revCur:7158,gmM2:82.1,gmM1:80.7,gmCur:77.4,delta:-1.4},
-  {name:'Neighborhood Loans',industry:'Mortgage',revM2:11781,revM1:11031,revCur:3103,gmM2:38.3,gmM1:36.9,gmCur:42.7,delta:-1.4},
-  {name:'Wayflyer',industry:'Small Business Lending',revM2:22387,revM1:26766,revCur:9590,gmM2:70.2,gmM1:68.8,gmCur:66.2,delta:-1.4},
-  {name:'Boom Pay',industry:'Consumer',revM2:40863,revM1:42914,revCur:10354,gmM2:60.1,gmM1:59.1,gmCur:59.5,delta:-1.0},
-  {name:'Union Home Mortgage',industry:'Mortgage',revM2:25312,revM1:24263,revCur:7299,gmM2:46.4,gmM1:45.7,gmCur:37.4,delta:-0.7},
-  {name:'Plaid',industry:'Consumer',revM2:58069,revM1:60731,revCur:14278,gmM2:70.9,gmM1:70.2,gmCur:67.6,delta:-0.7},
-  {name:'Expansion Capital Group',industry:'Small Business Lending',revM2:180568,revM1:195528,revCur:54628,gmM2:74.5,gmM1:73.9,gmCur:73.3,delta:-0.6},
-  {name:'AnnieMac Home Mortgage',industry:'Mortgage',revM2:34320,revM1:35758,revCur:7885,gmM2:79.4,gmM1:78.9,gmCur:83.4,delta:-0.5},
+const marginWatch = [
+  { name:"CoreLogic – Sandbox",                  industry:"Mortgage",               revM2:70205,  revM1:86360,  revCur:27340,  gmM2:7.0,   gmM1:-57.4, gmCur:-64.4, delta:-64.4 },
+  { name:"Dragin",                               industry:"Small Business Lending", revM2:20866,  revM1:25070,  revCur:9616,   gmM2:-30.9, gmM1:-47.5, gmCur:-53.4, delta:-16.6 },
+  { name:"First Community Mortgage (FCM Partners) POC", industry:"Mortgage",        revM2:41160,  revM1:34559,  revCur:12205,  gmM2:-35.0, gmM1:-47.8, gmCur:-58.5, delta:-12.8 },
+  { name:"Mulligan Funding Production",          industry:"Small Business Lending", revM2:25127,  revM1:30610,  revCur:9978,   gmM2:35.1,  gmM1:23.5,  gmCur:22.7,  delta:-11.6 },
+  { name:"SoFi – Encompass – Production",        industry:"Mortgage",               revM2:56003,  revM1:53383,  revCur:17779,  gmM2:75.6,  gmM1:64.1,  gmCur:62.8,  delta:-11.5 },
+  { name:"Channel Partners Production",          industry:"Small Business Lending", revM2:28344,  revM1:30269,  revCur:12220,  gmM2:79.2,  gmM1:72.2,  gmCur:73.0,  delta:-7.0  },
+  { name:"Lendio, Inc",                          industry:"Small Business Lending", revM2:27442,  revM1:34289,  revCur:11765,  gmM2:60.8,  gmM1:55.2,  gmCur:51.8,  delta:-5.6  },
+  { name:"Cake Mortgage",                        industry:"Mortgage",               revM2:18113,  revM1:14631,  revCur:4539,   gmM2:50.7,  gmM1:46.2,  gmCur:53.1,  delta:-4.5  },
+  { name:"Zillow – Encompass – Production",      industry:"Mortgage",               revM2:97393,  revM1:99193,  revCur:35598,  gmM2:-1.9,  gmM1:-6.2,  gmCur:-4.0,  delta:-4.3  },
+  { name:"Pearl Capital Business Funding",       industry:"Small Business Lending", revM2:59664,  revM1:58196,  revCur:23678,  gmM2:69.5,  gmM1:66.0,  gmCur:63.0,  delta:-3.5  },
+  { name:"OnDeck",                               industry:"Small Business Lending", revM2:227472, revM1:232631, revCur:85693,  gmM2:83.8,  gmM1:80.4,  gmCur:77.3,  delta:-3.4  },
+  { name:"National Funding",                     industry:"Small Business Lending", revM2:14786,  revM1:13654,  revCur:4202,   gmM2:86.8,  gmM1:83.5,  gmCur:81.2,  delta:-3.3  },
+  { name:"SoFi",                                 industry:"Consumer",               revM2:27624,  revM1:24572,  revCur:9136,   gmM2:73.1,  gmM1:70.1,  gmCur:74.7,  delta:-3.0  },
+  { name:"Nations Direct – Encompass – Production", industry:"Mortgage",            revM2:15640,  revM1:12137,  revCur:4048,   gmM2:21.8,  gmM1:19.0,  gmCur:24.8,  delta:-2.8  },
+  { name:"GVA BOX",                              industry:"Small Business Lending", revM2:11475,  revM1:10042,  revCur:5037,   gmM2:78.6,  gmM1:76.1,  gmCur:76.6,  delta:-2.5  },
+  { name:"Libertas Funding MCA Funds PROD",      industry:"Small Business Lending", revM2:67479,  revM1:54859,  revCur:25644,  gmM2:84.2,  gmM1:81.8,  gmCur:83.7,  delta:-2.4  },
+  { name:"ForwardLine – Production Bank Statements", industry:"Small Business Lending", revM2:43448, revM1:50426, revCur:17092, gmM2:74.9, gmM1:72.7, gmCur:72.1, delta:-2.2  },
+  { name:"Newrez Production Org",                industry:"Mortgage",               revM2:33108,  revM1:35657,  revCur:16239,  gmM2:71.7,  gmM1:69.6,  gmCur:64.2,  delta:-2.1  },
+  { name:"BHG Production Account",              industry:"Small Business Lending", revM2:31940,  revM1:34458,  revCur:10779,  gmM2:69.4,  gmM1:67.8,  gmCur:66.3,  delta:-1.6  },
+  { name:"Idea Financial",                       industry:"Small Business Lending", revM2:26781,  revM1:27730,  revCur:10419,  gmM2:82.1,  gmM1:80.7,  gmCur:79.5,  delta:-1.4  },
+  { name:"Neighborhood Loans – Encompass",       industry:"Mortgage",               revM2:11781,  revM1:11031,  revCur:4203,   gmM2:38.3,  gmM1:36.9,  gmCur:45.7,  delta:-1.4  },
+  { name:"Wayflyer",                             industry:"Small Business Lending", revM2:22387,  revM1:26766,  revCur:14381,  gmM2:70.2,  gmM1:68.8,  gmCur:69.5,  delta:-1.4  },
+  { name:"Boom Pay – Production",                industry:"Consumer",               revM2:40863,  revM1:42914,  revCur:13866,  gmM2:60.1,  gmM1:59.1,  gmCur:59.9,  delta:-1.0  },
+  { name:"Plaid Production",                     industry:"Consumer",               revM2:58069,  revM1:60731,  revCur:18974,  gmM2:70.9,  gmM1:70.2,  gmCur:68.1,  delta:-0.7  },
+  { name:"Union Home Mortgage – Encompass Production", industry:"Mortgage",         revM2:25312,  revM1:24263,  revCur:10155,  gmM2:46.4,  gmM1:45.7,  gmCur:39.1,  delta:-0.7  },
+  { name:"Expansion Capital Group",              industry:"Small Business Lending", revM2:180568, revM1:195528, revCur:78172,  gmM2:74.5,  gmM1:73.9,  gmCur:75.0,  delta:-0.6  },
+  { name:"AnnieMac Home Mortgage",               industry:"Mortgage",               revM2:34320,  revM1:35758,  revCur:9743,   gmM2:79.4,  gmM1:78.9,  gmCur:84.7,  delta:-0.5  },
 ];
 
-// ── Q7: Daily trend data ─────────────────────────────────────────────────────
-// May 2026: [label, weight(1=BD), rev, gm_pct]
-const MAY_DAILY = [
-  ['May 1',1,165386,67.4],['May 2',0,25549,61.1],['May 3',0,23612,60.6],
-  ['May 4',1,209350,68.4],['May 5',1,222103,66.2],['May 6',1,206169,67.7],
-  ['May 7',1,300636,76.3],['May 8',1,164429,65.9],['May 9',0,32025,61.0],
-  ['May 10',0,18573,67.8],['May 11',1,212724,68.6],['May 12',1,210996,68.5],
-  ['May 13',1,206159,68.9],['May 14',1,198794,68.6],['May 15',1,171975,64.8],
-  ['May 16',0,21801,60.3],['May 17',0,19686,63.1],['May 18',1,207627,66.6],
-  ['May 19',1,203479,65.8],['May 20',1,203891,67.0],['May 21',1,193453,66.6],
-  ['May 22',1,138875,66.2],['May 23',0,27621,66.4],['May 24',0,17519,64.8],
-  ['May 25',0,36726,66.0],['May 26',1,222328,67.8],['May 27',1,215750,64.8],
-  ['May 28',1,206197,65.3],['May 29',1,167498,65.5],['May 30',0,24980,63.0],
-  ['May 31',0,24161,65.4],
+// Daily data — business days only
+const mayDaily = [
+  { bd:1,  date:"May 1",  rev:165386, gm:67.4 },
+  { bd:2,  date:"May 4",  rev:209350, gm:68.4 },
+  { bd:3,  date:"May 5",  rev:222103, gm:66.2 },
+  { bd:4,  date:"May 6",  rev:206169, gm:67.7 },
+  { bd:5,  date:"May 7",  rev:300636, gm:76.3 },
+  { bd:6,  date:"May 8",  rev:164429, gm:65.9 },
+  { bd:7,  date:"May 11", rev:212724, gm:68.6 },
+  { bd:8,  date:"May 12", rev:210996, gm:68.5 },
+  { bd:9,  date:"May 13", rev:206159, gm:68.9 },
+  { bd:10, date:"May 14", rev:198794, gm:68.6 },
+  { bd:11, date:"May 15", rev:171975, gm:64.8 },
+  { bd:12, date:"May 18", rev:207627, gm:66.6 },
+  { bd:13, date:"May 19", rev:203479, gm:65.8 },
+  { bd:14, date:"May 20", rev:203891, gm:67.0 },
+  { bd:15, date:"May 21", rev:193453, gm:66.6 },
+  { bd:16, date:"May 22", rev:138875, gm:66.2 },
+  { bd:17, date:"May 26", rev:222328, gm:67.8 },
+  { bd:18, date:"May 27", rev:215750, gm:64.8 },
+  { bd:19, date:"May 28", rev:206197, gm:65.3 },
+  { bd:20, date:"May 29", rev:167498, gm:65.5 },
+];
+const junDaily = [
+  { bd:1, date:"Jun 1", rev:219682, gm:67.1 },
+  { bd:2, date:"Jun 2", rev:224416, gm:69.2 },
+  { bd:3, date:"Jun 3", rev:227890, gm:69.0 },
+  { bd:4, date:"Jun 4", rev:215264, gm:68.4 },
+  { bd:5, date:"Jun 5", rev:175084, gm:64.1 },
+  { bd:6, date:"Jun 8", rev:220498, gm:67.8 },
+  { bd:7, date:"Jun 9", rev:215953, gm:67.6 },
 ];
 
-// Jun 2026: [label, bd_elapsed, rev, gm_pct]
-const JUN_DAILY = [
-  ['Jun 1',1,219284,65.7],['Jun 2',2,223939,67.9],['Jun 3',3,227336,67.6],
-  ['Jun 4',4,214719,67.0],['Jun 5',5,174818,62.8],['Jun 6',5,26857,65.0],
-  ['Jun 7',5,24460,67.0],
-];
+// ═══════════════════════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════════════════════
+const fmt = v => v == null ? '—' : (v >= 1e6 ? '$'+(v/1e6).toFixed(2)+'M' : v >= 1e3 ? '$'+(v/1e3).toFixed(0)+'K' : '$'+v.toLocaleString());
+const fmtN = v => v == null ? '—' : '$'+Number(v).toLocaleString();
+const fmtPct = v => v == null ? '—' : v.toFixed(1)+'%';
+const gmCls = v => v >= 70 ? 'gm-green' : v >= 55 ? 'gm-yellow' : 'gm-red';
 
-// ── Helpers ──────────────────────────────────────────────────────────────────
-function fmt$(n){if(n==null||n===undefined)return'—';return'$'+Math.round(n).toLocaleString();}
-function fmtM(n){if(n==null)return'—';return'$'+(n/1e6).toFixed(2)+'M';}
-function gmClass(g){if(g==null)return'';return g>=70?'gm-green':g>=55?'gm-yellow':'gm-red';}
-function gmFmt(g){if(g==null)return'—';return g.toFixed(1)+'%';}
-function indPill(ind){
-  const map={'Small Business Lending':'pill-sbl','Mortgage':'pill-mortgage','Consumer':'pill-consumer','Professional Services':'pill-profserv','Property Management':'pill-propman','Medicaid':'pill-medicaid'};
-  return '<span class="pill '+(map[ind]||'pill-other')+'">'+ind+'</span>';
-}
-function rankBadge(i){
-  const cls=i===0?'rank-gold':i===1?'rank-silver':i===2?'rank-bronze':'';
-  return '<span class="rank-badge '+cls+'">'+(i+1)+'</span>';
-}
+const IND_COLORS = {
+  "Small Business Lending":"#3b82f6","Mortgage":"#f59e0b","Consumer":"#10b981",
+  "Professional Services":"#8b5cf6","Other Lending":"#ec4899","Banking/KYC":"#06b6d4",
+  "Medicaid":"#f97316","Property Management":"#84cc16","Unknown":"#6b7280"
+};
+const iColor = ind => IND_COLORS[ind] || "#8b949e";
 
-function showTab(id,btn){
-  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+const CHART_DEFAULTS = {
+  tooltip: { backgroundColor:'#1c2128', borderColor:'#30363d', borderWidth:1, titleColor:'#e6edf3', bodyColor:'#c9d1d9' },
+  legend:  { labels: { color:'#8b949e', boxWidth:11, font:{ size:11 }, padding:8 } }
+};
+
+// ═══════════════════════════════════════════════════════════
+// TAB SWITCHING
+// ═══════════════════════════════════════════════════════════
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
   document.getElementById('tab-'+id).classList.add('active');
   btn.classList.add('active');
+  if (id === 'daily' && !window._dailyBuilt) { buildDailyCharts(); window._dailyBuilt = true; }
 }
 
-function buildArrTable(){
-  document.getElementById('arrTable').innerHTML=TOP_ARR.map((r,i)=>
-    '<tr><td>'+rankBadge(i)+'</td><td><strong style="color:var(--white)">'+r.name+'</strong></td><td>'+indPill(r.industry)+'</td><td class="right"><strong style="color:var(--white)">'+fmtM(r.arr)+'</strong></td></tr>'
-  ).join('');
-}
-
-function buildRevTable(month){
-  const rows=TOP_CLIENTS_REV[month]||[];
-  document.getElementById('revTable').innerHTML=rows.map((r,i)=>
-    '<tr><td>'+rankBadge(i)+'</td><td><strong style="color:var(--white)">'+r.name+'</strong></td><td>'+indPill(r.industry)+'</td><td class="right"><strong style="color:var(--white)">'+fmt$(r.rev)+'</strong></td><td class="right"><span class="'+gmClass(r.gm)+'">'+gmFmt(r.gm)+'</span></td></tr>'
-  ).join('');
-}
-
-function switchRevMonth(m,btn){
-  document.querySelectorAll('.month-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  buildRevTable(m);
-}
-
-function buildAlerts(){
-  const sorted=[...REV_DROPS].sort((a,b)=>a.revM1-b.revM1);
-  document.getElementById('alertCards').innerHTML=sorted.map(r=>{
-    const drop=r.revM2>0?((r.revM1-r.revM2)/r.revM2*100):null;
-    return '<div class="alert-card"><div class="client-name">'+r.name+'</div><div class="client-ind">'+r.industry+'</div><div class="drop-pct">'+(drop!=null?drop.toFixed(0)+'%':'N/A')+' drop</div><div class="rev-row"><span class="rev-label">Apr (Actual)</span><span class="rev-val">'+fmt$(r.revM2)+'</span></div><div class="rev-row"><span class="rev-label">May (Projected)</span><span class="rev-val">'+fmt$(r.revM1)+'</span></div><div class="rev-row"><span class="rev-label">Jun MTD</span><span class="rev-val">'+(r.revCur!=null?fmt$(r.revCur):'—')+'</span></div></div>';
-  }).join('');
-  document.getElementById('alertTable').innerHTML=sorted.map((r,i)=>{
-    const drop=r.revM2>0?((r.revM1-r.revM2)/r.revM2*100):null;
-    return '<tr><td>'+(i+1)+'</td><td><strong style="color:var(--white)">'+r.name+'</strong></td><td>'+indPill(r.industry)+'</td><td class="right">'+fmt$(r.revM2)+'</td><td class="right">'+fmt$(r.revM1)+'</td><td class="right">'+(r.revCur!=null?fmt$(r.revCur):'—')+'</td><td class="right"><span style="color:var(--red);font-weight:700">'+(drop!=null?drop.toFixed(0)+'%':'—')+'</span></td></tr>';
-  }).join('');
-}
-
-function buildMarginTable(){
-  document.getElementById('marginTable').innerHTML=MARGIN_WATCH.map((r,i)=>
-    '<tr><td>'+(i+1)+'</td><td><strong style="color:var(--white)">'+r.name+'</strong></td><td>'+indPill(r.industry)+'</td><td class="right">'+fmt$(r.revM2)+'</td><td class="right">'+fmt$(r.revM1)+'</td><td class="right"><span class="'+gmClass(r.gmM2)+'">'+gmFmt(r.gmM2)+'</span></td><td class="right"><span class="'+gmClass(r.gmM1)+'">'+gmFmt(r.gmM1)+'</span></td><td class="right"><span class="'+gmClass(r.gmCur)+'">'+gmFmt(r.gmCur)+'</span></td><td class="right"><span style="color:var(--red);font-weight:700">'+(r.delta>0?'+':'')+r.delta.toFixed(1)+' pp</span></td></tr>'
-  ).join('');
-}
-
-function buildJuneTable(){
-  let cumul=0;
-  document.getElementById('juneDailyTable').innerHTML=JUN_DAILY.map((r,idx)=>{
-    cumul+=r[2];
-    const isBD=idx===0||r[1]>JUN_DAILY[idx-1][1];
-    return '<tr><td><strong style="color:var(--white)">'+r[0]+'</strong></td><td><span class="badge '+(isBD?'badge-actual':'badge-forecast')+'">'+(isBD?'Business Day':'Weekend')+'</span></td><td class="right">'+fmt$(r[2])+'</td><td class="right"><span class="'+gmClass(r[3])+'">'+gmFmt(r[3])+'</span></td><td class="right">'+fmt$(cumul)+'</td></tr>';
-  }).join('');
-}
-
-// ── CHARTS ───────────────────────────────────────────────────────────────────
-const CD = {
-  responsive:true,maintainAspectRatio:false,
-  plugins:{legend:{labels:{color:'#8b949e',font:{size:11},boxWidth:12}},tooltip:{backgroundColor:'#161b22',borderColor:'#21262d',borderWidth:1,titleColor:'#f0f6fc',bodyColor:'#c9d1d9'}},
-  scales:{x:{ticks:{color:'#8b949e',font:{size:10}},grid:{color:'#21262d'}},y:{ticks:{color:'#8b949e',font:{size:10}},grid:{color:'#21262d'}}}
-};
-
-// ARR Trend
-(function(){
-  new Chart(document.getElementById('arrChart').getContext('2d'),{
-    type:'bar',
-    data:{
-      labels:ARR_TREND.map(r=>r.m),
-      datasets:[
-        {type:'bar',label:'ARR ($)',data:ARR_TREND.map(r=>r.arr),backgroundColor:'rgba(79,156,249,.35)',borderColor:'#4f9cf9',borderWidth:1,yAxisID:'y',borderRadius:3},
-        {type:'line',label:'Clients',data:ARR_TREND.map(r=>r.clients),borderColor:'#3fb950',backgroundColor:'rgba(63,185,80,.1)',tension:.4,pointRadius:3,pointBackgroundColor:'#3fb950',yAxisID:'y2',borderWidth:2}
+// ═══════════════════════════════════════════════════════════
+// TAB 1: OVERVIEW
+// ═══════════════════════════════════════════════════════════
+function buildOverview() {
+  // ARR trend chart
+  new Chart(document.getElementById('arrTrendChart'), {
+    type: 'line',
+    data: {
+      labels: arrTrend.map(d => d.month),
+      datasets: [
+        { label:'Net ARR', data: arrTrend.map(d => d.arr/1e6), borderColor:'#58a6ff', backgroundColor:'rgba(88,166,255,0.08)',
+          borderWidth:2.5, pointRadius:4, fill:true, tension:0.3, yAxisID:'y' },
+        { label:'Active Clients', data: arrTrend.map(d => d.clients), borderColor:'#3fb950', borderWidth:1.5,
+          borderDash:[4,4], pointRadius:3, fill:false, tension:0.3, yAxisID:'y2' }
       ]
     },
-    options:{...CD,plugins:{...CD.plugins,legend:{display:true,labels:{color:'#8b949e',font:{size:11},boxWidth:12}}},
-      scales:{
-        x:{ticks:{color:'#8b949e',font:{size:10}},grid:{color:'#21262d'}},
-        y:{position:'left',ticks:{color:'#8b949e',font:{size:10},callback:v=>'$'+(v/1e6).toFixed(1)+'M'},grid:{color:'#21262d'}},
-        y2:{position:'right',ticks:{color:'#3fb950',font:{size:10}},grid:{drawOnChartArea:false}}
-      }}
-  });
-})();
-
-// ARR Donut
-(function(){
-  const indSums={};
-  TOP_ARR.forEach(r=>{indSums[r.industry]=(indSums[r.industry]||0)+r.arr;});
-  const labels=Object.keys(indSums);
-  const colMap={'Small Business Lending':'#4f9cf9','Mortgage':'#a78bfa','Consumer':'#34d399','Professional Services':'#fbbf24','Medicaid':'#fb923c','Property Management':'#22d3ee'};
-  const total=TOP_ARR.reduce((a,r)=>a+r.arr,0);
-  new Chart(document.getElementById('arrDonut').getContext('2d'),{
-    type:'doughnut',
-    data:{labels,datasets:[{data:labels.map(l=>indSums[l]),backgroundColor:labels.map(l=>colMap[l]||'#fb7185'),borderColor:'#161b22',borderWidth:2,hoverOffset:6}]},
-    options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{position:'right',labels:{color:'#8b949e',font:{size:10},boxWidth:10}},tooltip:{...CD.plugins.tooltip,callbacks:{label:c=>' $'+(c.parsed/1e6).toFixed(2)+'M ('+(c.parsed/total*100).toFixed(0)+'%)'}}}}
-  });
-})();
-
-// Industry stacked bar
-(function(){
-  const months=['Apr 26','May 26','Jun 26'];
-  const industries=['Small Business Lending','Mortgage','Consumer','Professional Services','Property Management','Medicaid','Other Lending','Banking/KYC'];
-  const colMap={'Small Business Lending':'#4f9cf9','Mortgage':'#a78bfa','Consumer':'#34d399','Professional Services':'#fbbf24','Property Management':'#22d3ee','Medicaid':'#fb923c','Other Lending':'#fb7185','Banking/KYC':'#60a5fa'};
-  const revData={
-    'Apr 26':{'Small Business Lending':2026278,'Mortgage':1239626,'Consumer':402128,'Professional Services':172244,'Medicaid':13039,'Other Lending':4503,'Banking/KYC':2013},
-    'May 26':{'Small Business Lending':2456944,'Mortgage':1193027,'Consumer':444167,'Professional Services':132739,'Property Management':42952,'Medicaid':15878,'Other Lending':3467,'Banking/KYC':10899},
-    'Jun 26':{'Small Business Lending':641643,'Mortgage':309115,'Consumer':107388,'Professional Services':33256,'Property Management':12227,'Medicaid':5012,'Other Lending':1069,'Banking/KYC':1702},
-  };
-  new Chart(document.getElementById('industryBar').getContext('2d'),{
-    type:'bar',
-    data:{labels:months,datasets:industries.map(ind=>({label:ind,data:months.map(m=>revData[m][ind]||0),backgroundColor:colMap[ind]+'cc',borderColor:colMap[ind],borderWidth:1,borderRadius:2}))},
-    options:{...CD,scales:{x:{ticks:{color:'#8b949e',font:{size:10}},grid:{color:'#21262d'},stacked:true},y:{ticks:{color:'#8b949e',font:{size:10},callback:v=>'$'+(v/1e6).toFixed(1)+'M'},grid:{color:'#21262d'},stacked:true}},plugins:{...CD.plugins,legend:{display:false}}}
-  });
-})();
-
-// Daily Trend charts
-(function(){
-  let mayCumBD=[],mayBDRev=[],mayBDGM=[],cumul=0;
-  MAY_DAILY.forEach(r=>{if(r[1]===1){cumul+=r[2];mayCumBD.push(cumul);mayBDRev.push(r[2]);mayBDGM.push(r[3]);}});
-
-  let junCumBD=[],junBDRev=[],junBDGM=[],lastBD=0,junCumul=0;
-  JUN_DAILY.forEach(r=>{if(r[1]>lastBD){junCumul+=r[2];junCumBD.push(junCumul);junBDRev.push(r[2]);junBDGM.push(r[3]);lastBD=r[1];}});
-
-  const bdL=Array.from({length:20},(_,i)=>'BD'+(i+1));
-  const bdL5=bdL.slice(0,5);
-
-  new Chart(document.getElementById('cumRevChart').getContext('2d'),{
-    type:'line',
-    data:{labels:bdL,datasets:[
-      {label:'May 2026',data:mayCumBD,borderColor:'#8b949e',backgroundColor:'rgba(139,148,158,.1)',tension:.4,pointRadius:3,pointBackgroundColor:'#8b949e',fill:true,borderWidth:2},
-      {label:'Jun 2026',data:[...junCumBD,...Array(20-junCumBD.length).fill(null)],borderColor:'#4f9cf9',backgroundColor:'rgba(79,156,249,.15)',tension:.4,pointRadius:4,pointBackgroundColor:'#4f9cf9',fill:true,borderWidth:2}
-    ]},
-    options:{...CD,scales:{x:{ticks:{color:'#8b949e',font:{size:10}},grid:{color:'#21262d'}},y:{ticks:{color:'#8b949e',font:{size:10},callback:v=>'$'+(v/1e6).toFixed(2)+'M'},grid:{color:'#21262d'}}},plugins:{...CD.plugins,legend:{display:true,labels:{color:'#8b949e',font:{size:11},boxWidth:12}}}}
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      interaction:{ mode:'index', intersect:false },
+      plugins: {
+        legend: CHART_DEFAULTS.legend,
+        tooltip: { ...CHART_DEFAULTS.tooltip, callbacks: { label: ctx => ctx.datasetIndex===0 ? ' ARR: $'+ctx.raw.toFixed(2)+'M' : ' Clients: '+ctx.raw } }
+      },
+      scales: {
+        x: { ticks:{color:'#8b949e',font:{size:11}}, grid:{color:'#21262d'} },
+        y: { ticks:{color:'#8b949e',font:{size:11},callback:v=>'$'+v.toFixed(0)+'M'}, grid:{color:'#21262d'},
+             title:{display:true,text:'Net ARR',color:'#8b949e',font:{size:11}} },
+        y2:{ position:'right', ticks:{color:'#3fb950',font:{size:11}}, grid:{display:false},
+             title:{display:true,text:'Clients',color:'#3fb950',font:{size:11}} }
+      }
+    }
   });
 
-  new Chart(document.getElementById('dailyRevBar').getContext('2d'),{
-    type:'bar',
-    data:{labels:bdL5,datasets:[
-      {label:'May 2026',data:mayBDRev.slice(0,5),backgroundColor:'rgba(139,148,158,.4)',borderColor:'#8b949e',borderWidth:1,borderRadius:2},
-      {label:'Jun 2026',data:junBDRev,backgroundColor:'rgba(79,156,249,.4)',borderColor:'#4f9cf9',borderWidth:1,borderRadius:2}
-    ]},
-    options:{...CD,scales:{x:{ticks:{color:'#8b949e',font:{size:10}},grid:{color:'#21262d'}},y:{ticks:{color:'#8b949e',font:{size:10},callback:v=>'$'+Math.round(v/1000)+'K'},grid:{color:'#21262d'}}},plugins:{...CD.plugins,legend:{display:true,labels:{color:'#8b949e',font:{size:11},boxWidth:12}}}}
+  // Stacked industry bar
+  const allInd = [...new Set([...revenueByIndustry.apr,...revenueByIndustry.may,...revenueByIndustry.jun].map(d=>d.industry))].sort();
+  new Chart(document.getElementById('industryStackedChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Apr 2026', 'May 2026', 'Jun 2026 (MTD)'],
+      datasets: allInd.map(ind => ({
+        label: ind,
+        data: ['apr','may','jun'].map(m => ((revenueByIndustry[m].find(d=>d.industry===ind)||{revenue:0}).revenue/1e6)),
+        backgroundColor: iColor(ind), borderRadius:2,
+      }))
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      plugins: {
+        legend: CHART_DEFAULTS.legend,
+        tooltip: { ...CHART_DEFAULTS.tooltip, callbacks:{ label: ctx=>' '+ctx.dataset.label+': $'+ctx.raw.toFixed(2)+'M' } }
+      },
+      scales: {
+        x: { stacked:true, ticks:{color:'#8b949e',font:{size:12}}, grid:{color:'#21262d'} },
+        y: { stacked:true, ticks:{color:'#8b949e',font:{size:11},callback:v=>'$'+v.toFixed(1)+'M'}, grid:{color:'#21262d'} }
+      }
+    }
   });
 
-  new Chart(document.getElementById('dailyGmChart').getContext('2d'),{
-    type:'line',
-    data:{labels:bdL5,datasets:[
-      {label:'May 2026',data:mayBDGM.slice(0,5),borderColor:'#8b949e',backgroundColor:'rgba(139,148,158,.05)',tension:.4,pointRadius:4,pointBackgroundColor:'#8b949e',borderWidth:2},
-      {label:'Jun 2026',data:junBDGM,borderColor:'#4f9cf9',backgroundColor:'rgba(79,156,249,.05)',tension:.4,pointRadius:4,pointBackgroundColor:'#4f9cf9',borderWidth:2}
-    ]},
-    options:{...CD,scales:{x:{ticks:{color:'#8b949e',font:{size:10}},grid:{color:'#21262d'}},y:{ticks:{color:'#8b949e',font:{size:10},callback:v=>v.toFixed(0)+'%'},grid:{color:'#21262d'},suggestedMin:60,suggestedMax:80}},plugins:{...CD.plugins,legend:{display:true,labels:{color:'#8b949e',font:{size:11},boxWidth:12}}}}
+  // May donut
+  const mayD = revenueByIndustry.may.filter(d=>d.revenue>0).sort((a,b)=>b.revenue-a.revenue);
+  new Chart(document.getElementById('industryDonutChart'), {
+    type: 'doughnut',
+    data: {
+      labels: mayD.map(d=>d.industry),
+      datasets: [{ data: mayD.map(d=>d.revenue/1e6), backgroundColor: mayD.map(d=>iColor(d.industry)), borderColor:'#0d1117', borderWidth:2 }]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false, cutout:'58%',
+      plugins: {
+        legend: CHART_DEFAULTS.legend,
+        tooltip: { ...CHART_DEFAULTS.tooltip, callbacks:{ label: ctx=>' '+ctx.label+': $'+ctx.raw.toFixed(2)+'M' } }
+      }
+    }
   });
-})();
 
-buildArrTable();
-buildRevTable('Apr 26');
-buildAlerts();
-buildMarginTable();
-buildJuneTable();
-</script>
-</body>
-</html>
+  // Industry table
+  const allRows = [...new Set([...revenueByIndustry.apr,...revenueByIndustry.may].map(d=>d.industry))].sort();
+  const tbody = document.getElementById('industryTableBody');
+  allRows.forEach(ind => {
+    const a = revenueByIndustry.apr.find(d=>d.industry===ind)||{revenue:null,gm:null};
+    const m = revenueByIndustry.may.find(d=>d.industry===ind)||{revenue:null,gm:null};
+    const j = revenueByIndustry.jun.find(d=>d.industry===ind)||{revenue:null,gm:null};
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td><span class="dot" style="background:${iColor(ind)}"></span>${ind}</td>
+      <td>${fmt(a.revenue)}</td><td><span class="${gmCls(a.gm)}">${fmtPct(a.gm)}</span></td>
+      <td>${fmt(m.revenue)}</td><td><span class="${gmCls(m.gm)}">${fmtPct(m.gm)}</span></td>
+      <td>${fmt(j.revenue)}</td><td><span class="${gmCls(j.gm)}">${fmtPct(j.gm)}</span></td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+// ═══════════════════════════════════════════════════════════
+// TAB 2: TOP CLIENTS
+// ═══════════════════════════════════════════════════════════
+let _curMonth = 'apr';
+function switchTopMonth(m, btn) {
+  _curMonth = m;
+  document.querySelectorAll('.month-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderTopClients();
+}
+function renderTopClients() {
+  const tbody = document.getElementById('topClientTableBody');
+  tbody.innerHTML = '';
+  topClients[_curMonth].forEach((c,i) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td><span class="rank-badge">${i+1}</span></td>
+      <td class="client-name">${c.name}</td>
+      <td><span class="dot" style="background:${iColor(c.industry)}"></span>${c.industry}</td>
+      <td>${fmtN(c.revenue)}</td>
+      <td><span class="${gmCls(c.gm)}">${fmtPct(c.gm)}</span></td>`;
+    tbody.appendChild(tr);
+  });
+  const arrBody = document.getElementById('arrTopTableBody');
+  arrBody.innerHTML = '';
+  topArrClients.forEach((c,i) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td><span class="rank-badge">${i+1}</span></td>
+      <td class="client-name">${c.name}</td>
+      <td><span class="dot" style="background:${iColor(c.industry)}"></span>${c.industry}</td>
+      <td>${fmtN(c.arr)}</td>`;
+    arrBody.appendChild(tr);
+  });
+}
+
+// ═══════════════════════════════════════════════════════════
+// TAB 3: REVENUE ALERTS
+// ═══════════════════════════════════════════════════════════
+function buildAlerts() {
+  const totalRisk = revenueAlerts.reduce((s,c)=>s+c.revM2,0);
+  const drops = revenueAlerts.map(c => (c.revM1-c.revM2)/c.revM2*100);
+  const avgDrop = drops.reduce((s,v)=>s+v,0)/drops.length;
+  document.getElementById('alertCount').textContent = revenueAlerts.length;
+  document.getElementById('alertRevAtRisk').textContent = fmt(totalRisk);
+  document.getElementById('alertAvgDrop').textContent = avgDrop.toFixed(0)+'%';
+  const tbody = document.getElementById('alertTableBody');
+  tbody.innerHTML = '';
+  revenueAlerts.forEach((c,i) => {
+    const drop = ((c.revM1-c.revM2)/c.revM2*100).toFixed(1);
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td class="client-name">${c.name}</td>
+      <td><span class="dot" style="background:${iColor(c.industry)}"></span>${c.industry}</td>
+      <td>${fmtN(c.revM2)}</td>
+      <td>${c.revM1 ? fmtN(c.revM1) : '<span style="color:#8b949e">$0</span>'}</td>
+      <td>${c.revCur ? fmtN(c.revCur) : '—'}</td>
+      <td style="color:#f85149;font-weight:600">${drop}%</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+// ═══════════════════════════════════════════════════════════
+// TAB 4: MARGIN WATCH
+// ═══════════════════════════════════════════════════════════
+function buildMargins() {
+  const tbody = document.getElementById('marginTableBody');
+  tbody.innerHTML = '';
+  marginWatch.forEach(c => {
+    const dColor = c.delta <= -5 ? 'gm-red' : 'gm-yellow';
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td class="client-name">${c.name}</td>
+      <td><span class="dot" style="background:${iColor(c.industry)}"></span>${c.industry}</td>
+      <td>${fmtN(c.revM2)}</td><td>${fmtN(c.revM1)}</td><td>${c.revCur ? fmtN(c.revCur) : '—'}</td>
+      <td><span class="${gmCls(c.gmM2)}">${fmtPct(c.gmM2)}</span></td>
+      <td><span class="${gmCls(c.gmM1)}">${fmtPct(c.gmM1)}</span></td>
+      <td><span class="${gmCls(c.gmCur)}">${fmtPct(c.gmCur)}</span></td>
+      <td><span class="${dColor}">${c.delta>0?'+':''}${c.delta.toFixed(1)} pp</span></td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+// ═══════════════════════════════════════════════════════════
+// TAB 5: DAILY TREND
+// ═══════════════════════════════════════════════════════════
+function buildDailyCharts() {
+  const bdLabels = Array.from({length:20},(_,i)=>'BD'+(i+1));
+  let mayCum = 0, junCum = 0;
+  const mayCumArr = mayDaily.map(d=>{ mayCum += d.rev; return mayCum/1e6; });
+  const junCumArr = junDaily.map(d=>{ junCum += d.rev; return junCum/1e6; });
+
+  new Chart(document.getElementById('dailyCumRevChart'), {
+    type: 'line',
+    data: {
+      labels: bdLabels,
+      datasets: [
+        { label:'May 2026 (Final)',  data: mayCumArr, borderColor:'#8b949e', borderWidth:1.5, borderDash:[5,3],
+          pointRadius:3, fill:false, tension:0.2 },
+        { label:'June 2026 (Live)', data: junCumArr, borderColor:'#58a6ff', borderWidth:2.5,
+          pointRadius:4.5, fill:false, tension:0.2 }
+      ]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      interaction:{ mode:'index', intersect:false },
+      plugins: {
+        legend: CHART_DEFAULTS.legend,
+        tooltip: { ...CHART_DEFAULTS.tooltip, callbacks:{ label: ctx=>' '+ctx.dataset.label+': $'+ctx.raw.toFixed(2)+'M' } }
+      },
+      scales: {
+        x: { ticks:{color:'#8b949e',font:{size:11}}, grid:{color:'#21262d'}, title:{display:true,text:'Business Day',color:'#8b949e',font:{size:11}} },
+        y: { ticks:{color:'#8b949e',font:{size:11},callback:v=>'$'+v.toFixed(1)+'M'}, grid:{color:'#21262d'},
+             title:{display:true,text:'Cumulative Revenue',color:'#8b949e',font:{size:11}} }
+      }
+    }
+  });
+
+  new Chart(document.getElementById('dailyGmChart'), {
+    type: 'line',
+    data: {
+      labels: bdLabels,
+      datasets: [
+        { label:'May 2026 GM%',  data: mayDaily.map(d=>d.gm), borderColor:'#8b949e', borderWidth:1.5,
+          borderDash:[5,3], pointRadius:3, fill:false, tension:0.2 },
+        { label:'June 2026 GM%', data: junDaily.map(d
