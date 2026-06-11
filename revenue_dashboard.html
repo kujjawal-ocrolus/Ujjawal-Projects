@@ -64,7 +64,7 @@ footer { text-align: center; padding: 16px; color: #8b949e; font-size: 12px; bor
     <div class="meta">Powered by live Snowflake data &nbsp;·&nbsp; 3-month rolling window (Apr–Jun 2026) &nbsp;·&nbsp; 12-month ARR trend</div>
   </div>
   <div style="text-align:right">
-    <div style="color:#e6edf3;font-weight:600;font-size:15px;">As of June 10, 2026</div>
+    <div style="color:#e6edf3;font-weight:600;font-size:15px;">As of June 11, 2026</div>
     <div class="meta">Auto-refreshed daily via scheduled task</div>
   </div>
 </div>
@@ -93,9 +93,9 @@ footer { text-align: center; padding: 16px; color: #8b949e; font-size: 12px; bor
       <div class="card-change"><span class="change-up">▲ 11.4% MoM</span> &nbsp; <span class="gm-yellow">67.3% GM</span></div>
     </div>
     <div class="card">
-      <div class="card-header">June 2026 <span class="tag tag-projected">Projected · 7/22 BDs</span></div>
+      <div class="card-header">June 2026 <span class="tag tag-projected">Projected · 8/22 BDs</span></div>
       <div class="card-value">$4.87M</div>
-      <div class="card-sub">367 billed orgs MTD</div>
+      <div class="card-sub">377 billed orgs MTD</div>
       <div class="card-change"><span class="change-up">▲ 13.3% vs May</span> &nbsp; <span class="gm-yellow">67.7% GM MTD</span></div>
     </div>
   </div>
@@ -220,7 +220,7 @@ footer { text-align: center; padding: 16px; color: #8b949e; font-size: 12px; bor
   </div>
 </div>
 
-<footer>Ocrolus Internal Analytics &nbsp;·&nbsp; Snowflake Data &nbsp;·&nbsp; Refreshed: June 10, 2026 &nbsp;·&nbsp; Auto-scheduled daily</footer>
+<footer>Ocrolus Internal Analytics &nbsp;·&nbsp; Snowflake Data &nbsp;·&nbsp; Refreshed: June 11, 2026 &nbsp;·&nbsp; Auto-scheduled daily</footer>
 
 <script>
 // ═══════════════════════════════════════════════════════════
@@ -262,14 +262,14 @@ const revenueByIndustry = {
     { industry:"Other Lending",          revenue:3467,    gm:80.5, orgs:4   },
   ],
   jun: [
-    { industry:"Small Business Lending", revenue:901959,  gm:77.6, orgs:132 },
-    { industry:"Mortgage",               revenue:426927,  gm:44.1, orgs:155 },
-    { industry:"Consumer",               revenue:146633,  gm:70.3, orgs:41  },
-    { industry:"Professional Services",  revenue:48693,   gm:80.3, orgs:32  },
-    { industry:"Property Management",    revenue:15347,   gm:79.5, orgs:1   },
-    { industry:"Medicaid",               revenue:6765,    gm:57.2, orgs:1   },
-    { industry:"Other Lending",          revenue:1345,    gm:71.2, orgs:2   },
-    { industry:"Banking/KYC",            revenue:2299,    gm:88.9, orgs:3   },
+    { industry:"Small Business Lending", revenue:1029238, gm:78.7, orgs:137 },
+    { industry:"Mortgage",               revenue:491637,  gm:31.1, orgs:158 },
+    { industry:"Consumer",               revenue:165284,  gm:70.7, orgs:43  },
+    { industry:"Professional Services",  revenue:55994,   gm:80.1, orgs:32  },
+    { industry:"Property Management",    revenue:16969,   gm:79.9, orgs:1   },
+    { industry:"Medicaid",               revenue:8416,    gm:57.8, orgs:1   },
+    { industry:"Other Lending",          revenue:1515,    gm:72.3, orgs:2   },
+    { industry:"Banking/KYC",            revenue:2813,    gm:89.5, orgs:3   },
   ]
 };
 
@@ -299,16 +299,16 @@ const topClients = {
     { name:"CoreLogic – Sandbox",                  industry:"Mortgage",               revenue:86360,  gm:-57.4},
   ],
   jun: [
-    { name:"Rapid Finance (Production)",           industry:"Small Business Lending", revenue:573329, gm:92.1 },
-    { name:"OnDeck",                               industry:"Small Business Lending", revenue:269321, gm:77.3 },
-    { name:"Expansion Capital Group",              industry:"Small Business Lending", revenue:245683, gm:75.0 },
-    { name:"Funding Metrics Production",           industry:"Small Business Lending", revenue:142689, gm:71.3 },
-    { name:"Fora Financial",                       industry:"Small Business Lending", revenue:138188, gm:88.8 },
-    { name:"Marlin Leasing Production",            industry:"Small Business Lending", revenue:136915, gm:83.9 },
-    { name:"Nova Credit",                          industry:"Consumer",               revenue:123898, gm:74.7 },
-    { name:"Kalamata Capital Group",               industry:"Small Business Lending", revenue:114167, gm:83.7 },
-    { name:"Zillow – Encompass – Production",      industry:"Mortgage",               revenue:111879, gm:-4.0 },
-    { name:"CoreLogic – Sandbox",                  industry:"Mortgage",               revenue:85926,  gm:-54.9},
+    { name:"Rapid Finance (Production)",           industry:"Small Business Lending", revenue:573466, gm:92.6 },
+    { name:"OnDeck",                               industry:"Small Business Lending", revenue:268736, gm:78.2 },
+    { name:"Expansion Capital Group",              industry:"Small Business Lending", revenue:244503, gm:76.5 },
+    { name:"Funding Metrics Production",           industry:"Small Business Lending", revenue:142315, gm:73.1 },
+    { name:"Fora Financial",                       industry:"Small Business Lending", revenue:137907, gm:89.5 },
+    { name:"Marlin Leasing Production",            industry:"Small Business Lending", revenue:135781, gm:84.9 },
+    { name:"Zillow – Encompass – Production",      industry:"Mortgage",               revenue:126591, gm:-52.9},
+    { name:"Nova Credit",                          industry:"Consumer",               revenue:122510, gm:75.0 },
+    { name:"Kalamata Capital Group",               industry:"Small Business Lending", revenue:114890, gm:84.9 },
+    { name:"CoreLogic – Sandbox",                  industry:"Mortgage",               revenue:84686,  gm:-54.0},
   ]
 };
 
@@ -387,13 +387,14 @@ const mayDaily = [
   { bd:20, date:"May 29", rev:167498, gm:65.5 },
 ];
 const junDaily = [
-  { bd:1, date:"Jun 1", rev:219682, gm:67.1 },
-  { bd:2, date:"Jun 2", rev:224416, gm:69.2 },
-  { bd:3, date:"Jun 3", rev:227890, gm:69.0 },
-  { bd:4, date:"Jun 4", rev:215264, gm:68.4 },
-  { bd:5, date:"Jun 5", rev:175084, gm:64.1 },
-  { bd:6, date:"Jun 8", rev:220498, gm:67.8 },
-  { bd:7, date:"Jun 9", rev:215953, gm:67.6 },
+  { bd:1, date:"Jun 1",  rev:219402, gm:63.9 },
+  { bd:2, date:"Jun 2",  rev:223835, gm:66.3 },
+  { bd:3, date:"Jun 3",  rev:227895, gm:65.9 },
+  { bd:4, date:"Jun 4",  rev:214923, gm:65.6 },
+  { bd:5, date:"Jun 5",  rev:175085, gm:60.7 },
+  { bd:6, date:"Jun 8",  rev:220400, gm:64.5 },
+  { bd:7, date:"Jun 9",  rev:215146, gm:64.5 },
+  { bd:8, date:"Jun 10", rev:223790, gm:66.1 },
 ];
 
 // ═══════════════════════════════════════════════════════════
@@ -601,7 +602,7 @@ function buildMargins() {
 // TAB 5: DAILY TREND
 // ═══════════════════════════════════════════════════════════
 function buildDailyCharts() {
-  const bdLabels = Array.from({length:20},(_,i)=>'BD'+(i+1));
+  const bdLabels = Array.from({length:22},(_,i)=>'BD'+(i+1));
   let mayCum = 0, junCum = 0;
   const mayCumArr = mayDaily.map(d=>{ mayCum += d.rev; return mayCum/1e6; });
   const junCumArr = junDaily.map(d=>{ junCum += d.rev; return junCum/1e6; });
