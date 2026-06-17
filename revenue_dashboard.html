@@ -62,7 +62,7 @@
 <div class="header">
   <div>
     <h1>&#128202; Revenue Intelligence Dashboard</h1>
-    <div class="meta">Ocrolus &middot; Auto-refreshed &middot; As of June 16, 2026</div>
+    <div class="meta">Ocrolus &middot; Auto-refreshed &middot; As of June 17, 2026</div>
   </div>
 </div>
 
@@ -82,7 +82,7 @@
 
 <script>
 // ======================================================
-//  EMBEDDED DATA  (refreshed 2026-06-16)
+//  EMBEDDED DATA  (refreshed 2026-06-17)
 // ======================================================
 
 const ARR_TREND = [
@@ -115,14 +115,14 @@ const REV_INDUSTRY = [
   {month:"May '26",type:"FORECAST",industry:"Professional Services",orgs:44,revenue:132739,gm:80.4},
   {month:"May '26",type:"FORECAST",industry:"Property Management",orgs:1,revenue:42952,gm:78.8},
   {month:"May '26",type:"FORECAST",industry:"Small Business Lending",orgs:153,revenue:2456944,gm:78.6},
-  {month:"Jun '26",type:"FORECAST",industry:"Banking/KYC",orgs:3,revenue:4003,gm:87.9},
-  {month:"Jun '26",type:"FORECAST",industry:"Consumer",orgs:43,revenue:228743,gm:65.3},
-  {month:"Jun '26",type:"FORECAST",industry:"Medicaid",orgs:2,revenue:10946,gm:57.1},
-  {month:"Jun '26",type:"FORECAST",industry:"Mortgage",orgs:164,revenue:671097,gm:52.7},
-  {month:"Jun '26",type:"FORECAST",industry:"Other Lending",orgs:3,revenue:2076,gm:75.0},
-  {month:"Jun '26",type:"FORECAST",industry:"Professional Services",orgs:37,revenue:80348,gm:78.4},
-  {month:"Jun '26",type:"FORECAST",industry:"Property Management",orgs:1,revenue:22381,gm:76.9},
-  {month:"Jun '26",type:"FORECAST",industry:"Small Business Lending",orgs:139,revenue:1369493,gm:79.0}
+  {month:"Jun '26",type:"FORECAST",industry:"Banking/KYC",orgs:3,revenue:4186,gm:88.5},
+  {month:"Jun '26",type:"FORECAST",industry:"Consumer",orgs:43,revenue:247908,gm:70.2},
+  {month:"Jun '26",type:"FORECAST",industry:"Medicaid",orgs:2,revenue:11851,gm:56.7},
+  {month:"Jun '26",type:"FORECAST",industry:"Mortgage",orgs:166,revenue:793295,gm:56.7},
+  {month:"Jun '26",type:"FORECAST",industry:"Other Lending",orgs:4,revenue:2295,gm:75.6},
+  {month:"Jun '26",type:"FORECAST",industry:"Professional Services",orgs:38,revenue:89432,gm:78.5},
+  {month:"Jun '26",type:"FORECAST",industry:"Property Management",orgs:1,revenue:23800,gm:79.2},
+  {month:"Jun '26",type:"FORECAST",industry:"Small Business Lending",orgs:140,revenue:1496065,gm:79.0}
 ];
 
 const TOP10_REVENUE = [
@@ -146,16 +146,16 @@ const TOP10_REVENUE = [
   {month:"May '26",rank:8,client:"Funding Metrics Production",industry:"Small Business Lending",revenue:99186,gm:71.0},
   {month:"May '26",rank:9,client:"Kalamata Capital Group",industry:"Small Business Lending",revenue:98417,gm:85.1},
   {month:"May '26",rank:10,client:"CoreLogic - Sandbox",industry:"Mortgage",revenue:86360,gm:-57.4},
-  {month:"Jun '26",rank:1,client:"Rapid Finance (Production)",industry:"Small Business Lending",revenue:571542,gm:92.9},
-  {month:"Jun '26",rank:2,client:"OnDeck",industry:"Small Business Lending",revenue:258448,gm:78.1},
-  {month:"Jun '26",rank:3,client:"Expansion Capital Group",industry:"Small Business Lending",revenue:233618,gm:77.0},
-  {month:"Jun '26",rank:4,client:"Zillow - Encompass - Production",industry:"Mortgage",revenue:211814,gm:49.9},
-  {month:"Jun '26",rank:5,client:"Fora Financial",industry:"Small Business Lending",revenue:135676,gm:89.7},
-  {month:"Jun '26",rank:6,client:"Funding Metrics Production",industry:"Small Business Lending",revenue:131964,gm:73.6},
-  {month:"Jun '26",rank:7,client:"Marlin Leasing Production",industry:"Small Business Lending",revenue:126508,gm:85.3},
-  {month:"Jun '26",rank:8,client:"Nova Credit",industry:"Consumer",revenue:125476,gm:67.5},
-  {month:"Jun '26",rank:9,client:"Kalamata Capital Group",industry:"Small Business Lending",revenue:112862,gm:85.7},
-  {month:"Jun '26",rank:10,client:"Lendr",industry:"Small Business Lending",revenue:77042,gm:82.0}
+  {month:"Jun '26",rank:1,client:"Rapid Finance (Production)",industry:"Small Business Lending",revenue:568916,gm:92.9},
+  {month:"Jun '26",rank:2,client:"Zillow - Encompass - Production",industry:"Mortgage",revenue:329758,gm:65.3},
+  {month:"Jun '26",rank:3,client:"OnDeck",industry:"Small Business Lending",revenue:258911,gm:78.0},
+  {month:"Jun '26",rank:4,client:"Expansion Capital Group",industry:"Small Business Lending",revenue:233140,gm:77.1},
+  {month:"Jun '26",rank:5,client:"Fora Financial",industry:"Small Business Lending",revenue:134200,gm:89.8},
+  {month:"Jun '26",rank:6,client:"Funding Metrics Production",industry:"Small Business Lending",revenue:130405,gm:73.5},
+  {month:"Jun '26",rank:7,client:"Nova Credit",industry:"Consumer",revenue:124368,gm:74.6},
+  {month:"Jun '26",rank:8,client:"Marlin Leasing Production",industry:"Small Business Lending",revenue:123380,gm:85.4},
+  {month:"Jun '26",rank:9,client:"Kalamata Capital Group",industry:"Small Business Lending",revenue:112283,gm:85.7},
+  {month:"Jun '26",rank:10,client:"Lendr",industry:"Small Business Lending",revenue:84159,gm:83.5}
 ];
 
 const TOP10_ARR = [
@@ -165,48 +165,48 @@ const TOP10_ARR = [
 ];
 
 const REV_ALERTS = [
-  {client:"Fresh Funding Solutions Inc",industry:"Small Business Lending",revM2:8308,revM1:0,revCur:16361},
+  {client:"Fresh Funding Solutions Inc",industry:"Small Business Lending",revM2:8308,revM1:0,revCur:16088},
   {client:"Cardiff",industry:"Small Business Lending",revM2:5652,revM1:28,revCur:88},
-  {client:"Better Mortgage (BSIC) - Production",industry:"Mortgage",revM2:5976,revM1:341,revCur:284},
+  {client:"Better Mortgage (BSIC) - Production",industry:"Mortgage",revM2:5976,revM1:341,revCur:277},
   {client:"Rapid Finance 2026 Bank Statement Retro",industry:"Small Business Lending",revM2:52015,revM1:6137,revCur:null},
-  {client:"Basepoint Production",industry:"Small Business Lending",revM2:94645,revM1:17082,revCur:17237},
-  {client:"Kapitus (strategic funding source)",industry:"Small Business Lending",revM2:73266,revM1:13812,revCur:15699},
-  {client:"CrossCountry Mortgage - Production",industry:"Mortgage",revM2:53849,revM1:11110,revCur:12289},
-  {client:"Loan Scorecard",industry:"Mortgage",revM2:11678,revM1:2858,revCur:1041},
-  {client:"Sage Forensic Accounting",industry:"Professional Services",revM2:5538,revM1:2185,revCur:4281},
-  {client:"CliftonLarsonAllen",industry:"Professional Services",revM2:20426,revM1:8578,revCur:4850},
-  {client:"JS Held LLC",industry:"Professional Services",revM2:7412,revM1:3390,revCur:2016},
-  {client:"Fundworks",industry:"Small Business Lending",revM2:32967,revM1:16475,revCur:17241}
+  {client:"Basepoint Production",industry:"Small Business Lending",revM2:94645,revM1:17082,revCur:17004},
+  {client:"Kapitus (strategic funding source)",industry:"Small Business Lending",revM2:73266,revM1:13812,revCur:21885},
+  {client:"CrossCountry Mortgage - Production",industry:"Mortgage",revM2:53849,revM1:11110,revCur:12258},
+  {client:"Loan Scorecard",industry:"Mortgage",revM2:11678,revM1:2858,revCur:1307},
+  {client:"Sage Forensic Accounting",industry:"Professional Services",revM2:5538,revM1:2185,revCur:2908},
+  {client:"CliftonLarsonAllen",industry:"Professional Services",revM2:20426,revM1:8578,revCur:4842},
+  {client:"JS Held LLC",industry:"Professional Services",revM2:7412,revM1:3390,revCur:2010},
+  {client:"Fundworks",industry:"Small Business Lending",revM2:32967,revM1:16475,revCur:17296}
 ];
 
 const MARGIN_WATCH = [
-  {client:"CoreLogic - Sandbox",industry:"Mortgage",revM2:70205,revM1:86360,revCur:17512,gmM2:7.0,gmM1:-57.4,gmCur:-64.4,delta:-64.4},
-  {client:"Dragin",industry:"Small Business Lending",revM2:20866,revM1:25070,revCur:15749,gmM2:-30.9,gmM1:-47.5,gmCur:-28.2,delta:-16.6},
-  {client:"First Community Mortgage (FCM Partners) POC",industry:"Mortgage",revM2:41160,revM1:34559,revCur:17270,gmM2:-35.0,gmM1:-47.8,gmCur:-55.1,delta:-12.8},
-  {client:"Mulligan Funding Production",industry:"Small Business Lending",revM2:25127,revM1:30610,revCur:13891,gmM2:35.1,gmM1:23.5,gmCur:29.9,delta:-11.6},
-  {client:"Sofi - Encompass - Production",industry:"Mortgage",revM2:56003,revM1:53383,revCur:24461,gmM2:75.6,gmM1:64.1,gmCur:62.7,delta:-11.5},
-  {client:"Channel Partners Production",industry:"Small Business Lending",revM2:28344,revM1:30269,revCur:16315,gmM2:79.2,gmM1:72.2,gmCur:74.0,delta:-7.0},
-  {client:"Lendio, Inc",industry:"Small Business Lending",revM2:27442,revM1:34289,revCur:16658,gmM2:60.8,gmM1:55.2,gmCur:52.0,delta:-5.6},
-  {client:"Cake Mortgage",industry:"Mortgage",revM2:18113,revM1:14631,revCur:6764,gmM2:50.7,gmM1:46.2,gmCur:52.9,delta:-4.5},
-  {client:"Zillow - Encompass - Production",industry:"Mortgage",revM2:97393,revM1:99193,revCur:100260,gmM2:-1.9,gmM1:-6.2,gmCur:44.8,delta:-4.3},
-  {client:"Pearl Capital Business Funding",industry:"Small Business Lending",revM2:59664,revM1:58196,revCur:31912,gmM2:69.5,gmM1:66.0,gmCur:66.6,delta:-3.5},
-  {client:"OnDeck",industry:"Small Business Lending",revM2:227472,revM1:232631,revCur:118185,gmM2:83.8,gmM1:80.4,gmCur:77.9,delta:-3.4},
-  {client:"National Funding",industry:"Small Business Lending",revM2:14786,revM1:13654,revCur:5668,gmM2:86.8,gmM1:83.5,gmCur:81.9,delta:-3.3},
-  {client:"SoFi",industry:"Consumer",revM2:27624,revM1:24572,revCur:12874,gmM2:73.1,gmM1:70.1,gmCur:71.0,delta:-3.0},
-  {client:"Nations Direct - Encompass - Production",industry:"Mortgage",revM2:15640,revM1:12137,revCur:6062,gmM2:21.8,gmM1:19.0,gmCur:20.9,delta:-2.8},
-  {client:"GVA BOX",industry:"Small Business Lending",revM2:11475,revM1:10042,revCur:7069,gmM2:78.6,gmM1:76.1,gmCur:78.3,delta:-2.5},
-  {client:"Libertas Funding MCA Funds PROD v2023",industry:"Small Business Lending",revM2:67479,revM1:54859,revCur:32261,gmM2:84.2,gmM1:81.8,gmCur:82.6,delta:-2.4},
-  {client:"ForwardLine - Production Bank Statements",industry:"Small Business Lending",revM2:43448,revM1:50426,revCur:23395,gmM2:74.9,gmM1:72.7,gmCur:74.4,delta:-2.2},
-  {client:"Newrez Production Org",industry:"Mortgage",revM2:33108,revM1:35657,revCur:20095,gmM2:71.7,gmM1:69.6,gmCur:67.0,delta:-2.1},
-  {client:"BHG Production Account",industry:"Small Business Lending",revM2:31940,revM1:34458,revCur:14579,gmM2:69.4,gmM1:67.8,gmCur:63.4,delta:-1.6},
-  {client:"Idea Financial",industry:"Small Business Lending",revM2:26781,revM1:27730,revCur:13983,gmM2:82.1,gmM1:80.7,gmCur:81.3,delta:-1.4},
-  {client:"Neighborhood Loans - Encompass",industry:"Mortgage",revM2:11781,revM1:11031,revCur:5613,gmM2:38.3,gmM1:36.9,gmCur:43.0,delta:-1.4},
-  {client:"Wayflyer",industry:"Small Business Lending",revM2:22387,revM1:26766,revCur:20619,gmM2:70.2,gmM1:68.8,gmCur:68.8,delta:-1.4},
-  {client:"Boom Pay - Production",industry:"Consumer",revM2:40863,revM1:42914,revCur:21415,gmM2:60.1,gmM1:59.1,gmCur:54.6,delta:-1.0},
-  {client:"Union Home Mortgage - Encompass Production",industry:"Mortgage",revM2:25312,revM1:24263,revCur:14335,gmM2:46.4,gmM1:45.7,gmCur:41.3,delta:-0.7},
-  {client:"Plaid Production",industry:"Consumer",revM2:58069,revM1:60731,revCur:27380,gmM2:70.9,gmM1:70.2,gmCur:64.7,delta:-0.7},
-  {client:"Expansion Capital Group",industry:"Small Business Lending",revM2:180568,revM1:195528,revCur:106141,gmM2:74.5,gmM1:73.9,gmCur:76.7,delta:-0.6},
-  {client:"AnnieMac Home Mortgage",industry:"Mortgage",revM2:34320,revM1:35758,revCur:15145,gmM2:79.4,gmM1:78.9,gmCur:84.9,delta:-0.5}
+  {client:"CoreLogic - Sandbox",industry:"Mortgage",revM2:70205,revM1:86360,revCur:20882,gmM2:7.0,gmM1:-57.4,gmCur:-64.4,delta:-64.4},
+  {client:"Dragin",industry:"Small Business Lending",revM2:20866,revM1:25070,revCur:20523,gmM2:-30.9,gmM1:-47.5,gmCur:-23.9,delta:-16.6},
+  {client:"First Community Mortgage (FCM Partners) POC",industry:"Mortgage",revM2:41160,revM1:34559,revCur:19882,gmM2:-35.0,gmM1:-47.8,gmCur:-55.5,delta:-12.8},
+  {client:"Mulligan Funding Production",industry:"Small Business Lending",revM2:25127,revM1:30610,revCur:16993,gmM2:35.1,gmM1:23.5,gmCur:30.4,delta:-11.6},
+  {client:"Sofi - Encompass - Production",industry:"Mortgage",revM2:56003,revM1:53383,revCur:30436,gmM2:75.6,gmM1:64.1,gmCur:66.3,delta:-11.5},
+  {client:"Channel Partners Production",industry:"Small Business Lending",revM2:28344,revM1:30269,revCur:19427,gmM2:79.2,gmM1:72.2,gmCur:74.4,delta:-7.0},
+  {client:"Lendio, Inc",industry:"Small Business Lending",revM2:27442,revM1:34289,revCur:20732,gmM2:60.8,gmM1:55.2,gmCur:54.4,delta:-5.6},
+  {client:"Cake Mortgage",industry:"Mortgage",revM2:18113,revM1:14631,revCur:8310,gmM2:50.7,gmM1:46.2,gmCur:60.2,delta:-4.5},
+  {client:"Zillow - Encompass - Production",industry:"Mortgage",revM2:97393,revM1:99193,revCur:179868,gmM2:-1.9,gmM1:-6.2,gmCur:65.3,delta:-4.3},
+  {client:"Pearl Capital Business Funding",industry:"Small Business Lending",revM2:59664,revM1:58196,revCur:37963,gmM2:69.5,gmM1:66.0,gmCur:67.6,delta:-3.5},
+  {client:"OnDeck",industry:"Small Business Lending",revM2:227472,revM1:232631,revCur:141224,gmM2:83.8,gmM1:80.4,gmCur:78.0,delta:-3.4},
+  {client:"National Funding",industry:"Small Business Lending",revM2:14786,revM1:13654,revCur:6879,gmM2:86.8,gmM1:83.5,gmCur:82.4,delta:-3.3},
+  {client:"SoFi",industry:"Consumer",revM2:27624,revM1:24572,revCur:15025,gmM2:73.1,gmM1:70.1,gmCur:73.8,delta:-3.0},
+  {client:"Nations Direct - Encompass - Production",industry:"Mortgage",revM2:15640,revM1:12137,revCur:7320,gmM2:21.8,gmM1:19.0,gmCur:28.5,delta:-2.8},
+  {client:"GVA BOX",industry:"Small Business Lending",revM2:11475,revM1:10042,revCur:8480,gmM2:78.6,gmM1:76.1,gmCur:78.2,delta:-2.5},
+  {client:"Libertas Funding MCA Funds PROD v2023",industry:"Small Business Lending",revM2:67479,revM1:54859,revCur:39070,gmM2:84.2,gmM1:81.8,gmCur:82.9,delta:-2.4},
+  {client:"ForwardLine - Production Bank Statements",industry:"Small Business Lending",revM2:43448,revM1:50426,revCur:27231,gmM2:74.9,gmM1:72.7,gmCur:75.3,delta:-2.2},
+  {client:"Newrez Production Org",industry:"Mortgage",revM2:33108,revM1:35657,revCur:22899,gmM2:71.7,gmM1:69.6,gmCur:67.3,delta:-2.1},
+  {client:"BHG Production Account",industry:"Small Business Lending",revM2:31940,revM1:34458,revCur:16758,gmM2:69.4,gmM1:67.8,gmCur:66.0,delta:-1.6},
+  {client:"Idea Financial",industry:"Small Business Lending",revM2:26781,revM1:27730,revCur:16977,gmM2:82.1,gmM1:80.7,gmCur:81.8,delta:-1.4},
+  {client:"Neighborhood Loans - Encompass",industry:"Mortgage",revM2:11781,revM1:11031,revCur:6894,gmM2:38.3,gmM1:36.9,gmCur:47.5,delta:-1.4},
+  {client:"Wayflyer",industry:"Small Business Lending",revM2:22387,revM1:26766,revCur:24679,gmM2:70.2,gmM1:68.8,gmCur:69.5,delta:-1.4},
+  {client:"Boom Pay - Production",industry:"Consumer",revM2:40863,revM1:42914,revCur:26083,gmM2:60.1,gmM1:59.1,gmCur:59.0,delta:-1.0},
+  {client:"Union Home Mortgage - Encompass Production",industry:"Mortgage",revM2:25312,revM1:24263,revCur:17204,gmM2:46.4,gmM1:45.7,gmCur:50.1,delta:-0.7},
+  {client:"Plaid Production",industry:"Consumer",revM2:58069,revM1:60731,revCur:32399,gmM2:70.9,gmM1:70.2,gmCur:67.9,delta:-0.7},
+  {client:"Expansion Capital Group",industry:"Small Business Lending",revM2:180568,revM1:195528,revCur:127167,gmM2:74.5,gmM1:73.9,gmCur:77.1,delta:-0.6},
+  {client:"AnnieMac Home Mortgage",industry:"Mortgage",revM2:34320,revM1:35758,revCur:16929,gmM2:79.4,gmM1:78.9,gmCur:83.8,delta:-0.5}
 ];
 
 const DAILY_TREND = [
@@ -241,21 +241,22 @@ const DAILY_TREND = [
   {month:"May '26",date:"2026-05-29",weight:1,bdTotal:20,dailyRev:167498,dailyGm:65.5},
   {month:"May '26",date:"2026-05-30",weight:0,bdTotal:20,dailyRev:24980,dailyGm:63.0},
   {month:"May '26",date:"2026-05-31",weight:0,bdTotal:20,dailyRev:24161,dailyGm:65.4},
-  {month:"Jun '26",date:"2026-06-01",weight:1,bdElapsed:1,bdTotal:22,dailyRev:217333,dailyGm:70.3},
-  {month:"Jun '26",date:"2026-06-02",weight:1,bdElapsed:2,bdTotal:22,dailyRev:224438,dailyGm:71.0},
-  {month:"Jun '26",date:"2026-06-03",weight:1,bdElapsed:3,bdTotal:22,dailyRev:230892,dailyGm:70.9},
-  {month:"Jun '26",date:"2026-06-04",weight:1,bdElapsed:4,bdTotal:22,dailyRev:217234,dailyGm:70.8},
-  {month:"Jun '26",date:"2026-06-05",weight:1,bdElapsed:5,bdTotal:22,dailyRev:177551,dailyGm:66.7},
-  {month:"Jun '26",date:"2026-06-06",weight:0,bdElapsed:5,bdTotal:22,dailyRev:28059,dailyGm:68.2},
-  {month:"Jun '26",date:"2026-06-07",weight:0,bdElapsed:5,bdTotal:22,dailyRev:25018,dailyGm:69.3},
-  {month:"Jun '26",date:"2026-06-08",weight:1,bdElapsed:6,bdTotal:22,dailyRev:221274,dailyGm:70.6},
-  {month:"Jun '26",date:"2026-06-09",weight:1,bdElapsed:7,bdTotal:22,dailyRev:217253,dailyGm:70.2},
-  {month:"Jun '26",date:"2026-06-10",weight:1,bdElapsed:8,bdTotal:22,dailyRev:225007,dailyGm:71.5},
-  {month:"Jun '26",date:"2026-06-11",weight:1,bdElapsed:9,bdTotal:22,dailyRev:205770,dailyGm:70.5},
-  {month:"Jun '26",date:"2026-06-12",weight:1,bdElapsed:10,bdTotal:22,dailyRev:167765,dailyGm:64.1},
-  {month:"Jun '26",date:"2026-06-13",weight:0,bdElapsed:10,bdTotal:22,dailyRev:27069,dailyGm:56.3},
-  {month:"Jun '26",date:"2026-06-14",weight:0,bdElapsed:10,bdTotal:22,dailyRev:6255,dailyGm:-11.3},
-  {month:"Jun '26",date:"2026-06-15",weight:1,bdElapsed:11,bdTotal:22,dailyRev:204811,dailyGm:66.1}
+  {month:"Jun '26",date:"2026-06-01",weight:1,bdElapsed:1,bdTotal:22,dailyRev:221920,dailyGm:71.9},
+  {month:"Jun '26",date:"2026-06-02",weight:1,bdElapsed:2,bdTotal:22,dailyRev:228357,dailyGm:72.5},
+  {month:"Jun '26",date:"2026-06-03",weight:1,bdElapsed:3,bdTotal:22,dailyRev:235210,dailyGm:72.4},
+  {month:"Jun '26",date:"2026-06-04",weight:1,bdElapsed:4,bdTotal:22,dailyRev:221515,dailyGm:72.2},
+  {month:"Jun '26",date:"2026-06-05",weight:1,bdElapsed:5,bdTotal:22,dailyRev:181078,dailyGm:68.3},
+  {month:"Jun '26",date:"2026-06-06",weight:0,bdElapsed:5,bdTotal:22,dailyRev:29313,dailyGm:70.5},
+  {month:"Jun '26",date:"2026-06-07",weight:0,bdElapsed:5,bdTotal:22,dailyRev:25591,dailyGm:70.8},
+  {month:"Jun '26",date:"2026-06-08",weight:1,bdElapsed:6,bdTotal:22,dailyRev:225966,dailyGm:72.2},
+  {month:"Jun '26",date:"2026-06-09",weight:1,bdElapsed:7,bdTotal:22,dailyRev:221741,dailyGm:71.8},
+  {month:"Jun '26",date:"2026-06-10",weight:1,bdElapsed:8,bdTotal:22,dailyRev:229485,dailyGm:73.0},
+  {month:"Jun '26",date:"2026-06-11",weight:1,bdElapsed:9,bdTotal:22,dailyRev:210492,dailyGm:72.2},
+  {month:"Jun '26",date:"2026-06-12",weight:1,bdElapsed:10,bdTotal:22,dailyRev:171893,dailyGm:70.7},
+  {month:"Jun '26",date:"2026-06-13",weight:0,bdElapsed:10,bdTotal:22,dailyRev:27948,dailyGm:70.1},
+  {month:"Jun '26",date:"2026-06-14",weight:0,bdElapsed:10,bdTotal:22,dailyRev:6231,dailyGm:31.1},
+  {month:"Jun '26",date:"2026-06-15",weight:1,bdElapsed:11,bdTotal:22,dailyRev:209794,dailyGm:71.5},
+  {month:"Jun '26",date:"2026-06-16",weight:1,bdElapsed:12,bdTotal:22,dailyRev:222296,dailyGm:69.6}
 ];
 
 // ======================================================
@@ -311,7 +312,7 @@ function buildOverview(){
   const latestArr = ARR_TREND[ARR_TREND.length-1];
   const prevArr = ARR_TREND[ARR_TREND.length-2];
   const arrDelta = pct(latestArr.arr, prevArr.arr);
-  const junBD=11, junBDTotal=22;
+  const junBD=12, junBDTotal=22;
   const junProj = Math.round(jun.revenue / (junBD/junBDTotal));
 
   const mayRows = REV_INDUSTRY.filter(r=>r.month==="May '26");
@@ -343,7 +344,7 @@ function buildOverview(){
     <div class="kpi">
       <div class="kpi-label">Jun GM% (MTD)</div>
       <div class="kpi-value">${fmtPct(jun.gm)}</div>
-      <div class="kpi-sub"><span class="tag forecast-tag">MTD thru Jun 15</span></div>
+      <div class="kpi-sub"><span class="tag forecast-tag">MTD thru Jun 16</span></div>
     </div>
   </div>
 
@@ -672,7 +673,7 @@ function buildDaily(){
   <div class="grid-2" style="margin-bottom:24px">
     <div class="card">
       <div class="card-title">Cumulative Revenue &mdash; Business Day Aligned</div>
-      <div class="card-subtitle">May 2026 (final) vs Jun 2026 (MTD, through Jun 15)</div>
+      <div class="card-subtitle">May 2026 (final) vs Jun 2026 (MTD, through Jun 16)</div>
       <div class="chart-wrap"><canvas id="cumRevChart"></canvas></div>
     </div>
     <div class="card">
@@ -793,4 +794,12 @@ function showTab(id,el){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   el.classList.add('active');
-  if(!TAB_BUILT[id]){TAB_BUILDERS[id]();TA
+  if(!TAB_BUILT[id]){TAB_BUILDERS[id]();TAB_BUILT[id]=true;}
+}
+
+// Init
+buildOverview();
+TAB_BUILT['overview']=true;
+</script>
+</body>
+</html>
