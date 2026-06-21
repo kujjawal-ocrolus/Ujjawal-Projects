@@ -62,7 +62,7 @@
 <div class="header">
   <div>
     <h1>&#128202; Revenue Intelligence Dashboard</h1>
-    <div class="meta">Ocrolus &middot; Auto-refreshed &middot; As of June 19, 2026</div>
+    <div class="meta">Ocrolus &middot; Auto-refreshed &middot; As of June 21, 2026</div>
   </div>
 </div>
 
@@ -82,7 +82,7 @@
 
 <script>
 // ======================================================
-//  EMBEDDED DATA  (refreshed 2026-06-19)
+//  EMBEDDED DATA  (refreshed 2026-06-21)
 // ======================================================
 
 const ARR_TREND = [
@@ -116,14 +116,14 @@ const REV_INDUSTRY = [
   {month:"May '26",type:"FORECAST",industry:"Professional Services",orgs:44,revenue:132739,gm:80.4},
   {month:"May '26",type:"FORECAST",industry:"Property Management",orgs:1,revenue:42952,gm:78.8},
   {month:"May '26",type:"FORECAST",industry:"Small Business Lending",orgs:153,revenue:2456944,gm:78.6},
-  {month:"Jun '26",type:"FORECAST",industry:"Banking/KYC",orgs:3,revenue:4794,gm:88.8},
-  {month:"Jun '26",type:"FORECAST",industry:"Consumer",orgs:44,revenue:287046,gm:70.3},
-  {month:"Jun '26",type:"FORECAST",industry:"Medicaid",orgs:2,revenue:14007,gm:56.7},
-  {month:"Jun '26",type:"FORECAST",industry:"Mortgage",orgs:166,revenue:904417,gm:56.0},
-  {month:"Jun '26",type:"FORECAST",industry:"Other Lending",orgs:4,revenue:2623,gm:75.3},
-  {month:"Jun '26",type:"FORECAST",industry:"Professional Services",orgs:40,revenue:99121,gm:78.2},
-  {month:"Jun '26",type:"FORECAST",industry:"Property Management",orgs:1,revenue:26910,gm:79.2},
-  {month:"Jun '26",type:"FORECAST",industry:"Small Business Lending",orgs:141,revenue:1735308,gm:79.4}
+  {month:"Jun '26",type:"FORECAST",industry:"Banking/KYC",orgs:3,revenue:4804,gm:88.6},
+  {month:"Jun '26",type:"FORECAST",industry:"Consumer",orgs:44,revenue:301353,gm:69.8},
+  {month:"Jun '26",type:"FORECAST",industry:"Medicaid",orgs:2,revenue:14699,gm:56.2},
+  {month:"Jun '26",type:"FORECAST",industry:"Mortgage",orgs:166,revenue:931761,gm:55.1},
+  {month:"Jun '26",type:"FORECAST",industry:"Other Lending",orgs:4,revenue:2779,gm:75.4},
+  {month:"Jun '26",type:"FORECAST",industry:"Professional Services",orgs:40,revenue:102173,gm:77.6},
+  {month:"Jun '26",type:"FORECAST",industry:"Property Management",orgs:1,revenue:28539,gm:78.8},
+  {month:"Jun '26",type:"FORECAST",industry:"Small Business Lending",orgs:141,revenue:1806540,gm:79.2}
 ];
 
 const TOP10_REVENUE = [
@@ -147,16 +147,16 @@ const TOP10_REVENUE = [
   {month:"May '26",rank:8,client:"Funding Metrics Production",industry:"Small Business Lending",revenue:99186,gm:71.0},
   {month:"May '26",rank:9,client:"Kalamata Capital Group",industry:"Small Business Lending",revenue:98417,gm:85.1},
   {month:"May '26",rank:10,client:"CoreLogic - Sandbox",industry:"Mortgage",revenue:86360,gm:-57.4},
-  {month:"Jun '26",rank:1,client:"Rapid Finance (Production)",industry:"Small Business Lending",revenue:570232,gm:93.0},
-  {month:"Jun '26",rank:2,client:"Zillow - Encompass - Production",industry:"Mortgage",revenue:296145,gm:63.0},
-  {month:"Jun '26",rank:3,client:"OnDeck",industry:"Small Business Lending",revenue:258107,gm:78.2},
-  {month:"Jun '26",rank:4,client:"Expansion Capital Group",industry:"Small Business Lending",revenue:232947,gm:77.5},
-  {month:"Jun '26",rank:5,client:"Fora Financial",industry:"Small Business Lending",revenue:132742,gm:89.9},
-  {month:"Jun '26",rank:6,client:"Funding Metrics Production",industry:"Small Business Lending",revenue:126260,gm:73.7},
-  {month:"Jun '26",rank:7,client:"Marlin Leasing Production",industry:"Small Business Lending",revenue:122826,gm:85.6},
-  {month:"Jun '26",rank:8,client:"Nova Credit",industry:"Consumer",revenue:122615,gm:74.6},
-  {month:"Jun '26",rank:9,client:"Kalamata Capital Group",industry:"Small Business Lending",revenue:112503,gm:85.9},
-  {month:"Jun '26",rank:10,client:"Lendr",industry:"Small Business Lending",revenue:83224,gm:84.0}
+  {month:"Jun '26",rank:1,client:"Rapid Finance (Production)",industry:"Small Business Lending",revenue:562231,gm:93.1},
+  {month:"Jun '26",rank:2,client:"Zillow - Encompass - Production",industry:"Mortgage",revenue:281446,gm:62.0},
+  {month:"Jun '26",rank:3,client:"OnDeck",industry:"Small Business Lending",revenue:248714,gm:77.9},
+  {month:"Jun '26",rank:4,client:"Expansion Capital Group",industry:"Small Business Lending",revenue:224657,gm:77.2},
+  {month:"Jun '26",rank:5,client:"Fora Financial",industry:"Small Business Lending",revenue:130962,gm:89.9},
+  {month:"Jun '26",rank:6,client:"Funding Metrics Production",industry:"Small Business Lending",revenue:120971,gm:73.3},
+  {month:"Jun '26",rank:7,client:"Nova Credit",industry:"Consumer",revenue:120372,gm:74.3},
+  {month:"Jun '26",rank:8,client:"Marlin Leasing Production",industry:"Small Business Lending",revenue:117545,gm:85.3},
+  {month:"Jun '26",rank:9,client:"Kalamata Capital Group",industry:"Small Business Lending",revenue:109878,gm:86.1},
+  {month:"Jun '26",rank:10,client:"Lendr",industry:"Small Business Lending",revenue:81651,gm:84.3}
 ];
 
 const TOP10_ARR = [
@@ -242,24 +242,25 @@ const DAILY_TREND = [
   {month:"May '26",date:"2026-05-29",weight:1,bdTotal:20,dailyRev:167498,dailyGm:65.5},
   {month:"May '26",date:"2026-05-30",weight:0,bdTotal:20,dailyRev:24980,dailyGm:63.0},
   {month:"May '26",date:"2026-05-31",weight:0,bdTotal:20,dailyRev:24161,dailyGm:65.4},
-  {month:"Jun '26",date:"2026-06-01",weight:1,bdElapsed:1,bdTotal:22,dailyRev:211251,dailyGm:70.8},
-  {month:"Jun '26",date:"2026-06-02",weight:1,bdElapsed:2,bdTotal:22,dailyRev:219256,dailyGm:71.5},
-  {month:"Jun '26",date:"2026-06-03",weight:1,bdElapsed:3,bdTotal:22,dailyRev:225157,dailyGm:71.4},
-  {month:"Jun '26",date:"2026-06-04",weight:1,bdElapsed:4,bdTotal:22,dailyRev:212312,dailyGm:71.2},
-  {month:"Jun '26",date:"2026-06-05",weight:1,bdElapsed:5,bdTotal:22,dailyRev:172536,dailyGm:66.8},
-  {month:"Jun '26",date:"2026-06-06",weight:0,bdElapsed:5,bdTotal:22,dailyRev:26464,dailyGm:67.6},
-  {month:"Jun '26",date:"2026-06-07",weight:0,bdElapsed:5,bdTotal:22,dailyRev:24113,dailyGm:69.1},
-  {month:"Jun '26",date:"2026-06-08",weight:1,bdElapsed:6,bdTotal:22,dailyRev:215183,dailyGm:70.9},
-  {month:"Jun '26",date:"2026-06-09",weight:1,bdElapsed:7,bdTotal:22,dailyRev:211447,dailyGm:70.5},
-  {month:"Jun '26",date:"2026-06-10",weight:1,bdElapsed:8,bdTotal:22,dailyRev:219279,dailyGm:71.9},
-  {month:"Jun '26",date:"2026-06-11",weight:1,bdElapsed:9,bdTotal:22,dailyRev:199635,dailyGm:70.8},
-  {month:"Jun '26",date:"2026-06-12",weight:1,bdElapsed:10,bdTotal:22,dailyRev:161763,dailyGm:69.0},
-  {month:"Jun '26",date:"2026-06-13",weight:0,bdElapsed:10,bdTotal:22,dailyRev:26101,dailyGm:68.1},
-  {month:"Jun '26",date:"2026-06-14",weight:0,bdElapsed:10,bdTotal:22,dailyRev:6241,dailyGm:21.5},
-  {month:"Jun '26",date:"2026-06-15",weight:1,bdElapsed:11,bdTotal:22,dailyRev:199143,dailyGm:70.2},
-  {month:"Jun '26",date:"2026-06-16",weight:1,bdElapsed:12,bdTotal:22,dailyRev:209673,dailyGm:67.9},
-  {month:"Jun '26",date:"2026-06-17",weight:1,bdElapsed:13,bdTotal:22,dailyRev:203098,dailyGm:69.7},
-  {month:"Jun '26",date:"2026-06-18",weight:1,bdElapsed:14,bdTotal:22,dailyRev:203001,dailyGm:71.4}
+  {month:"Jun '26",date:"2026-06-01",weight:1,bdElapsed:1,bdTotal:22,dailyRev:222458,dailyGm:71.8},
+  {month:"Jun '26",date:"2026-06-02",weight:1,bdElapsed:2,bdTotal:22,dailyRev:229233,dailyGm:72.4},
+  {month:"Jun '26",date:"2026-06-03",weight:1,bdElapsed:3,bdTotal:22,dailyRev:235999,dailyGm:72.3},
+  {month:"Jun '26",date:"2026-06-04",weight:1,bdElapsed:4,bdTotal:22,dailyRev:222059,dailyGm:72.1},
+  {month:"Jun '26",date:"2026-06-05",weight:1,bdElapsed:5,bdTotal:22,dailyRev:181240,dailyGm:67.9},
+  {month:"Jun '26",date:"2026-06-06",weight:0,bdElapsed:5,bdTotal:22,dailyRev:29109,dailyGm:69.9},
+  {month:"Jun '26",date:"2026-06-07",weight:0,bdElapsed:5,bdTotal:22,dailyRev:25552,dailyGm:70.3},
+  {month:"Jun '26",date:"2026-06-08",weight:1,bdElapsed:6,bdTotal:22,dailyRev:226555,dailyGm:72.0},
+  {month:"Jun '26",date:"2026-06-09",weight:1,bdElapsed:7,bdTotal:22,dailyRev:222168,dailyGm:71.5},
+  {month:"Jun '26",date:"2026-06-10",weight:1,bdElapsed:8,bdTotal:22,dailyRev:229937,dailyGm:72.8},
+  {month:"Jun '26",date:"2026-06-11",weight:1,bdElapsed:9,bdTotal:22,dailyRev:210586,dailyGm:71.9},
+  {month:"Jun '26",date:"2026-06-12",weight:1,bdElapsed:10,bdTotal:22,dailyRev:171801,dailyGm:70.3},
+  {month:"Jun '26",date:"2026-06-13",weight:0,bdElapsed:10,bdTotal:22,dailyRev:27893,dailyGm:69.6},
+  {month:"Jun '26",date:"2026-06-14",weight:0,bdElapsed:10,bdTotal:22,dailyRev:6331,dailyGm:21.5},
+  {month:"Jun '26",date:"2026-06-15",weight:1,bdElapsed:11,bdTotal:22,dailyRev:210082,dailyGm:71.2},
+  {month:"Jun '26",date:"2026-06-16",weight:1,bdElapsed:12,bdTotal:22,dailyRev:222173,dailyGm:69.1},
+  {month:"Jun '26",date:"2026-06-17",weight:1,bdElapsed:13,bdTotal:22,dailyRev:214311,dailyGm:70.8},
+  {month:"Jun '26",date:"2026-06-18",weight:1,bdElapsed:14,bdTotal:22,dailyRev:204158,dailyGm:71.1},
+  {month:"Jun '26",date:"2026-06-19",weight:1,bdElapsed:15,bdTotal:22,dailyRev:101005,dailyGm:70.6}
 ];
 
 // ======================================================
@@ -315,7 +316,7 @@ function buildOverview(){
   const latestArr = ARR_TREND[ARR_TREND.length-1];
   const prevArr = ARR_TREND[ARR_TREND.length-2];
   const arrDelta = pct(latestArr.arr, prevArr.arr);
-  const junBD=14, junBDTotal=22;
+  const junBD=15, junBDTotal=22;
   const junProj = Math.round(jun.revenue / (junBD/junBDTotal));
 
   const mayRows = REV_INDUSTRY.filter(r=>r.month==="May '26");
@@ -347,7 +348,7 @@ function buildOverview(){
     <div class="kpi">
       <div class="kpi-label">Jun GM% (MTD)</div>
       <div class="kpi-value">${fmtPct(jun.gm)}</div>
-      <div class="kpi-sub"><span class="tag forecast-tag">MTD thru Jun 18</span></div>
+      <div class="kpi-sub"><span class="tag forecast-tag">MTD thru Jun 19</span></div>
     </div>
   </div>
 
