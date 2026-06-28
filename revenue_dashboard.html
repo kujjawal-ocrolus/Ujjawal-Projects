@@ -56,7 +56,7 @@
   <div>
     <h1>&#9889; Ocrolus Revenue Intelligence</h1>
   </div>
-  <div class="meta">As of <strong>June 26, 2026</strong> &nbsp;&middot;&nbsp; Auto-refreshed daily &nbsp;&middot;&nbsp; All figures in USD</div>
+  <div class="meta">As of <strong>June 28, 2026</strong> &nbsp;&middot;&nbsp; Auto-refreshed daily &nbsp;&middot;&nbsp; All figures in USD</div>
 </div>
 
 <div class="tab-bar">
@@ -82,7 +82,7 @@
       <canvas id="revGmChart"></canvas>
     </div>
     <div class="card half">
-      <h3>Current Month Industry Revenue Mix (Jun '26)</h3>
+      <h3>Current Month Industry Revenue Mix (Jun '26 Proj.)</h3>
       <canvas id="industryChart"></canvas>
     </div>
   </div>
@@ -149,7 +149,7 @@
 
 <script>
 // ============================================================
-// DATA — refreshed 2026-06-26
+// DATA — refreshed 2026-06-28
 // ============================================================
 
 const Q1_ARR = [
@@ -183,14 +183,14 @@ const Q2_REVENUE = [
   {month:"2026-05-01",label:"May '26",industry:"Professional Services",type:"FORECAST",orgs:44,revenue:132739,gm:80.4},
   {month:"2026-05-01",label:"May '26",industry:"Property Management",type:"FORECAST",orgs:1,revenue:42952,gm:78.8},
   {month:"2026-05-01",label:"May '26",industry:"Small Business Lending",type:"FORECAST",orgs:153,revenue:2456944,gm:78.6},
-  {month:"2026-06-01",label:"Jun '26",industry:"Banking/KYC",type:"FORECAST",orgs:3,revenue:6099,gm:88.0},
-  {month:"2026-06-01",label:"Jun '26",industry:"Consumer",type:"FORECAST",orgs:44,revenue:390966,gm:70.0},
-  {month:"2026-06-01",label:"Jun '26",industry:"Medicaid",type:"FORECAST",orgs:2,revenue:17711,gm:55.8},
-  {month:"2026-06-01",label:"Jun '26",industry:"Mortgage",type:"FORECAST",orgs:169,revenue:1153742,gm:53.1},
-  {month:"2026-06-01",label:"Jun '26",industry:"Other Lending",type:"FORECAST",orgs:4,revenue:3480,gm:76.6},
-  {month:"2026-06-01",label:"Jun '26",industry:"Professional Services",type:"FORECAST",orgs:41,revenue:131387,gm:78.1},
-  {month:"2026-06-01",label:"Jun '26",industry:"Property Management",type:"FORECAST",orgs:1,revenue:36145,gm:78.8},
-  {month:"2026-06-01",label:"Jun '26",industry:"Small Business Lending",type:"FORECAST",orgs:142,revenue:2302435,gm:79.5}
+  {month:"2026-06-01",label:"Jun '26",industry:"Banking/KYC",type:"FORECAST",orgs:3,revenue:6500,gm:87.8},
+  {month:"2026-06-01",label:"Jun '26",industry:"Consumer",type:"FORECAST",orgs:45,revenue:417579,gm:69.7},
+  {month:"2026-06-01",label:"Jun '26",industry:"Medicaid",type:"FORECAST",orgs:2,revenue:18083,gm:55.7},
+  {month:"2026-06-01",label:"Jun '26",industry:"Mortgage",type:"FORECAST",orgs:169,revenue:1207499,gm:52.5},
+  {month:"2026-06-01",label:"Jun '26",industry:"Other Lending",type:"FORECAST",orgs:4,revenue:3626,gm:76.7},
+  {month:"2026-06-01",label:"Jun '26",industry:"Professional Services",type:"FORECAST",orgs:41,revenue:138158,gm:78.1},
+  {month:"2026-06-01",label:"Jun '26",industry:"Property Management",type:"FORECAST",orgs:1,revenue:38660,gm:78.4},
+  {month:"2026-06-01",label:"Jun '26",industry:"Small Business Lending",type:"FORECAST",orgs:142,revenue:2413076,gm:79.2}
 ];
 
 const Q3_TOP_CLIENTS = [
@@ -214,16 +214,16 @@ const Q3_TOP_CLIENTS = [
   {month:"2026-05-01",name:"Funding Metrics Production",industry:"Small Business Lending",revenue:99186,gm:71.0,rank:8},
   {month:"2026-05-01",name:"Kalamata Capital Group",industry:"Small Business Lending",revenue:98417,gm:85.1,rank:9},
   {month:"2026-05-01",name:"CoreLogic - Sandbox",industry:"Mortgage",revenue:86360,gm:-57.4,rank:10},
-  {month:"2026-06-01",name:"Rapid Finance (Production)",industry:"Small Business Lending",revenue:568705,gm:93.1,rank:1},
-  {month:"2026-06-01",name:"OnDeck",industry:"Small Business Lending",revenue:253765,gm:78.3,rank:2},
-  {month:"2026-06-01",name:"Zillow - Encompass - Production",industry:"Mortgage",revenue:246724,gm:56.6,rank:3},
-  {month:"2026-06-01",name:"Expansion Capital Group",industry:"Small Business Lending",revenue:228485,gm:77.6,rank:4},
-  {month:"2026-06-01",name:"Fora Financial",industry:"Small Business Lending",revenue:133283,gm:90.0,rank:5},
-  {month:"2026-06-01",name:"Nova Credit",industry:"Consumer",revenue:122131,gm:74.5,rank:6},
-  {month:"2026-06-01",name:"Funding Metrics Production",industry:"Small Business Lending",revenue:120442,gm:73.6,rank:7},
-  {month:"2026-06-01",name:"Marlin Leasing Production",industry:"Small Business Lending",revenue:117543,gm:85.8,rank:8},
-  {month:"2026-06-01",name:"Kalamata Capital Group",industry:"Small Business Lending",revenue:110213,gm:86.1,rank:9},
-  {month:"2026-06-01",name:"Lendr",industry:"Small Business Lending",revenue:75514,gm:83.5,rank:10}
+  {month:"2026-06-01",name:"Rapid Finance (Production)",industry:"Small Business Lending",revenue:568267,gm:93.1,rank:1},
+  {month:"2026-06-01",name:"OnDeck",industry:"Small Business Lending",revenue:252083,gm:78.1,rank:2},
+  {month:"2026-06-01",name:"Zillow - Encompass - Production",industry:"Mortgage",revenue:240324,gm:55.2,rank:3},
+  {month:"2026-06-01",name:"Expansion Capital Group",industry:"Small Business Lending",revenue:227061,gm:77.3,rank:4},
+  {month:"2026-06-01",name:"Fora Financial",industry:"Small Business Lending",revenue:133141,gm:89.8,rank:5},
+  {month:"2026-06-01",name:"Nova Credit",industry:"Consumer",revenue:124490,gm:74.3,rank:6},
+  {month:"2026-06-01",name:"Funding Metrics Production",industry:"Small Business Lending",revenue:118638,gm:73.2,rank:7},
+  {month:"2026-06-01",name:"Marlin Leasing Production",industry:"Small Business Lending",revenue:115848,gm:85.6,rank:8},
+  {month:"2026-06-01",name:"Kalamata Capital Group",industry:"Small Business Lending",revenue:109134,gm:86.0,rank:9},
+  {month:"2026-06-01",name:"The Business Backer",industry:"Small Business Lending",revenue:76535,gm:85.7,rank:10}
 ];
 
 const Q4_TOP_ARR = [
@@ -233,18 +233,18 @@ const Q4_TOP_ARR = [
 ];
 
 const Q5_ALERTS = [
-  {name:"Fresh Funding Solutions Inc",industry:"Small Business Lending",revM2:8308,revM1:0,revCur:16864},
+  {name:"Fresh Funding Solutions Inc",industry:"Small Business Lending",revM2:8308,revM1:0,revCur:16977},
   {name:"Cardiff",industry:"Small Business Lending",revM2:5652,revM1:28,revCur:88},
-  {name:"Better Mortgage (BSIC) - Production",industry:"Mortgage",revM2:5976,revM1:341,revCur:287},
+  {name:"Better Mortgage (BSIC) - Production",industry:"Mortgage",revM2:5976,revM1:341,revCur:292},
   {name:"Rapid Finance 2026 Bank Statement Retro",industry:"Small Business Lending",revM2:52015,revM1:6137,revCur:null},
-  {name:"Basepoint Production",industry:"Small Business Lending",revM2:94645,revM1:17082,revCur:16030},
-  {name:"Kapitus",industry:"Small Business Lending",revM2:73266,revM1:13812,revCur:14764},
-  {name:"CrossCountry Mortgage - Production",industry:"Mortgage",revM2:53849,revM1:11110,revCur:10635},
-  {name:"Loan Scorecard",industry:"Mortgage",revM2:11678,revM1:2858,revCur:1486},
-  {name:"Sage Forensic Accounting",industry:"Professional Services",revM2:5538,revM1:2185,revCur:2676},
+  {name:"Basepoint Production",industry:"Small Business Lending",revM2:94645,revM1:17082,revCur:15968},
+  {name:"Kapitus (strategic funding source)",industry:"Small Business Lending",revM2:73266,revM1:13812,revCur:14659},
+  {name:"CrossCountry Mortgage - Production",industry:"Mortgage",revM2:53849,revM1:11110,revCur:10743},
+  {name:"Loan Scorecard",industry:"Mortgage",revM2:11678,revM1:2858,revCur:1796},
+  {name:"Sage Forensic Accounting",industry:"Professional Services",revM2:5538,revM1:2185,revCur:2923},
   {name:"CliftonLarsonAllen",industry:"Professional Services",revM2:20426,revM1:8578,revCur:4869},
-  {name:"JS Held LLC",industry:"Professional Services",revM2:7412,revM1:3390,revCur:2886},
-  {name:"Fundworks",industry:"Small Business Lending",revM2:32967,revM1:16475,revCur:16594}
+  {name:"JS Held LLC",industry:"Professional Services",revM2:7412,revM1:3390,revCur:3531},
+  {name:"Fundworks",industry:"Small Business Lending",revM2:32967,revM1:16475,revCur:16528}
 ];
 
 const Q6_MARGIN = [
@@ -293,15 +293,15 @@ const MAY_DAILY = [
 ];
 
 const JUN_DAILY = [
-  ["06-01",1,1,22,218748,71.8],["06-02",1,2,22,225905,72.4],["06-03",1,3,22,232738,72.4],
-  ["06-04",1,4,22,218188,72.1],["06-05",1,5,22,178568,68.0],["06-06",0,5,22,28401,69.8],
-  ["06-07",0,5,22,25217,70.4],["06-08",1,6,22,222807,72.0],["06-09",1,7,22,218590,71.5],
-  ["06-10",1,8,22,225940,72.7],["06-11",1,9,22,207332,71.9],["06-12",1,10,22,168728,70.3],
-  ["06-13",0,10,22,27474,69.6],["06-14",0,10,22,6329,22.9],["06-15",1,11,22,206616,71.2],
-  ["06-16",1,12,22,218055,69.1],["06-17",1,13,22,210602,70.8],["06-18",1,14,22,201127,71.1],
-  ["06-19",1,15,22,99582,70.7],["06-20",0,15,22,22869,70.3],["06-21",0,15,22,21091,71.3],
-  ["06-22",1,16,22,219729,71.1],["06-23",1,17,22,219716,69.6],["06-24",1,18,22,212501,69.6],
-  ["06-25",1,19,22,205111,69.2]
+  ["06-01",1,1,22,218843,71.7],["06-02",1,2,22,226163,72.3],["06-03",1,3,22,232911,72.3],
+  ["06-04",1,4,22,218339,71.9],["06-05",1,5,22,178575,67.9],["06-06",0,5,22,28332,69.7],
+  ["06-07",0,5,22,25216,70.3],["06-08",1,6,22,222860,71.8],["06-09",1,7,22,218684,71.4],
+  ["06-10",1,8,22,225955,72.6],["06-11",1,9,22,207296,71.7],["06-12",1,10,22,168801,70.1],
+  ["06-13",0,10,22,27441,69.6],["06-14",0,10,22,6346,23.4],["06-15",1,11,22,206665,71.1],
+  ["06-16",1,12,22,218002,68.9],["06-17",1,13,22,210638,70.6],["06-18",1,14,22,201193,71.0],
+  ["06-19",1,15,22,99614,70.6],["06-20",0,15,22,22852,70.2],["06-21",0,15,22,21295,71.5],
+  ["06-22",1,16,22,219755,71.0],["06-23",1,17,22,220020,69.4],["06-24",1,18,22,212512,69.5],
+  ["06-25",1,19,22,205140,69.1],["06-26",1,20,22,168494,67.3],["06-27",0,20,22,31239,61.8]
 ];
 
 // ============================================================
@@ -590,9 +590,4 @@ function switchTab(idx) {
 buildKPIs();
 buildARRChart();
 buildRevGmChart();
-buildIndustryChart();
-buildIndustryTable();
-buildTopArrTable();
-buildTopRevTable();
-buildAlerts();
-buildMarginWatch()
+buildIndust
