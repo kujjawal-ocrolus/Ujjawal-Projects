@@ -59,7 +59,7 @@
 
 <header>
   <h1>&#x26A1; Ocrolus Revenue Intelligence</h1>
-  <span class="asof">As of July 5, 2026 &nbsp;&middot;&nbsp; Auto-refreshed daily</span>
+  <span class="asof">As of July 6, 2026 &nbsp;&middot;&nbsp; Auto-refreshed daily</span>
 </header>
 
 <div class="tabs">
@@ -93,9 +93,9 @@
     </div>
     <div class="kpi">
       <div class="label">Jul MTD Revenue</div>
-      <div class="value">$415K</div>
-      <div class="sub">2 of 22 BDs &middot; proj. $4.56M</div>
-      <div class="delta delta-dn">&#9660; 65.9% GM</div>
+      <div class="value">$430K</div>
+      <div class="sub">2 of 22 BDs &middot; proj. $4.73M</div>
+      <div class="delta delta-dn">&#9660; 64.8% GM</div>
     </div>
   </div>
 
@@ -263,12 +263,12 @@ const INDUSTRY_DATA = {
     {ind:'Other Lending',rev:3845,gm:76.6},
   ],
   jul:[
-    {ind:'Small Business Lending',rev:239737,gm:74.8},
-    {ind:'Mortgage',rev:110754,gm:44.6},
-    {ind:'Consumer',rev:49785,gm:67.4},
-    {ind:'Professional Services',rev:13601,gm:76.0},
-    {ind:'Banking/KYC',rev:589,gm:87.4},
-    {ind:'Other Lending',rev:377,gm:77.5},
+    {ind:'Small Business Lending',rev:245470,gm:73.6},
+    {ind:'Mortgage',rev:115358,gm:43.4},
+    {ind:'Consumer',rev:54231,gm:67.4},
+    {ind:'Professional Services',rev:13576,gm:75.3},
+    {ind:'Banking/KYC',rev:624,gm:86.6},
+    {ind:'Other Lending',rev:386,gm:76.4},
   ],
 };
 
@@ -303,53 +303,53 @@ const TOP_CLIENTS = {
     {name:'The Business Backer',ind:'Small Business Lending',rev:77684,gm:85.6},
   ],
   jul:[
-    {name:'Rapid Finance (Production)',ind:'Small Business Lending',rev:618827,gm:92.3},
-    {name:'OnDeck',ind:'Small Business Lending',rev:255442,gm:74.1},
-    {name:'Expansion Capital Group',ind:'Small Business Lending',rev:247918,gm:70.2},
-    {name:'Fora Financial',ind:'Small Business Lending',rev:146938,gm:87.5},
-    {name:'Nova Credit',ind:'Consumer',rev:141405,gm:75.5},
-    {name:'Funding Metrics Production',ind:'Small Business Lending',rev:120813,gm:64.7},
-    {name:'Zillow - Encompass - Production',ind:'Mortgage',rev:111441,gm:0.9},
-    {name:'The Business Backer',ind:'Small Business Lending',rev:94534,gm:83.1},
-    {name:'Marlin Leasing Production',ind:'Small Business Lending',rev:90838,gm:83.0},
-    {name:'Lendr',ind:'Small Business Lending',rev:79024,gm:79.1},
+    {name:'Rapid Finance (Production)',ind:'Small Business Lending',rev:632874,gm:91.7},
+    {name:'OnDeck',ind:'Small Business Lending',rev:263780,gm:73.2},
+    {name:'Expansion Capital Group',ind:'Small Business Lending',rev:254661,gm:68.3},
+    {name:'Nova Credit',ind:'Consumer',rev:157608,gm:75.7},
+    {name:'Fora Financial',ind:'Small Business Lending',rev:146795,gm:86.4},
+    {name:'Funding Metrics Production',ind:'Small Business Lending',rev:120681,gm:62.7},
+    {name:'Zillow - Encompass - Production',ind:'Mortgage',rev:117568,gm:-7.2},
+    {name:'The Business Backer',ind:'Small Business Lending',rev:107734,gm:82.5},
+    {name:'Marlin Leasing Production',ind:'Small Business Lending',rev:91619,gm:82.0},
+    {name:'Plaid Production',ind:'Consumer',rev:81510,gm:66.5},
   ],
 };
 
 const ALERTS = [
   {name:'Merchant Growth',ind:'Small Business Lending',rev_m2:14912,rev_m1:31,rev_cur:11},
   {name:'Fundworks',ind:'Small Business Lending',rev_m2:16475,rev_m1:421,rev_cur:null},
-  {name:'CoreLogic - Sandbox',ind:'Mortgage',rev_m2:86360,rev_m1:36827,rev_cur:34463},
-  {name:'CliftonLarsonAllen',ind:'Professional Services',rev_m2:8578,rev_m1:2190,rev_cur:2574},
+  {name:'CliftonLarsonAllen',ind:'Professional Services',rev_m2:8578,rev_m1:2190,rev_cur:2552},
   {name:'Level Financial Group',ind:'Professional Services',rev_m2:7358,rev_m1:2971,rev_cur:2794},
-  {name:'Fleetcor',ind:'Small Business Lending',rev_m2:6576,rev_m1:2895,rev_cur:3784},
+  {name:'CoreLogic - Sandbox',ind:'Mortgage',rev_m2:86360,rev_m1:36827,rev_cur:35024},
+  {name:'Fleetcor',ind:'Small Business Lending',rev_m2:6576,rev_m1:2895,rev_cur:3894},
 ];
 
 const MARGIN_WATCH = [
-  {name:'Kapitus (strategic funding source)',ind:'Small Business Lending',rev_m2:13812,rev_m1:16451,rev_cur:1750,gm_m2:-67.0,gm_m1:-85.0,gm_cur:-111.6,delta:-18.0},
-  {name:'First Community Mortgage (FCM Partners) POC',ind:'Mortgage',rev_m2:34559,rev_m1:34494,rev_cur:3143,gm_m2:-47.8,gm_m1:-60.2,gm_cur:-63.6,delta:-12.4},
-  {name:'Better Mortgage - Production',ind:'Mortgage',rev_m2:49681,rev_m1:50546,rev_cur:5388,gm_m2:43.8,gm_m1:32.5,gm_cur:23.7,delta:-11.3},
-  {name:'Rural First',ind:'Mortgage',rev_m2:22277,rev_m1:23381,rev_cur:2101,gm_m2:34.5,gm_m1:23.9,gm_cur:26.5,delta:-10.6},
-  {name:'Hancock Whitney - Encompass - Production',ind:'Mortgage',rev_m2:11037,rev_m1:11735,rev_cur:1337,gm_m2:61.9,gm_m1:51.8,gm_cur:52.5,delta:-10.1},
-  {name:'Veterans United Home Loans - Production',ind:'Mortgage',rev_m2:68979,rev_m1:56830,rev_cur:5041,gm_m2:34.0,gm_m1:26.2,gm_cur:31.9,delta:-7.8},
-  {name:'Funding Circle UK Production',ind:'Small Business Lending',rev_m2:28306,rev_m1:30473,rev_cur:4102,gm_m2:72.6,gm_m1:67.9,gm_cur:69.7,delta:-4.7},
-  {name:'Greenbox Capital Sandbox',ind:'Small Business Lending',rev_m2:15038,rev_m1:15584,rev_cur:958,gm_m2:65.5,gm_m1:60.9,gm_cur:59.6,delta:-4.6},
-  {name:'Lendio, Inc',ind:'Small Business Lending',rev_m2:34289,rev_m1:36390,rev_cur:3284,gm_m2:55.2,gm_m1:50.6,gm_cur:39.6,delta:-4.6},
-  {name:'Best Egg - Production',ind:'Consumer',rev_m2:32441,rev_m1:36823,rev_cur:3890,gm_m2:74.6,gm_m1:70.7,gm_cur:72.0,delta:-3.9},
-  {name:'BHG Production Account',ind:'Small Business Lending',rev_m2:34458,rev_m1:26371,rev_cur:2013,gm_m2:67.8,gm_m1:64.3,gm_cur:63.2,delta:-3.5},
-  {name:'Compeer Financial - Production',ind:'Mortgage',rev_m2:13673,rev_m1:14815,rev_cur:1526,gm_m2:48.2,gm_m1:45.5,gm_cur:45.3,delta:-2.7},
-  {name:'Plaid Production',ind:'Consumer',rev_m2:60731,rev_m1:64240,rev_cur:6782,gm_m2:70.2,gm_m1:67.6,gm_cur:66.9,delta:-2.6},
-  {name:'OnDeck',ind:'Small Business Lending',rev_m2:232631,rev_m1:252733,rev_cur:23222,gm_m2:80.4,gm_m1:77.9,gm_cur:74.1,delta:-2.5},
-  {name:'Aven - Production',ind:'Consumer',rev_m2:11943,rev_m1:14007,rev_cur:955,gm_m2:85.7,gm_m1:83.7,gm_cur:82.3,delta:-2.0},
-  {name:'CrossCountry Mortgage - Production',ind:'Mortgage',rev_m2:11110,rev_m1:10737,rev_cur:1172,gm_m2:85.5,gm_m1:83.9,gm_cur:80.9,delta:-1.6},
-  {name:'VALID8 Production',ind:'Professional Services',rev_m2:56158,rev_m1:69128,rev_cur:5962,gm_m2:73.0,gm_m1:71.4,gm_cur:66.3,delta:-1.6},
-  {name:'Boom Pay - Production',ind:'Consumer',rev_m2:42914,rev_m1:48461,rev_cur:4589,gm_m2:59.1,gm_m1:57.6,gm_cur:56.3,delta:-1.5},
-  {name:'Zillow Home Loans',ind:'Mortgage',rev_m2:64973,rev_m1:68581,rev_cur:6273,gm_m2:41.8,gm_m1:40.5,gm_cur:28.1,delta:-1.3},
-  {name:'National Funding',ind:'Small Business Lending',rev_m2:13654,rev_m1:11740,rev_cur:1248,gm_m2:83.5,gm_m1:82.3,gm_cur:82.2,delta:-1.2},
-  {name:'Goodleap - Production',ind:'Mortgage',rev_m2:13315,rev_m1:14643,rev_cur:1299,gm_m2:81.8,gm_m1:80.6,gm_cur:80.8,delta:-1.2},
-  {name:'Brex - Production',ind:'Small Business Lending',rev_m2:15005,rev_m1:15964,rev_cur:2057,gm_m2:77.2,gm_m1:76.6,gm_cur:77.0,delta:-0.6},
-  {name:'Lendr',ind:'Small Business Lending',rev_m2:76120,rev_m1:76208,rev_cur:7184,gm_m2:84.1,gm_m1:83.6,gm_cur:79.1,delta:-0.5},
-  {name:'IOU Financial Production',ind:'Small Business Lending',rev_m2:19255,rev_m1:17984,rev_cur:1659,gm_m2:81.9,gm_m1:81.4,gm_cur:77.4,delta:-0.5},
+  {name:'Kapitus (strategic funding source)',ind:'Small Business Lending',rev_m2:13812,rev_m1:16451,rev_cur:1746,gm_m2:-67.0,gm_m1:-85.0,gm_cur:-118.0,delta:-18.0},
+  {name:'First Community Mortgage (FCM Partners) POC',ind:'Mortgage',rev_m2:34559,rev_m1:34494,rev_cur:3158,gm_m2:-47.8,gm_m1:-60.2,gm_cur:-67.8,delta:-12.4},
+  {name:'Better Mortgage - Production',ind:'Mortgage',rev_m2:49681,rev_m1:50546,rev_cur:7216,gm_m2:43.8,gm_m1:32.5,gm_cur:38.8,delta:-11.3},
+  {name:'Rural First',ind:'Mortgage',rev_m2:22277,rev_m1:23381,rev_cur:2133,gm_m2:34.5,gm_m1:23.9,gm_cur:25.7,delta:-10.6},
+  {name:'Hancock Whitney - Encompass - Production',ind:'Mortgage',rev_m2:11037,rev_m1:11735,rev_cur:1380,gm_m2:61.9,gm_m1:51.8,gm_cur:52.9,delta:-10.1},
+  {name:'Veterans United Home Loans - Production',ind:'Mortgage',rev_m2:68979,rev_m1:56830,rev_cur:5181,gm_m2:34.0,gm_m1:26.2,gm_cur:31.7,delta:-7.8},
+  {name:'Funding Circle UK Production',ind:'Small Business Lending',rev_m2:28306,rev_m1:30473,rev_cur:4204,gm_m2:72.6,gm_m1:67.9,gm_cur:69.2,delta:-4.7},
+  {name:'Lendio, Inc',ind:'Small Business Lending',rev_m2:34289,rev_m1:36390,rev_cur:3817,gm_m2:55.2,gm_m1:50.6,gm_cur:39.8,delta:-4.6},
+  {name:'Greenbox Capital Sandbox',ind:'Small Business Lending',rev_m2:15038,rev_m1:15584,rev_cur:957,gm_m2:65.5,gm_m1:60.9,gm_cur:57.8,delta:-4.6},
+  {name:'Best Egg - Production',ind:'Consumer',rev_m2:32441,rev_m1:36823,rev_cur:4296,gm_m2:74.6,gm_m1:70.7,gm_cur:71.7,delta:-3.9},
+  {name:'BHG Production Account',ind:'Small Business Lending',rev_m2:34458,rev_m1:26371,rev_cur:2170,gm_m2:67.8,gm_m1:64.3,gm_cur:62.7,delta:-3.5},
+  {name:'Compeer Financial - Production',ind:'Mortgage',rev_m2:13673,rev_m1:14815,rev_cur:1523,gm_m2:48.2,gm_m1:45.5,gm_cur:44.3,delta:-2.7},
+  {name:'Plaid Production',ind:'Consumer',rev_m2:60731,rev_m1:64240,rev_cur:7410,gm_m2:70.2,gm_m1:67.6,gm_cur:66.5,delta:-2.6},
+  {name:'OnDeck',ind:'Small Business Lending',rev_m2:232631,rev_m1:252733,rev_cur:23980,gm_m2:80.4,gm_m1:77.9,gm_cur:73.2,delta:-2.5},
+  {name:'Aven - Production',ind:'Consumer',rev_m2:11943,rev_m1:14007,rev_cur:1159,gm_m2:85.7,gm_m1:83.7,gm_cur:82.0,delta:-2.0},
+  {name:'CrossCountry Mortgage - Production',ind:'Mortgage',rev_m2:11110,rev_m1:10737,rev_cur:1169,gm_m2:85.5,gm_m1:83.9,gm_cur:80.3,delta:-1.6},
+  {name:'VALID8 Production',ind:'Professional Services',rev_m2:56158,rev_m1:69128,rev_cur:5951,gm_m2:73.0,gm_m1:71.4,gm_cur:65.5,delta:-1.6},
+  {name:'Boom Pay - Production',ind:'Consumer',rev_m2:42914,rev_m1:48461,rev_cur:5156,gm_m2:59.1,gm_m1:57.6,gm_cur:56.5,delta:-1.5},
+  {name:'Zillow Home Loans',ind:'Mortgage',rev_m2:64973,rev_m1:68581,rev_cur:7315,gm_m2:41.8,gm_m1:40.5,gm_cur:26.5,delta:-1.3},
+  {name:'Goodleap - Production',ind:'Mortgage',rev_m2:13315,rev_m1:14643,rev_cur:1401,gm_m2:81.8,gm_m1:80.6,gm_cur:81.2,delta:-1.2},
+  {name:'National Funding',ind:'Small Business Lending',rev_m2:13654,rev_m1:11740,rev_cur:1273,gm_m2:83.5,gm_m1:82.3,gm_cur:81.6,delta:-1.2},
+  {name:'Brex - Production',ind:'Small Business Lending',rev_m2:15005,rev_m1:15964,rev_cur:2146,gm_m2:77.2,gm_m1:76.6,gm_cur:76.2,delta:-0.6},
+  {name:'IOU Financial Production',ind:'Small Business Lending',rev_m2:19255,rev_m1:17984,rev_cur:1683,gm_m2:81.9,gm_m1:81.4,gm_cur:75.8,delta:-0.5},
+  {name:'Lendr',ind:'Small Business Lending',rev_m2:76120,rev_m1:76208,rev_cur:7028,gm_m2:84.1,gm_m1:83.6,gm_cur:77.5,delta:-0.5},
 ];
 
 // Daily data — all calendar days
@@ -367,9 +367,10 @@ const DAILY_ALL = [
   ['Jun 28',0,34268,67.5],['Jun 29',1,218903,67.7],['Jun 30',1,210380,69.1],
 ];
 const JUL_DAILY = [
-  ['Jul 1',1,192382,66.8],
-  ['Jul 2',1,176717,66.0],
-  ['Jul 3',0,45743,62.0],
+  ['Jul 1',1,191943,65.7],
+  ['Jul 2',1,176180,64.8],
+  ['Jul 3',0,45958,61.4],
+  ['Jul 4',0,15563,62.5],
 ];
 const JUL_BD_ELAPSED=2, JUL_BD_TOTAL=22;
 
@@ -395,5 +396,4 @@ function showTab(id){
 
 // ======================== TAB 1: OVERVIEW ========================
 function buildIndustryTable(){
-  const allInds=['Small Business Lending','Mortgage','Consumer','Professional Services',
-    'Pro
+  const allInds=['Small Business Lending','Mortgage','Consumer','Profes
