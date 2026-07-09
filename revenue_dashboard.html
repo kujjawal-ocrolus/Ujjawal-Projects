@@ -143,14 +143,14 @@
 
 <script>
 /* ---------- DATA (embedded) ---------- */
-const ASOF = "July 8, 2026";
+const ASOF = "July 9, 2026";
 const MONTH_LABELS = {m0:"May 2026", m1:"Jun 2026", m2:"Jul 2026"};
 
 const ARR_TREND = [
   {m:"Aug 2025",v:36672528},{m:"Sep 2025",v:39696705},{m:"Oct 2025",v:38507630},
   {m:"Nov 2025",v:45572067},{m:"Dec 2025",v:44998140},{m:"Jan 2026",v:48964915},
   {m:"Feb 2026",v:49814910},{m:"Mar 2026",v:49632152},{m:"Apr 2026",v:48397374},
-  {m:"May 2026",v:51749932},{m:"Jun 2026",v:54501145}
+  {m:"May 2026",v:51749932},{m:"Jun 2026",v:54538570}
 ];
 
 // month key m0=May m1=Jun m2=Jul(current)
@@ -169,15 +169,15 @@ const INDUSTRY = [
   {mk:"m1",ind:"Other Lending",orgs:4,rev:3845,gm:76.6},
   {mk:"m1",ind:"Professional Services",orgs:42,rev:151341,gm:78.0},
   {mk:"m1",ind:"Small Business Lending",orgs:144,rev:2649928,gm:79.3},
-  {mk:"m2",ind:"Banking/KYC",orgs:2,rev:744,gm:86.8},
-  {mk:"m2",ind:"Consumer",orgs:40,rev:77839,gm:67.9},
-  {mk:"m2",ind:"Mortgage",orgs:156,rev:175259,gm:42.5},
-  {mk:"m2",ind:"Other Lending",orgs:3,rev:573,gm:78.7},
-  {mk:"m2",ind:"Professional Services",orgs:21,rev:18841,gm:74.5},
-  {mk:"m2",ind:"Small Business Lending",orgs:132,rev:390244,gm:75.8}
+  {mk:"m2",ind:"Banking/KYC",orgs:2,rev:895,gm:87.5},
+  {mk:"m2",ind:"Consumer",orgs:40,rev:97614,gm:69.3},
+  {mk:"m2",ind:"Mortgage",orgs:162,rev:230484,gm:44.5},
+  {mk:"m2",ind:"Other Lending",orgs:3,rev:740,gm:81.8},
+  {mk:"m2",ind:"Professional Services",orgs:25,rev:28194,gm:75.3},
+  {mk:"m2",ind:"Small Business Lending",orgs:134,rev:524243,gm:78.8}
 ];
 // current open month projection factor (business days elapsed / total)
-const CUR_PROJ_FACTOR = 3/22;
+const CUR_PROJ_FACTOR = 4/22;
 
 // Top clients by revenue (full-month, current projected). mk month key.
 const TOP_REV = [
@@ -201,16 +201,16 @@ const TOP_REV = [
   {mk:"m1",r:8,name:"Marlin Leasing Production",ind:"Small Business Lending",rev:116431,gm:85.7},
   {mk:"m1",r:9,name:"Kalamata Capital Group",ind:"Small Business Lending",rev:108553,gm:86.0},
   {mk:"m1",r:10,name:"The Business Backer",ind:"Small Business Lending",rev:77684,gm:85.6},
-  {mk:"m2",r:1,name:"Rapid Finance (Production)",ind:"Small Business Lending",rev:659839,gm:92.0},
-  {mk:"m2",r:2,name:"Expansion Capital Group",ind:"Small Business Lending",rev:282641,gm:71.7},
-  {mk:"m2",r:3,name:"OnDeck",ind:"Small Business Lending",rev:277787,gm:74.9},
-  {mk:"m2",r:4,name:"Fora Financial",ind:"Small Business Lending",rev:157109,gm:87.4},
-  {mk:"m2",r:5,name:"Nova Credit",ind:"Consumer",rev:145655,gm:75.6},
-  {mk:"m2",r:6,name:"Funding Metrics Production",ind:"Small Business Lending",rev:131113,gm:66.6},
-  {mk:"m2",r:7,name:"Zillow - Encompass - Production",ind:"Mortgage",rev:117392,gm:-11.1},
-  {mk:"m2",r:8,name:"The Business Backer",ind:"Small Business Lending",rev:104896,gm:84.0},
-  {mk:"m2",r:9,name:"Marlin Leasing Production",ind:"Small Business Lending",rev:99851,gm:84.1},
-  {mk:"m2",r:10,name:"Zillow Home Loans",ind:"Mortgage",rev:85103,gm:30.9}
+  {mk:"m2",r:1,name:"Rapid Finance (Production)",ind:"Small Business Lending",rev:662646,gm:93.1},
+  {mk:"m2",r:2,name:"OnDeck",ind:"Small Business Lending",rev:294674,gm:78.7},
+  {mk:"m2",r:3,name:"Expansion Capital Group",ind:"Small Business Lending",rev:280803,gm:75.6},
+  {mk:"m2",r:4,name:"Fora Financial",ind:"Small Business Lending",rev:156519,gm:89.3},
+  {mk:"m2",r:5,name:"Funding Metrics Production",ind:"Small Business Lending",rev:137671,gm:72.0},
+  {mk:"m2",r:6,name:"Nova Credit",ind:"Consumer",rev:135773,gm:75.4},
+  {mk:"m2",r:7,name:"Zillow - Encompass - Production",ind:"Mortgage",rev:113696,gm:-4.5},
+  {mk:"m2",r:8,name:"Marlin Leasing Production",ind:"Small Business Lending",rev:103125,gm:86.1},
+  {mk:"m2",r:9,name:"The Business Backer",ind:"Small Business Lending",rev:94809,gm:85.8},
+  {mk:"m2",r:10,name:"Lendr",ind:"Small Business Lending",rev:80399,gm:80.9}
 ];
 
 // Top clients by ARR (latest fully-populated snapshot: Jun 2026)
@@ -229,12 +229,12 @@ const TOP_ARR = [
 
 // Revenue drop >50% (m2 = 2 months ago actual, m1 = last month projected, cur = current projected)
 const DROPS = [
-  {name:"Merchant Growth",ind:"Small Business Lending",m2:14912,m1:31,cur:37},
+  {name:"Merchant Growth",ind:"Small Business Lending",m2:14912,m1:31,cur:50},
   {name:"Fundworks",ind:"Small Business Lending",m2:16475,m1:421,cur:null},
   {name:"CliftonLarsonAllen",ind:"Professional Services",m2:8578,m1:2190,cur:2552},
-  {name:"Level Financial Group",ind:"Professional Services",m2:7358,m1:2971,cur:3065},
-  {name:"CoreLogic - Sandbox",ind:"Mortgage",m2:86360,m1:36827,cur:36564},
-  {name:"Fleetcor",ind:"Small Business Lending",m2:6576,m1:2895,cur:4473}
+  {name:"Level Financial Group",ind:"Professional Services",m2:7358,m1:2971,cur:2393},
+  {name:"CoreLogic - Sandbox",ind:"Mortgage",m2:86360,m1:36827,cur:37642},
+  {name:"Fleetcor",ind:"Small Business Lending",m2:6576,m1:2895,cur:3828}
 ];
 
 // Stable revenue, declining margins
@@ -282,9 +282,10 @@ const DAILY = [
   {mk:"prior",d:"Jun 25",w:1,rev:203401,gm:68.9},{mk:"prior",d:"Jun 26",w:1,rev:167370,gm:67.1},
   {mk:"prior",d:"Jun 27",w:0,rev:32599,gm:62.6},{mk:"prior",d:"Jun 28",w:0,rev:34268,gm:67.5},
   {mk:"prior",d:"Jun 29",w:1,rev:218903,gm:67.7},{mk:"prior",d:"Jun 30",w:1,rev:210380,gm:69.1},
-  {mk:"cur",d:"Jul 1",w:1,rev:187551,gm:66.5},{mk:"cur",d:"Jul 2",w:1,rev:171707,gm:65.7},
-  {mk:"cur",d:"Jul 3",w:0,rev:45171,gm:62.6},{mk:"cur",d:"Jul 4",w:0,rev:15405,gm:63.0},
-  {mk:"cur",d:"Jul 5",w:0,rev:20136,gm:66.5},{mk:"cur",d:"Jul 6",w:1,rev:223530,gm:66.7}
+  {mk:"cur",d:"Jul 1",w:1,rev:186009,gm:69.1},{mk:"cur",d:"Jul 2",w:1,rev:170087,gm:68.3},
+  {mk:"cur",d:"Jul 3",w:0,rev:44959,gm:64.9},{mk:"cur",d:"Jul 4",w:0,rev:15463,gm:65.4},
+  {mk:"cur",d:"Jul 5",w:0,rev:20149,gm:68.7},{mk:"cur",d:"Jul 6",w:1,rev:221274,gm:69.4},
+  {mk:"cur",d:"Jul 7",w:1,rev:224228,gm:69.0}
 ];
 
 /* ---------- HELPERS ---------- */
@@ -328,4 +329,4 @@ document.querySelectorAll("nav button").forEach(b=>{
     {label:"Current Month (proj.)",value:fmtM(curRevProj),delta:"run-rate estimate",cls:""}
   ];
   document.getElementById("kpiRow").innerHTML = kpis.map(k=>
-    `<div class="kpi"><div class="label">${k.label}</div><div class="value">${k.value}</div><div class="delta ${k.cls}
+    `<div class="kpi"><div class="label">${k.label}</div><div class="v
