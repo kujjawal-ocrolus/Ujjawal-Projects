@@ -155,7 +155,7 @@
 
 <script>
 // ===== EMBEDDED DATA =====
-const ASOF = "21 Jul 2026";
+const ASOF = "22 Jul 2026";
 document.getElementById('asofDate').textContent = ASOF;
 
 // Q1: 12-month ARR trend (incomplete final month excluded)
@@ -195,16 +195,16 @@ const ind = {
     {i:"Other Lending",c:4,rev:3676,gm:71.6}
   ],
   "Jul '26":[
-    {i:"Small Business Lending",c:147,rev:1641534,gm:79.2},
-    {i:"Mortgage",c:175,rev:680351,gm:42.2},
-    {i:"Consumer",c:46,rev:292944,gm:70.1},
-    {i:"Professional Services",c:41,rev:76151,gm:77.6},
-    {i:"Banking/KYC",c:3,rev:4292,gm:87.7},
-    {i:"Other Lending",c:3,rev:1612,gm:87.6}
+    {i:"Small Business Lending",c:147,rev:1784029,gm:79.3},
+    {i:"Mortgage",c:176,rev:735629,gm:42.3},
+    {i:"Consumer",c:46,rev:312928,gm:70.1},
+    {i:"Professional Services",c:42,rev:79625,gm:77.7},
+    {i:"Banking/KYC",c:3,rev:4600,gm:87.7},
+    {i:"Other Lending",c:3,rev:1708,gm:87.8}
   ]
 };
-// Jul is MTD (12 business days of 22 elapsed through Jul 19 — latest data available)
-const JUL_BD_ELAPSED = 12, BD_TOTAL = 22;
+// Jul is MTD (13 business days of 22 elapsed through Jul 20 — latest data available)
+const JUL_BD_ELAPSED = 13, BD_TOTAL = 22;
 
 // Q3: top 10 revenue per month [m2=May, m1=Jun, cur=Jul(proj)]
 const topRev = [
@@ -233,16 +233,16 @@ const topRev = [
     {n:"VALID8 Production",i:"Professional Services",rev:66094,gm:68.2}
   ],
   [
-    {n:"Rapid Finance (Production)",i:"Small Business Lending",rev:614073,gm:92.7},
-    {n:"OnDeck",i:"Small Business Lending",rev:277756,gm:77.7},
-    {n:"Expansion Capital Group",i:"Small Business Lending",rev:267036,gm:74.6},
-    {n:"Fora Financial",i:"Small Business Lending",rev:147873,gm:88.5},
-    {n:"Nova Credit",i:"Consumer",rev:138701,gm:76.3},
-    {n:"Funding Metrics Production",i:"Small Business Lending",rev:129932,gm:71.9},
-    {n:"Zillow - Encompass - Production",i:"Mortgage",rev:109038,gm:-12.8},
-    {n:"Marlin Leasing Production",i:"Small Business Lending",rev:106955,gm:85.8},
-    {n:"Kalamata Capital Group",i:"Small Business Lending",rev:105457,gm:93.7},
-    {n:"Libertas Funding MCA Funds PROD v2023",i:"Small Business Lending",rev:84823,gm:81.4}
+    {n:"Rapid Finance (Production)",i:"Small Business Lending",rev:614621,gm:92.7},
+    {n:"OnDeck",i:"Small Business Lending",rev:277310,gm:77.8},
+    {n:"Expansion Capital Group",i:"Small Business Lending",rev:268056,gm:74.7},
+    {n:"Fora Financial",i:"Small Business Lending",rev:148492,gm:88.6},
+    {n:"Nova Credit",i:"Consumer",rev:135352,gm:76.2},
+    {n:"Funding Metrics Production",i:"Small Business Lending",rev:133068,gm:72.1},
+    {n:"Zillow - Encompass - Production",i:"Mortgage",rev:110115,gm:-11.3},
+    {n:"Marlin Leasing Production",i:"Small Business Lending",rev:107754,gm:85.8},
+    {n:"Kalamata Capital Group",i:"Small Business Lending",rev:105707,gm:93.8},
+    {n:"Libertas Funding MCA Funds PROD v2023",i:"Small Business Lending",rev:85040,gm:81.7}
   ]
 ];
 
@@ -262,55 +262,55 @@ const topArr = [
 
 // Q5: >50% revenue drop
 const drops = [
-  {n:"Sungage Financial Production",i:"Banking/KYC",m2:5836,m1:503,cur:2644},
-  {n:"Quorum - Encompass - Production",i:"Mortgage",m2:21476,m1:4879,cur:21619},
+  {n:"Sungage Financial Production",i:"Banking/KYC",m2:5836,m1:503,cur:2865},
+  {n:"Quorum - Encompass - Production",i:"Mortgage",m2:21476,m1:4879,cur:21596},
   {n:"CliftonLarsonAllen",i:"Professional Services",m2:8578,m1:2094,cur:3378},
-  {n:"Highland Hill Capital 2025",i:"Small Business Lending",m2:6460,m1:1654,cur:5179},
-  {n:"Nova Credit",i:"Consumer",m2:128835,m1:36979,cur:138701},
-  {n:"Samson Funding",i:"Small Business Lending",m2:10953,m1:3408,cur:11145},
-  {n:"Lendr",i:"Small Business Lending",m2:76120,m1:28057,cur:76313},
-  {n:"Fora Financial",i:"Small Business Lending",m2:133091,m1:49063,cur:147873},
+  {n:"Highland Hill Capital 2025",i:"Small Business Lending",m2:6460,m1:1654,cur:5089},
+  {n:"Nova Credit",i:"Consumer",m2:128835,m1:36979,cur:135352},
+  {n:"Samson Funding",i:"Small Business Lending",m2:10953,m1:3408,cur:10971},
+  {n:"Lendr",i:"Small Business Lending",m2:76120,m1:28057,cur:76389},
+  {n:"Fora Financial",i:"Small Business Lending",m2:133091,m1:49063,cur:148492},
   {n:"Level Financial Group",i:"Professional Services",m2:7358,m1:2840,cur:1467},
-  {n:"Fintap Production",i:"Small Business Lending",m2:21920,m1:8482,cur:24195},
-  {n:"Square Advance",i:"Small Business Lending",m2:7132,m1:2800,cur:8034},
-  {n:"Rapid Finance (Production)",i:"Small Business Lending",m2:542706,m1:214586,cur:614073},
-  {n:"Kalamata Capital Group",i:"Small Business Lending",m2:98417,m1:39966,cur:105457},
-  {n:"Fleetcor",i:"Small Business Lending",m2:6576,m1:2767,cur:3351},
-  {n:"Society Mortgage - Encompass - Production",i:"Mortgage",m2:8046,m1:4000,cur:3060}
+  {n:"Fintap Production",i:"Small Business Lending",m2:21920,m1:8482,cur:23828},
+  {n:"Square Advance",i:"Small Business Lending",m2:7132,m1:2800,cur:7551},
+  {n:"Rapid Finance (Production)",i:"Small Business Lending",m2:542706,m1:214586,cur:614621},
+  {n:"Kalamata Capital Group",i:"Small Business Lending",m2:98417,m1:39966,cur:105707},
+  {n:"Fleetcor",i:"Small Business Lending",m2:6576,m1:2767,cur:3474},
+  {n:"Society Mortgage - Encompass - Production",i:"Mortgage",m2:8046,m1:4000,cur:3178}
 ];
 
 // Q6: stable revenue, declining margins
 const marginWatch = [
-  {n:"First Community Mortgage (FCM Partners) POC",i:"Mortgage",rev2:34559,rev1:32980,revc:18483,gm2:-47.8,gm1:-65.5,gmc:-56.3,d:-17.7},
-  {n:"Hancock Whitney - Encompass - Production",i:"Mortgage",rev2:11037,rev1:11220,revc:6196,gm2:61.9,gm1:46.0,gmc:52.7,d:-15.9},
-  {n:"Union Home Mortgage - Encompass Production",i:"Mortgage",rev2:24263,rev1:30263,revc:17719,gm2:45.7,gm1:32.2,gmc:25.4,d:-13.5},
-  {n:"Rural First",i:"Mortgage",rev2:22277,rev1:22355,revc:12218,gm2:34.5,gm1:21.4,gmc:23.5,d:-13.1},
-  {n:"Compeer Financial - Production",i:"Mortgage",rev2:13673,rev1:14164,revc:7700,gm2:48.2,gm1:37.4,gmc:39.1,d:-10.8},
-  {n:"Veterans United Home Loans - Production",i:"Mortgage",rev2:68979,rev1:54337,revc:32704,gm2:34.0,gm1:23.8,gmc:30.8,d:-10.2},
-  {n:"Greenbox Capital Sandbox",i:"Small Business Lending",rev2:15038,rev1:14900,revc:8469,gm2:65.5,gm1:58.9,gmc:61.6,d:-6.6},
-  {n:"CrossCountry Mortgage - Production",i:"Mortgage",rev2:11110,rev1:10266,revc:4657,gm2:85.5,gm1:79.1,gmc:83.3,d:-6.4},
-  {n:"Nations Direct - Encompass - Production",i:"Mortgage",rev2:12137,rev1:12700,revc:7886,gm2:19.0,gm1:12.7,gmc:14.9,d:-6.3},
-  {n:"Sofi - Encompass - Production",i:"Mortgage",rev2:53383,rev1:50787,revc:27379,gm2:64.1,gm1:57.9,gmc:57.3,d:-6.2},
-  {n:"Funding Circle UK Production",i:"Small Business Lending",rev2:28306,rev1:29136,revc:20040,gm2:72.6,gm1:66.6,gmc:71.8,d:-6.0},
-  {n:"Flinks Production",i:"Consumer",rev2:22152,rev1:24396,revc:10486,gm2:22.2,gm1:16.3,gmc:14.6,d:-5.9},
-  {n:"VALID8 Production",i:"Professional Services",rev2:56158,rev1:66094,revc:34901,gm2:73.0,gm1:68.2,gmc:70.9,d:-4.8},
-  {n:"Lender ToolKit - Mortgage Dashboard",i:"Mortgage",rev2:38200,rev1:30804,revc:15757,gm2:74.3,gm1:69.7,gmc:65.1,d:-4.6},
-  {n:"Best Egg - Production",i:"Consumer",rev2:32441,rev1:35207,revc:22607,gm2:74.6,gm1:70.0,gmc:72.2,d:-4.6},
-  {n:"OnDeck",i:"Small Business Lending",rev2:232631,rev1:241643,revc:151503,gm2:80.4,gm1:76.7,gmc:77.7,d:-3.7},
-  {n:"Laminr.AI - Production",i:"Mortgage",rev2:21049,rev1:18734,revc:4919,gm2:86.0,gm1:82.3,gmc:87.3,d:-3.7},
-  {n:"LoanStream Mortgage OCMBC",i:"Mortgage",rev2:52396,rev1:51817,revc:28947,gm2:84.3,gm1:80.7,gmc:87.5,d:-3.6},
-  {n:"Goodleap - Production",i:"Mortgage",rev2:13315,rev1:14000,revc:7740,gm2:81.8,gm1:78.2,gmc:78.5,d:-3.6},
-  {n:"BHG Production Account",i:"Small Business Lending",rev2:34458,rev1:25214,revc:12687,gm2:67.8,gm1:64.4,gmc:64.3,d:-3.4},
-  {n:"Zillow Home Loans",i:"Mortgage",rev2:64973,rev1:65572,revc:42099,gm2:41.8,gm1:38.5,gmc:30.5,d:-3.3},
-  {n:"Hive Financial Systems",i:"Consumer",rev2:12386,rev1:11093,revc:7118,gm2:80.5,gm1:77.5,gmc:80.1,d:-3.0},
-  {n:"National Funding",i:"Small Business Lending",rev2:13654,rev1:11067,revc:7275,gm2:83.5,gm1:81.1,gmc:83.1,d:-2.4},
-  {n:"JG Wentworth",i:"Consumer",rev2:10669,rev1:11138,revc:7577,gm2:88.9,gm1:87.0,gmc:88.7,d:-1.9},
-  {n:"Aven - Production",i:"Consumer",rev2:11943,rev1:13392,revc:2649,gm2:85.7,gm1:84.0,gmc:84.2,d:-1.7},
-  {n:"IOU Financial Production",i:"Small Business Lending",rev2:19255,rev1:17195,revc:11037,gm2:81.9,gm1:80.2,gmc:80.9,d:-1.7},
-  {n:"Newrez Production Org",i:"Mortgage",rev2:35657,rev1:36218,revc:19364,gm2:69.6,gm1:68.1,gmc:67.9,d:-1.5},
-  {n:"Legacy Mutual - Encompass - Production",i:"Mortgage",rev2:12960,rev1:10335,revc:5252,gm2:73.6,gm1:72.1,gmc:72.9,d:-1.5},
-  {n:"Boom Pay - Production",i:"Consumer",rev2:42914,rev1:46334,revc:25065,gm2:59.1,gm1:57.6,gmc:59.2,d:-1.5},
-  {n:"All Western",i:"Mortgage",rev2:24501,rev1:25194,revc:13885,gm2:75.4,gm1:74.0,gmc:75.8,d:-1.4}
+  {n:"First Community Mortgage (FCM Partners) POC",i:"Mortgage",rev2:34559,rev1:32980,revc:19757,gm2:-47.8,gm1:-65.5,gmc:-57.4,d:-17.7},
+  {n:"Hancock Whitney - Encompass - Production",i:"Mortgage",rev2:11037,rev1:11220,revc:6747,gm2:61.9,gm1:46.0,gmc:51.6,d:-15.9},
+  {n:"Union Home Mortgage - Encompass Production",i:"Mortgage",rev2:24263,rev1:30263,revc:19035,gm2:45.7,gm1:32.2,gmc:25.4,d:-13.5},
+  {n:"Rural First",i:"Mortgage",rev2:22277,rev1:22355,revc:13105,gm2:34.5,gm1:21.4,gmc:23.7,d:-13.1},
+  {n:"Compeer Financial - Production",i:"Mortgage",rev2:13673,rev1:14164,revc:8706,gm2:48.2,gm1:37.4,gmc:39.2,d:-10.8},
+  {n:"Veterans United Home Loans - Production",i:"Mortgage",rev2:68979,rev1:54337,revc:35589,gm2:34.0,gm1:23.8,gmc:30.7,d:-10.2},
+  {n:"Greenbox Capital Sandbox",i:"Small Business Lending",rev2:15038,rev1:14900,revc:9303,gm2:65.5,gm1:58.9,gmc:61.0,d:-6.6},
+  {n:"CrossCountry Mortgage - Production",i:"Mortgage",rev2:11110,rev1:10266,revc:4657,gm2:85.5,gm1:79.1,gmc:83.4,d:-6.4},
+  {n:"Nations Direct - Encompass - Production",i:"Mortgage",rev2:12137,rev1:12700,revc:8387,gm2:19.0,gm1:12.7,gmc:14.7,d:-6.3},
+  {n:"Sofi - Encompass - Production",i:"Mortgage",rev2:53383,rev1:50787,revc:29759,gm2:64.1,gm1:57.9,gmc:57.8,d:-6.2},
+  {n:"Funding Circle UK Production",i:"Small Business Lending",rev2:28306,rev1:29136,revc:21649,gm2:72.6,gm1:66.6,gmc:71.8,d:-6.0},
+  {n:"Flinks Production",i:"Consumer",rev2:22152,rev1:24396,revc:11349,gm2:22.2,gm1:16.3,gmc:16.2,d:-5.9},
+  {n:"VALID8 Production",i:"Professional Services",rev2:56158,rev1:66094,revc:36283,gm2:73.0,gm1:68.2,gmc:71.0,d:-4.8},
+  {n:"Lender ToolKit - Mortgage Dashboard",i:"Mortgage",rev2:38200,rev1:30804,revc:16625,gm2:74.3,gm1:69.7,gmc:65.2,d:-4.6},
+  {n:"Best Egg - Production",i:"Consumer",rev2:32441,rev1:35207,revc:24133,gm2:74.6,gm1:70.0,gmc:72.2,d:-4.6},
+  {n:"OnDeck",i:"Small Business Lending",rev2:232631,rev1:241643,revc:163865,gm2:80.4,gm1:76.7,gmc:77.8,d:-3.7},
+  {n:"Laminr.AI - Production",i:"Mortgage",rev2:21049,rev1:18734,revc:5393,gm2:86.0,gm1:82.3,gmc:87.1,d:-3.7},
+  {n:"LoanStream Mortgage OCMBC",i:"Mortgage",rev2:52396,rev1:51817,revc:31381,gm2:84.3,gm1:80.7,gmc:87.6,d:-3.6},
+  {n:"Goodleap - Production",i:"Mortgage",rev2:13315,rev1:14000,revc:8241,gm2:81.8,gm1:78.2,gmc:78.3,d:-3.6},
+  {n:"BHG Production Account",i:"Small Business Lending",rev2:34458,rev1:25214,revc:13595,gm2:67.8,gm1:64.4,gmc:64.3,d:-3.4},
+  {n:"Zillow Home Loans",i:"Mortgage",rev2:64973,rev1:65572,revc:44767,gm2:41.8,gm1:38.5,gmc:30.5,d:-3.3},
+  {n:"Hive Financial Systems",i:"Consumer",rev2:12386,rev1:11093,revc:7752,gm2:80.5,gm1:77.5,gmc:80.1,d:-3.0},
+  {n:"National Funding",i:"Small Business Lending",rev2:13654,rev1:11067,revc:8079,gm2:83.5,gm1:81.1,gmc:83.5,d:-2.4},
+  {n:"JG Wentworth",i:"Consumer",rev2:10669,rev1:11138,revc:8360,gm2:88.9,gm1:87.0,gmc:88.7,d:-1.9},
+  {n:"IOU Financial Production",i:"Small Business Lending",rev2:19255,rev1:17195,revc:11946,gm2:81.9,gm1:80.2,gmc:81.2,d:-1.7},
+  {n:"Aven - Production",i:"Consumer",rev2:11943,rev1:13392,revc:2649,gm2:85.7,gm1:84.0,gmc:84.3,d:-1.7},
+  {n:"Boom Pay - Production",i:"Consumer",rev2:42914,rev1:46334,revc:26776,gm2:59.1,gm1:57.6,gmc:59.1,d:-1.5},
+  {n:"Newrez Production Org",i:"Mortgage",rev2:35657,rev1:36218,revc:20911,gm2:69.6,gm1:68.1,gmc:68.6,d:-1.5},
+  {n:"Legacy Mutual - Encompass - Production",i:"Mortgage",rev2:12960,rev1:10335,revc:5805,gm2:73.6,gm1:72.1,gmc:72.1,d:-1.5},
+  {n:"All Western",i:"Mortgage",rev2:24501,rev1:25194,revc:14890,gm2:75.4,gm1:74.0,gmc:76.0,d:-1.4}
 ];
 
 // Q7: daily trend (prior=Jun, current=Jul) — [weight, dailyRev, dailyGm]
@@ -323,10 +323,10 @@ const dailyPrior = [
   [1,146014,60.6],[0,29631,59.3],[0,30689,64.6],[1,186852,60.9],[1,176722,61.8]
 ];
 const dailyCur = [
-  [1,190889,69.5],[1,177921,69.0],[0,47780,65.8],[0,15239,64.3],[0,19999,68.3],
-  [1,232039,70.1],[1,233177,69.2],[1,231300,69.7],[1,218071,69.6],[1,185647,69.7],
-  [0,25851,66.0],[0,23397,65.4],[1,234632,69.3],[1,221994,68.4],[1,215329,68.6],
-  [1,208413,68.3],[1,166734,67.0],[0,25645,64.9],[0,22828,65.6]
+  [1,190925,69.6],[1,177847,69.1],[0,47709,65.8],[0,15245,64.4],[0,20024,68.4],
+  [1,232092,70.3],[1,233131,69.3],[1,231333,69.8],[1,218020,69.8],[1,185696,69.8],
+  [0,25836,66.1],[0,23384,65.5],[1,234728,69.5],[1,221999,68.6],[1,215426,68.8],
+  [1,208307,68.4],[1,166683,67.2],[0,25587,65.0],[0,22867,65.7],[1,221678,68.4]
 ];
 
 // ===== HELPERS =====
