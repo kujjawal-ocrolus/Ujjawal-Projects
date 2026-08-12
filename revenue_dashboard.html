@@ -98,7 +98,7 @@
     <h1>Ocrolus Revenue Intelligence Dashboard</h1>
     <div class="sub">ARR, revenue, margins, and client health across the Ocrolus portfolio</div>
   </div>
-  <div class="asof">As of August 11, 2026 14:01 IST</div>
+  <div class="asof">As of August 12, 2026 15:27 IST</div>
 </div>
 
 <div class="tabs">
@@ -124,7 +124,7 @@
       <div class="card">
         <h3>Revenue &amp; Gross Margin — Last 3 Months</h3>
         <canvas id="revGmChart" height="220"></canvas>
-        <div class="note">August is month-to-date only (5 business days of data available as of this refresh); shown as raw MTD, not projected to a full month.</div>
+        <div class="note">August is month-to-date only (6 business days of data available as of this refresh); shown as raw MTD, not projected to a full month.</div>
       </div>
     </div>
 
@@ -146,7 +146,7 @@
         <thead><tr><th>Industry</th><th class="num">Orgs</th><th class="num">Revenue (MTD)</th><th class="num">Gross Margin</th></tr></thead>
         <tbody id="industryTableBody"></tbody>
       </table>
-      <div class="note">Figures reflect only the data currently loaded for August (5 business days); reporting typically lags by a few days.</div>
+      <div class="note">Figures reflect only the data currently loaded for August (6 business days); reporting typically lags by a few days.</div>
     </div>
   </div>
 
@@ -180,7 +180,7 @@
         <thead><tr><th>Client</th><th>Industry</th><th class="num">Jun Rev</th><th class="num">Jul Rev</th><th class="num">% Change</th><th class="num">Aug Rev (proj.)</th></tr></thead>
         <tbody id="alertsTableBody"></tbody>
       </table>
-      <div class="note">Flags clients above $5K in June 2026 revenue whose July 2026 revenue (business-day projected) fell more than 50%. August figures are projected off 5 business days of data — an early estimate; "—" means no August data has landed yet for that client.</div>
+      <div class="note">Flags clients above $5K in June 2026 revenue whose July 2026 revenue (business-day projected) fell more than 50%. August figures are projected off 6 business days of data — an early estimate; "—" means no August data has landed yet for that client.</div>
     </div>
   </div>
 
@@ -192,7 +192,7 @@
         <thead><tr><th>Client</th><th>Industry</th><th class="num">Jun Rev</th><th class="num">Jul Rev</th><th class="num">Jun GM</th><th class="num">Jul GM</th><th class="num">Δ Margin (pp)</th><th class="num">Aug GM (MTD)</th></tr></thead>
         <tbody id="marginTableBody"></tbody>
       </table>
-      <div class="note">Clients with revenue within ±30% month-over-month (June → July, both above $10K) but gross margin down more than 0.4pp. Sorted by largest margin decline. August GM reflects only 5 business days of data — early and can be volatile.</div>
+      <div class="note">Clients with revenue within ±30% month-over-month (June → July, both above $10K) but gross margin down more than 0.4pp. Sorted by largest margin decline. August GM reflects only 6 business days of data — early and can be volatile.</div>
     </div>
   </div>
 
@@ -201,19 +201,19 @@
     <div class="section-title">Cumulative Revenue — Business-Day Aligned</div>
     <div class="card">
       <canvas id="dailyRevChart" height="220"></canvas>
-      <div class="legend-row"><span><span class="dot" style="background:#58a6ff"></span>July 2026 (prior, complete)</span><span><span class="dot" style="background:#8b949e"></span>August 2026 (current, 5 business days)</span></div>
+      <div class="legend-row"><span><span class="dot" style="background:#58a6ff"></span>July 2026 (prior, complete)</span><span><span class="dot" style="background:#8b949e"></span>August 2026 (current, 6 business days)</span></div>
     </div>
     <div class="section-title">Cumulative Gross Margin % — Business-Day Aligned</div>
     <div class="card">
       <canvas id="dailyGmChart" height="220"></canvas>
-      <div class="note">X-axis is business-day number within the month (weekends excluded). August has recorded 5 business days of data as of this refresh; its line will extend as new business-day data lands.</div>
+      <div class="note">X-axis is business-day number within the month (weekends excluded). August has recorded 6 business days of data as of this refresh; its line will extend as new business-day data lands.</div>
     </div>
   </div>
 
 </div>
 
 <script>
-// ============== EMBEDDED DATA (from Snowflake, refreshed 2026-08-11 14:01 IST) ==============
+// ============== EMBEDDED DATA (from Snowflake, refreshed 2026-08-12 15:27 IST) ==============
 
 const arrTrend = [
   {month:"Sep 2025", clients:397, arr:39696705},
@@ -228,7 +228,7 @@ const arrTrend = [
   {month:"Jun 2026", clients:408, arr:54469215},
 ];
 
-// Industry x month. June = closed actuals. July = full month (provisional, pre-close). August = MTD only (5 business days landed).
+// Industry x month. June = closed actuals. July = full month (provisional, pre-close). August = MTD only (6 business days landed).
 const monthKeys = ["Jun 2026","Jul 2026","Aug 2026"];
 const industryData = {
   "Jun 2026": {total:4002656, gm:64.0, isForecast:false,
@@ -249,14 +249,14 @@ const industryData = {
       {industry:"Professional Services", orgs:45, revenue:134989, gm:76.9},
       {industry:"Small Business Lending", orgs:147, revenue:2912730, gm:78.5},
     ]},
-  "Aug 2026": {total:1142371, gm:66.8, isForecast:true, mtdOnly:true,
+  "Aug 2026": {total:1360348, gm:67.4, isForecast:true, mtdOnly:true,
     rows:[
-      {industry:"Banking/KYC", orgs:3, revenue:1527, gm:82.2},
-      {industry:"Consumer", orgs:43, revenue:110055, gm:62.6},
-      {industry:"Mortgage", orgs:169, revenue:280810, gm:40.2},
-      {industry:"Other Lending", orgs:4, revenue:905, gm:76.7},
-      {industry:"Professional Services", orgs:25, revenue:32102, gm:74.7},
-      {industry:"Small Business Lending", orgs:137, revenue:716972, gm:77.5},
+      {industry:"Banking/KYC", orgs:3, revenue:1887, gm:82.3},
+      {industry:"Consumer", orgs:45, revenue:128567, gm:63.5},
+      {industry:"Mortgage", orgs:172, revenue:330340, gm:40.5},
+      {industry:"Other Lending", orgs:4, revenue:1004, gm:78.1},
+      {industry:"Professional Services", orgs:26, revenue:37295, gm:74.6},
+      {industry:"Small Business Lending", orgs:139, revenue:861255, gm:78.0},
     ]},
 };
 
@@ -299,53 +299,53 @@ const topRevenue = {
     {name:"The Business Backer", industry:"Small Business Lending", revenue:78308, gm:85.8},
   ],
   "Aug 2026": [
-    {name:"Rapid Finance (Production)", industry:"Small Business Lending", revenue:658980, gm:92.1},
-    {name:"OnDeck", industry:"Small Business Lending", revenue:274231, gm:76.0},
-    {name:"Expansion Capital Group", industry:"Small Business Lending", revenue:251500, gm:69.6},
-    {name:"Fora Financial", industry:"Small Business Lending", revenue:163136, gm:87.6},
-    {name:"Funding Metrics Production", industry:"Small Business Lending", revenue:130931, gm:67.1},
-    {name:"Kalamata Capital Group", industry:"Small Business Lending", revenue:115307, gm:94.7},
-    {name:"Zillow - Encompass - Production", industry:"Mortgage", revenue:107381, gm:-12.3},
-    {name:"Marlin Leasing Production", industry:"Small Business Lending", revenue:105374, gm:83.0},
-    {name:"The Business Backer", industry:"Small Business Lending", revenue:88452, gm:84.9},
-    {name:"Lendr", industry:"Small Business Lending", revenue:81161, gm:79.5},
+    {name:"Rapid Finance (Production)", industry:"Small Business Lending", revenue:653874, gm:92.3},
+    {name:"OnDeck", industry:"Small Business Lending", revenue:285093, gm:77.3},
+    {name:"Expansion Capital Group", industry:"Small Business Lending", revenue:250856, gm:70.6},
+    {name:"Fora Financial", industry:"Small Business Lending", revenue:162491, gm:88.1},
+    {name:"Funding Metrics Production", industry:"Small Business Lending", revenue:127754, gm:67.9},
+    {name:"Kalamata Capital Group", industry:"Small Business Lending", revenue:118538, gm:94.7},
+    {name:"Marlin Leasing Production", industry:"Small Business Lending", revenue:107321, gm:83.3},
+    {name:"Zillow - Encompass - Production", industry:"Mortgage", revenue:106981, gm:-8.5},
+    {name:"Lendr", industry:"Small Business Lending", revenue:81984, gm:80.4},
+    {name:"The Business Backer", industry:"Small Business Lending", revenue:81519, gm:85.1},
   ],
 };
 
 const revenueAlerts = [
   {name:"Plus Platform Core Extract Sandbox", industry:"Mortgage", revM2:9627, revM1:368, revCur:399},
   {name:"Dixon Hughes Goodman (Charleston)", industry:"Professional Services", revM2:7278, revM1:952, revCur:null},
-  {name:"Aven - Production", industry:"Consumer", revM2:13392, revM1:3015, revCur:2272},
-  {name:"Uplinq", industry:"Small Business Lending", revM2:28078, revM1:7335, revCur:5867},
-  {name:"Loan Scorecard", industry:"Mortgage", revM2:8990, revM1:3302, revCur:1638},
-  {name:"Zillow - Encompass - Production", industry:"Mortgage", revM2:219716, revM1:103092, revCur:107381},
+  {name:"Aven - Production", industry:"Consumer", revM2:13392, revM1:3015, revCur:1971},
+  {name:"Uplinq", industry:"Small Business Lending", revM2:28078, revM1:7335, revCur:5831},
+  {name:"Loan Scorecard", industry:"Mortgage", revM2:8990, revM1:3302, revCur:1649},
+  {name:"Zillow - Encompass - Production", industry:"Mortgage", revM2:219716, revM1:103092, revCur:106981},
 ];
 
 const marginWatch = [
-  {name:"CoreLogic - Sandbox", industry:"Mortgage", revM2:47824, revM1:39815, gmM2:-32.2, gmM1:-75.0, gmCur:-65.1, delta:-42.8},
-  {name:"Better Mortgage - Production", industry:"Mortgage", revM2:69832, revM1:52376, gmM2:50.9, gmM1:30.8, gmCur:30.4, delta:-20.1},
-  {name:"Zillow Home Loans", industry:"Mortgage", revM2:65572, revM1:68020, gmM2:38.7, gmM1:26.7, gmCur:22.8, delta:-12.0},
-  {name:"Lendio, Inc", industry:"Small Business Lending", revM2:34495, revM1:36540, gmM2:58.9, gmM1:49.9, gmCur:49.9, delta:-9.0},
-  {name:"Kapitus (strategic funding source)", industry:"Small Business Lending", revM2:71260, revM1:75335, gmM2:54.5, gmM1:46.2, gmCur:49.7, delta:-8.3},
-  {name:"Union Home Mortgage - Encompass Production", industry:"Mortgage", revM2:30263, revM1:31189, gmM2:32.5, gmM1:24.8, gmCur:19.6, delta:-7.7},
-  {name:"Plaid Production", industry:"Consumer", revM2:61421, revM1:69094, gmM2:70.6, gmM1:64.0, gmCur:64.8, delta:-6.6},
-  {name:"Lender ToolKit - Mortgage Dashboard", industry:"Mortgage", revM2:30804, revM1:25020, gmM2:69.8, gmM1:64.0, gmCur:63.7, delta:-5.8},
-  {name:"Jars Capital", industry:"Consumer", revM2:16442, revM1:15836, gmM2:78.8, gmM1:73.5, gmCur:76.7, delta:-5.3},
-  {name:"SoFi", industry:"Consumer", revM2:29751, revM1:23434, gmM2:75.7, gmM1:70.7, gmCur:70.9, delta:-5.0},
-  {name:"Arsenal POC 2025", industry:"Small Business Lending", revM2:11618, revM1:13881, gmM2:74.6, gmM1:69.6, gmCur:63.2, delta:-5.0},
-  {name:"AnnieMac Home Mortgage", industry:"Mortgage", revM2:35460, revM1:35316, gmM2:80.3, gmM1:76.5, gmCur:76.0, delta:-3.8},
-  {name:"BHG Production Account -", industry:"Small Business Lending", revM2:25214, revM1:21862, gmM2:64.3, gmM1:60.6, gmCur:61.7, delta:-3.7},
-  {name:"Expansion Capital Group", industry:"Small Business Lending", revM2:221089, revM1:249179, gmM2:76.6, gmM1:73.6, gmCur:69.6, delta:-3.0},
-  {name:"Flinks Production", industry:"Consumer", revM2:24396, revM1:19030, gmM2:16.6, gmM1:13.9, gmCur:23.1, delta:-2.7},
-  {name:"Boom Pay - Production", industry:"Consumer", revM2:46334, revM1:42650, gmM2:57.6, gmM1:55.1, gmCur:56.3, delta:-2.5},
-  {name:"Rural First", industry:"Mortgage", revM2:22355, revM1:21262, gmM2:21.6, gmM1:19.4, gmCur:17.6, delta:-2.2},
-  {name:"Brex - Production", industry:"Small Business Lending", revM2:15264, revM1:17700, gmM2:76.4, gmM1:74.5, gmCur:77.9, delta:-1.9},
+  {name:"CoreLogic - Sandbox", industry:"Mortgage", revM2:47824, revM1:39815, gmM2:-32.2, gmM1:-75.0, gmCur:-68.7, delta:-42.8},
+  {name:"Better Mortgage - Production", industry:"Mortgage", revM2:69832, revM1:52376, gmM2:50.9, gmM1:30.8, gmCur:30.3, delta:-20.1},
+  {name:"Zillow Home Loans", industry:"Mortgage", revM2:65572, revM1:68020, gmM2:38.7, gmM1:26.7, gmCur:22.1, delta:-12.0},
+  {name:"Lendio, Inc", industry:"Small Business Lending", revM2:34495, revM1:36540, gmM2:58.9, gmM1:49.9, gmCur:49.6, delta:-9.0},
+  {name:"Kapitus (strategic funding source)", industry:"Small Business Lending", revM2:71260, revM1:75335, gmM2:54.5, gmM1:46.2, gmCur:51.1, delta:-8.3},
+  {name:"Union Home Mortgage - Encompass Production", industry:"Mortgage", revM2:30263, revM1:31189, gmM2:32.5, gmM1:24.8, gmCur:22.8, delta:-7.7},
+  {name:"Plaid Production", industry:"Consumer", revM2:61421, revM1:69094, gmM2:70.6, gmM1:64.0, gmCur:64.5, delta:-6.6},
+  {name:"Lender ToolKit - Mortgage Dashboard", industry:"Mortgage", revM2:30804, revM1:25020, gmM2:69.8, gmM1:64.0, gmCur:62.9, delta:-5.8},
+  {name:"Jars Capital", industry:"Consumer", revM2:16442, revM1:15836, gmM2:78.8, gmM1:73.5, gmCur:77.0, delta:-5.3},
+  {name:"SoFi", industry:"Consumer", revM2:29751, revM1:23434, gmM2:75.7, gmM1:70.7, gmCur:70.5, delta:-5.0},
+  {name:"Arsenal POC 2025", industry:"Small Business Lending", revM2:11618, revM1:13881, gmM2:74.6, gmM1:69.6, gmCur:63.6, delta:-5.0},
+  {name:"AnnieMac Home Mortgage", industry:"Mortgage", revM2:35460, revM1:35316, gmM2:80.3, gmM1:76.5, gmCur:75.6, delta:-3.8},
+  {name:"BHG Production Account -", industry:"Small Business Lending", revM2:25214, revM1:21862, gmM2:64.3, gmM1:60.6, gmCur:61.9, delta:-3.7},
+  {name:"Expansion Capital Group", industry:"Small Business Lending", revM2:221089, revM1:249179, gmM2:76.6, gmM1:73.6, gmCur:70.6, delta:-3.0},
+  {name:"Flinks Production", industry:"Consumer", revM2:24396, revM1:19030, gmM2:16.6, gmM1:13.9, gmCur:21.6, delta:-2.7},
+  {name:"Boom Pay - Production", industry:"Consumer", revM2:46334, revM1:42650, gmM2:57.6, gmM1:55.1, gmCur:56.0, delta:-2.5},
+  {name:"Rural First", industry:"Mortgage", revM2:22355, revM1:21262, gmM2:21.6, gmM1:19.4, gmCur:14.7, delta:-2.2},
+  {name:"Brex - Production", industry:"Small Business Lending", revM2:15264, revM1:17700, gmM2:76.4, gmM1:74.5, gmCur:78.2, delta:-1.9},
   {name:"Goodleap - Production", industry:"Mortgage", revM2:14000, revM1:13876, gmM2:78.3, gmM1:76.7, gmCur:78.9, delta:-1.6},
-  {name:"Sofi - Encompass - Production", industry:"Mortgage", revM2:50787, revM1:48241, gmM2:58.0, gmM1:56.6, gmCur:56.3, delta:-1.4},
-  {name:"Cake Mortgage", industry:"Mortgage", revM2:15152, revM1:16720, gmM2:48.3, gmM1:47.1, gmCur:40.2, delta:-1.2},
-  {name:"Funding Metrics Production", industry:"Small Business Lending", revM2:115196, revM1:133576, gmM2:71.4, gmM1:70.3, gmCur:67.1, delta:-1.1},
-  {name:"USA Mortgage - Encompass - Production", industry:"Mortgage", revM2:28142, revM1:28491, gmM2:63.7, gmM1:62.7, gmCur:62.8, delta:-1.0},
-  {name:"CAN Capital", industry:"Small Business Lending", revM2:40181, revM1:41319, gmM2:87.4, gmM1:86.9, gmCur:86.4, delta:-0.5},
+  {name:"Sofi - Encompass - Production", industry:"Mortgage", revM2:50787, revM1:48241, gmM2:58.0, gmM1:56.6, gmCur:58.2, delta:-1.4},
+  {name:"Cake Mortgage", industry:"Mortgage", revM2:15152, revM1:16720, gmM2:48.3, gmM1:47.1, gmCur:40.3, delta:-1.2},
+  {name:"Funding Metrics Production", industry:"Small Business Lending", revM2:115196, revM1:133576, gmM2:71.4, gmM1:70.3, gmCur:67.9, delta:-1.1},
+  {name:"USA Mortgage - Encompass - Production", industry:"Mortgage", revM2:28142, revM1:28491, gmM2:63.7, gmM1:62.7, gmCur:63.0, delta:-1.0},
+  {name:"CAN Capital", industry:"Small Business Lending", revM2:40181, revM1:41319, gmM2:87.4, gmM1:86.9, gmCur:86.2, delta:-0.5},
 ];
 
 // Daily figures for business days only (weekends excluded); cumulative revenue and revenue-weighted
@@ -357,9 +357,9 @@ const dailyJulyRaw = [
   {rev:188219,gm:67.7},{rev:163064,gm:67.9},{rev:220196,gm:68.4},{rev:220353,gm:68.7},{rev:208918,gm:69.1},
   {rev:205348,gm:67.2},{rev:155040,gm:62.2},
 ];
-// August has recorded 5 business days of data as of this refresh (Aug 3-7; Aug 1-2 and Aug 8-9 fell on weekends)
+// August has recorded 6 business days of data as of this refresh (Aug 3-7 and Aug 10; Aug 1-2 and Aug 8-9 fell on weekends)
 const dailyAugustRaw = [
-  {rev:224578,gm:67.5},{rev:223121,gm:67.6},{rev:222943,gm:66.7},{rev:201772,gm:66.0},{rev:164471,gm:65.9},
+  {rev:225928,gm:68.0},{rev:224542,gm:68.1},{rev:224589,gm:67.3},{rev:203232,gm:66.6},{rev:165615,gm:66.4},{rev:210177,gm:68.0},
 ];
 
 function toCumulative(raw){
@@ -523,7 +523,7 @@ function renderTopRevenue(month){
   ).join("");
   document.querySelectorAll("#monthSwitch .btn").forEach(b=>b.classList.toggle("active", b.dataset.month===month));
   document.getElementById("topRevNote").textContent = month === "Aug 2026"
-    ? "August figures are projected to a full month based on 5 business days of data — an early estimate that will firm up as more days land."
+    ? "August figures are projected to a full month based on 6 business days of data — an early estimate that will firm up as more days land."
     : (month === "Jul 2026" ? "July figures reflect the full month; the underlying source had not yet flipped this month to closed \"actuals\" status as of this refresh." : "");
 }
 document.getElementById("monthSwitch").innerHTML = revMonths.map(m=>
