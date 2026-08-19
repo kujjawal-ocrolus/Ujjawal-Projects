@@ -168,11 +168,12 @@ const fmtUSDShort = n => {
   if(abs>=1e3) return '$'+(n/1e3).toFixed(0)+'K';
   return '$'+Math.round(n);
 };
-const fmtPct = n => (n===null||n===undefined) ? '—' : n.toFixed(1)+'%';
-const gmClass = gm => gm===null||gm===undefined ? '' : gm>=70 ? 'green' : gm>=55 ? 'yellow' : 'red';
+const fmtPct = n => (n===null||n===undefined||isNaN(n)) ? '—' : n.toFixed(1)+'%';
+const gmClass = gm => gm===null||gm===undefined||isNaN(gm) ? '' : gm>=70 ? 'green' : gm>=55 ? 'yellow' : 'red';
 
-/* ---------------- DATA ---------------- */
+/* ---------------- DATA (fresh from Snowflake, 2026-08-19) ---------------- */
 
+// Q1 — 12-month ARR trend (FINANCE_RAMP). Latest month (2026-07) excluded: only 4 accounts / $0 posted, snapshot not yet finalized.
 const ARR_TREND = [
   {month:'Sep 25', arr:39696705, clients:397},
   {month:'Oct 25', arr:38507630, clients:401},
@@ -186,6 +187,7 @@ const ARR_TREND = [
   {month:'Jun 26', arr:54469215, clients:408},
 ];
 
+// ARR by industry, latest finalized month (Jun 2026)
 const ARR_BY_INDUSTRY = [
   {industry:'Small Business Lending', arr:31663486, clients:144},
   {industry:'Mortgage', arr:15368179, clients:165},
@@ -195,6 +197,7 @@ const ARR_BY_INDUSTRY = [
   {industry:'Other Lending', arr:20135, clients:3},
 ];
 
+// Q4 — Top 10 clients by ARR, latest finalized month
 const TOP10_ARR = [
   {name:'Enova International, Inc.', industry:'Small Business Lending', arr:3378041},
   {name:'Zillow Group', industry:'Mortgage', arr:2549728},
@@ -208,35 +211,49 @@ const TOP10_ARR = [
   {name:'BasePoint Capital', industry:'Small Business Lending', arr:960000},
 ];
 
-// Industry monthly (actual revenue as reported; Aug figures below are scaled to full-month estimate)
-const INDUSTRY_MONTHLY = {
+// Q2 — Revenue + GM by industry per month. Jun = ACTUAL (closed). Jul = FORECAST (closed month, fully accrued).
+// Aug = FORECAST, MTD raw — mtdRevenue/mtdGm as billed through the latest business day, projected to a full month below.
+const AUG_BD_ELAPSED = 11;   // business days elapsed in Aug per DAILY_MARGINS_SPLIT_V1 as of latest load
+const AUG_BD_TOTAL = 21;     // total business days in Aug 2026
+const INDUSTRY_MONTHLY_RAW = {
   'Jun 26': [
-    {industry:'Banking/KYC', orgs:3, revenue:7096, gm:87.0},
-    {industry:'Consumer', orgs:48, revenue:420273, gm:63.3},
-    {industry:'Mortgage', orgs:169, revenue:1313381, gm:47.5},
-    {industry:'Other Lending', orgs:3, revenue:1735, gm:83.0},
-    {industry:'Professional Services', orgs:42, revenue:141692, gm:76.2},
-    {industry:'Small Business Lending', orgs:146, revenue:2118479, gm:73.4},
+    {industry:'Banking/KYC', orgs:3, mtdRevenue:7096, mtdGm:87.0},
+    {industry:'Consumer', orgs:48, mtdRevenue:420273, mtdGm:63.3},
+    {industry:'Mortgage', orgs:169, mtdRevenue:1313381, mtdGm:47.5},
+    {industry:'Other Lending', orgs:3, mtdRevenue:1735, mtdGm:83.0},
+    {industry:'Professional Services', orgs:42, mtdRevenue:141692, mtdGm:76.2},
+    {industry:'Small Business Lending', orgs:146, mtdRevenue:2118479, mtdGm:73.4},
   ],
   'Jul 26': [
-    {industry:'Banking/KYC', orgs:3, revenue:9798, gm:88.1},
-    {industry:'Consumer', orgs:48, revenue:511365, gm:68.1},
-    {industry:'Mortgage', orgs:178, revenue:1209480, gm:41.6},
-    {industry:'Other Lending', orgs:3, revenue:2796, gm:86.5},
-    {industry:'Professional Services', orgs:45, revenue:134989, gm:76.9},
-    {industry:'Small Business Lending', orgs:147, revenue:2912730, gm:78.5},
+    {industry:'Banking/KYC', orgs:3, mtdRevenue:9798, mtdGm:88.1},
+    {industry:'Consumer', orgs:48, mtdRevenue:511365, mtdGm:68.1},
+    {industry:'Mortgage', orgs:178, mtdRevenue:1209480, mtdGm:41.6},
+    {industry:'Other Lending', orgs:3, mtdRevenue:2796, mtdGm:86.5},
+    {industry:'Professional Services', orgs:45, mtdRevenue:134989, mtdGm:76.9},
+    {industry:'Small Business Lending', orgs:147, mtdRevenue:2912730, mtdGm:78.5},
   ],
   'Aug 26 (Proj.)': [
-    {industry:'Banking/KYC', orgs:3, revenue:4747, gm:82.1},
-    {industry:'Consumer', orgs:48, revenue:443181, gm:63.6},
-    {industry:'Mortgage', orgs:175, revenue:1160687, gm:49.1},
-    {industry:'Other Lending', orgs:4, revenue:3401, gm:79.8},
-    {industry:'Professional Services', orgs:31, revenue:121427, gm:72.9},
-    {industry:'Small Business Lending', orgs:144, revenue:2947874, gm:79.5},
+    {industry:'Banking/KYC', orgs:3, mtdRevenue:2487, mtdGm:82.1},
+    {industry:'Consumer', orgs:48, mtdRevenue:232142, mtdGm:63.6},
+    {industry:'Mortgage', orgs:175, mtdRevenue:607883, mtdGm:49.1},
+    {industry:'Other Lending', orgs:4, mtdRevenue:1781, mtdGm:79.8},
+    {industry:'Professional Services', orgs:31, mtdRevenue:63605, mtdGm:72.9},
+    {industry:'Small Business Lending', orgs:144, mtdRevenue:1543981, mtdGm:79.5},
   ],
 };
+// Project the open month (Aug) to a full-month figure; Jun/Jul are already closed/full.
+const INDUSTRY_MONTHLY = {};
+Object.keys(INDUSTRY_MONTHLY_RAW).forEach(m=>{
+  const isOpen = m.includes('Proj.');
+  const scale = isOpen ? (AUG_BD_TOTAL/AUG_BD_ELAPSED) : 1;
+  INDUSTRY_MONTHLY[m] = INDUSTRY_MONTHLY_RAW[m].map(r=>({
+    industry:r.industry, orgs:r.orgs,
+    revenue: r.mtdRevenue*scale,
+    gm: r.mtdGm, // gross margin % held flat from MTD run-rate for the projection
+  }));
+});
 
-// Top 10 clients by revenue, per month (full-month projected for open month)
+// Q3 — Top 10 clients by revenue per month (SQL already full-month-projects the open month per org)
 const TOP10_REV = {
   'Jun 26': [
     {name:'OnDeck', industry:'Small Business Lending', revenue:241643, gm:76.6},
@@ -276,7 +293,7 @@ const TOP10_REV = {
   ],
 };
 
-// Revenue alerts: >50% drop from Jun (M-2) to Jul projected (M-1)
+// Q5 — Clients with >50% revenue drop, M-2 (Jun, actual) -> M-1 (Jul, projected)
 const ALERTS = [
   {name:'Plus Platform Core Extract Sandbox', industry:'Mortgage', rev_m2:9627, rev_m1:368, rev_cur:216},
   {name:'Dixon Hughes Goodman (Charleston)', industry:'Professional Services', rev_m2:7278, rev_m1:952, rev_cur:null},
@@ -286,7 +303,7 @@ const ALERTS = [
   {name:'Zillow - Encompass - Production', industry:'Mortgage', rev_m2:219716, rev_m1:103092, rev_cur:105311},
 ];
 
-// Margin watch: stable revenue, declining margin (Jun -> Jul)
+// Q6 — Stable revenue, declining margin (Jun -> Jul)
 const MARGIN_WATCH = [
   {name:'CoreLogic - Sandbox', industry:'Mortgage', rev_m2:47824, rev_m1:39815, gm_m2:-32.2, gm_m1:-75.0, delta:-42.8},
   {name:'Better Mortgage - Production', industry:'Mortgage', rev_m2:69832, rev_m1:52376, gm_m2:50.9, gm_m1:30.8, delta:-20.1},
@@ -314,30 +331,41 @@ const MARGIN_WATCH = [
   {name:'CAN Capital', industry:'Small Business Lending', rev_m2:40181, rev_m1:41319, gm_m2:87.4, gm_m1:86.9, delta:-0.5},
 ];
 
-// Daily cumulative trend, business-day aligned
-const DAILY = {
+// Q7 — Raw daily rows (weight=1 flags a business day). Cumulative BD, revenue and weighted GM% are derived below in JS.
+const DAILY_RAW = {
   july: [
-    {bd:1,cum_rev:191607,cum_gm:68.8},{bd:2,cum_rev:370409,cum_gm:68.6},{bd:2,cum_rev:418351,cum_gm:68.2},
-    {bd:2,cum_rev:433607,cum_gm:68.0},{bd:2,cum_rev:453710,cum_gm:68.0},{bd:3,cum_rev:687444,cum_gm:68.5},
-    {bd:4,cum_rev:922106,cum_gm:68.6},{bd:5,cum_rev:1154661,cum_gm:68.7},{bd:6,cum_rev:1374090,cum_gm:68.7},
-    {bd:7,cum_rev:1560812,cum_gm:68.8},{bd:7,cum_rev:1586616,cum_gm:68.7},{bd:7,cum_rev:1610081,cum_gm:68.7},
-    {bd:8,cum_rev:1846164,cum_gm:68.7},{bd:9,cum_rev:2069697,cum_gm:68.6},{bd:10,cum_rev:2286639,cum_gm:68.5},
-    {bd:11,cum_rev:2498108,cum_gm:68.5},{bd:12,cum_rev:2665233,cum_gm:68.4},{bd:12,cum_rev:2690773,cum_gm:68.3},
-    {bd:12,cum_rev:2713567,cum_gm:68.3},{bd:13,cum_rev:2936230,cum_gm:68.2},{bd:14,cum_rev:3156775,cum_gm:68.2},
-    {bd:15,cum_rev:3368730,cum_gm:68.2},{bd:16,cum_rev:3556949,cum_gm:68.2},{bd:17,cum_rev:3720013,cum_gm:68.2},
-    {bd:17,cum_rev:3748548,cum_gm:68.2},{bd:17,cum_rev:3771301,cum_gm:68.2},{bd:18,cum_rev:3991497,cum_gm:68.2},
-    {bd:19,cum_rev:4211850,cum_gm:68.2},{bd:20,cum_rev:4420768,cum_gm:68.3},{bd:21,cum_rev:4626116,cum_gm:68.2},
-    {bd:22,cum_rev:4781156,cum_gm:68.0},
+    {weight:1,rev:191607,gm:68.8},{weight:1,rev:178802,gm:68.3},{weight:0,rev:47942,gm:65.1},
+    {weight:0,rev:15256,gm:63.8},{weight:0,rev:20103,gm:67.8},{weight:1,rev:233734,gm:69.6},
+    {weight:1,rev:234662,gm:68.6},{weight:1,rev:232555,gm:69.1},{weight:1,rev:219429,gm:69.1},
+    {weight:1,rev:186722,gm:69.1},{weight:0,rev:25804,gm:65.2},{weight:0,rev:23465,gm:64.7},
+    {weight:1,rev:236083,gm:68.7},{weight:1,rev:223533,gm:67.9},{weight:1,rev:216942,gm:68.1},
+    {weight:1,rev:211469,gm:68.0},{weight:1,rev:167125,gm:66.4},{weight:0,rev:25540,gm:64.0},
+    {weight:0,rev:22794,gm:64.8},{weight:1,rev:222663,gm:67.7},{weight:1,rev:220545,gm:68.1},
+    {weight:1,rev:211955,gm:68.0},{weight:1,rev:188219,gm:67.7},{weight:1,rev:163064,gm:67.9},
+    {weight:0,rev:28535,gm:68.0},{weight:0,rev:22753,gm:66.6},{weight:1,rev:220196,gm:68.4},
+    {weight:1,rev:220353,gm:68.7},{weight:1,rev:208918,gm:69.1},{weight:1,rev:205348,gm:67.2},
+    {weight:1,rev:155040,gm:62.2},
   ],
   august: [
-    {bd:0,cum_rev:25607,cum_gm:66.8},{bd:0,cum_rev:48729,cum_gm:67.0},{bd:1,cum_rev:276283,cum_gm:70.4},
-    {bd:2,cum_rev:502111,cum_gm:70.7},{bd:3,cum_rev:727902,cum_gm:70.6},{bd:4,cum_rev:931747,cum_gm:70.4},
-    {bd:5,cum_rev:1097567,cum_gm:70.2},{bd:5,cum_rev:1132617,cum_gm:70.4},{bd:5,cum_rev:1155680,cum_gm:70.3},
-    {bd:6,cum_rev:1367912,cum_gm:70.4},{bd:7,cum_rev:1602297,cum_gm:70.5},{bd:8,cum_rev:1818120,cum_gm:70.5},
-    {bd:9,cum_rev:2022196,cum_gm:70.5},{bd:10,cum_rev:2189668,cum_gm:70.4},{bd:10,cum_rev:2212553,cum_gm:70.4},
-    {bd:10,cum_rev:2234312,cum_gm:70.3},{bd:11,cum_rev:2451878,cum_gm:70.3},
+    {weight:0,rev:25607,gm:66.8},{weight:0,rev:23122,gm:67.2},{weight:1,rev:227554,gm:71.1},
+    {weight:1,rev:225828,gm:71.1},{weight:1,rev:225791,gm:70.3},{weight:1,rev:203845,gm:69.6},
+    {weight:1,rev:165820,gm:69.6},{weight:0,rev:35050,gm:74.0},{weight:0,rev:23063,gm:68.7},
+    {weight:1,rev:212232,gm:71.0},{weight:1,rev:234385,gm:70.6},{weight:1,rev:215823,gm:70.8},
+    {weight:1,rev:204076,gm:70.5},{weight:1,rev:167472,gm:69.3},{weight:0,rev:22885,gm:66.5},
+    {weight:0,rev:21759,gm:67.5},{weight:1,rev:217566,gm:69.8},
   ],
 };
+// Derive cumulative BD-elapsed, cumulative revenue, and cumulative (revenue-weighted) GM% per day
+function deriveCumulative(rows){
+  let cumBd=0, cumRev=0, cumGp=0;
+  return rows.map(r=>{
+    cumBd += r.weight;
+    cumRev += r.rev;
+    cumGp += r.rev*r.gm/100;
+    return {bd:cumBd, cum_rev:cumRev, cum_gm: cumRev>0 ? (cumGp/cumRev*100) : null};
+  });
+}
+const DAILY = { july: deriveCumulative(DAILY_RAW.july), august: deriveCumulative(DAILY_RAW.august) };
 
 /* ---------------- TABS ---------------- */
 document.querySelectorAll('.tabbtn').forEach(btn=>{
@@ -481,88 +509,89 @@ new Chart(document.getElementById('industryStackChart'), {
   document.getElementById('arrTable').innerHTML = html;
 })();
 
-/* ---------------- TOP 10 REVENUE (month switcher) ---------------- */
-const revMonths = Object.keys(TOP10_REV);
-function renderRevClientTable(month){
-  let html = '<thead><tr><th>#</th><th>Client</th><th>Industry</th><th>Revenue</th><th>Gross Margin</th></tr></thead><tbody>';
-  TOP10_REV[month].forEach((c,i)=>{
-    html += `<tr><td>${i+1}</td><td>${c.name}</td><td>${c.industry}</td><td>${fmtUSD(c.revenue)}</td><td><span class="pill ${gmClass(c.gm)}">${fmtPct(c.gm)}</span></td></tr>`;
-  });
-  html += '</tbody>';
-  document.getElementById('revClientTable').innerHTML = html;
-}
-document.getElementById('monthSwitcher').innerHTML = revMonths.map((m,i)=>`<button data-m="${m}" class="${i===revMonths.length-1?'active':''}">${m}</button>`).join('');
-document.querySelectorAll('#monthSwitcher button').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    document.querySelectorAll('#monthSwitcher button').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    renderRevClientTable(btn.dataset.m);
-  });
-});
-renderRevClientTable(revMonths[revMonths.length-1]);
-
-/* ---------------- ALERTS ---------------- */
+/* ---------------- TOP 10 REVENUE TABLE + MONTH SWITCHER ---------------- */
 (function(){
-  const pctDrop = a => a.rev_m1!==null && a.rev_m2 ? ((a.rev_m1-a.rev_m2)/a.rev_m2*100) : null;
-  const sorted = [...ALERTS].sort((a,b)=>pctDrop(a)-pctDrop(b));
-  const cardsHtml = sorted.slice(0,3).map(a=>{
-    const d = pctDrop(a);
+  const months = Object.keys(TOP10_REV);
+  const switcher = document.getElementById('monthSwitcher');
+  switcher.innerHTML = months.map((m,i)=>`<button data-m="${m}" class="${i===months.length-1?'active':''}">${m}</button>`).join('');
+
+  function render(m){
+    let html = '<thead><tr><th>#</th><th>Client</th><th>Industry</th><th>Revenue</th><th>Gross Margin</th></tr></thead><tbody>';
+    TOP10_REV[m].forEach((c,i)=>{
+      html += `<tr><td>${i+1}</td><td>${c.name}</td><td>${c.industry}</td><td>${fmtUSD(c.revenue)}</td><td><span class="pill ${gmClass(c.gm)}">${fmtPct(c.gm)}</span></td></tr>`;
+    });
+    html += '</tbody>';
+    document.getElementById('revClientTable').innerHTML = html;
+  }
+  switcher.querySelectorAll('button').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      switcher.querySelectorAll('button').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      render(btn.dataset.m);
+    });
+  });
+  render(months[months.length-1]);
+})();
+
+/* ---------------- REVENUE ALERTS ---------------- */
+(function(){
+  const cards = ALERTS.slice(0,4).map(a=>{
+    const pct = ((a.rev_m1-a.rev_m2)/a.rev_m2*100).toFixed(0);
     return `<div class="alert-card">
       <div class="name">${a.name}</div>
       <div class="sub">${a.industry}</div>
-      <div class="metric">${d.toFixed(0)}%</div>
+      <div class="metric">${pct}%</div>
       <div class="sub">${fmtUSD(a.rev_m2)} → ${fmtUSD(a.rev_m1)}</div>
     </div>`;
   }).join('');
-  document.getElementById('alertCards').innerHTML = cardsHtml;
+  document.getElementById('alertCards').innerHTML = cards;
 
-  let html = '<thead><tr><th>Client</th><th>Industry</th><th>Two Months Ago</th><th>Prior Month (Proj.)</th><th>Current Month (Proj.)</th><th>% Change</th></tr></thead><tbody>';
-  sorted.forEach(a=>{
-    const d = pctDrop(a);
-    html += `<tr><td>${a.name}</td><td>${a.industry}</td><td>${fmtUSD(a.rev_m2)}</td><td>${a.rev_m1!==null?fmtUSD(a.rev_m1):'—'}</td><td>${a.rev_cur!==null&&a.rev_cur!==undefined?fmtUSD(a.rev_cur):'—'}</td><td class="neg">${d.toFixed(1)}%</td></tr>`;
+  let html = '<thead><tr><th>Client</th><th>Industry</th><th>Rev (M-2)</th><th>Rev (M-1, proj.)</th><th>Change</th><th>Rev (Current, proj.)</th></tr></thead><tbody>';
+  ALERTS.forEach(a=>{
+    const pct = ((a.rev_m1-a.rev_m2)/a.rev_m2*100).toFixed(0);
+    html += `<tr><td>${a.name}</td><td>${a.industry}</td><td>${fmtUSD(a.rev_m2)}</td><td>${fmtUSD(a.rev_m1)}</td><td class="neg">${pct}%</td><td>${a.rev_cur!==null?fmtUSD(a.rev_cur):'—'}</td></tr>`;
   });
   html += '</tbody>';
   document.getElementById('alertsTable').innerHTML = html;
 })();
 
-/* ---------------- MARGIN WATCH ---------------- */
+/* ---------------- MARGIN WATCH TABLE ---------------- */
 (function(){
-  let html = '<thead><tr><th>Client</th><th>Industry</th><th>Rev (M-2)</th><th>Rev (M-1)</th><th>GM (M-2)</th><th>GM (M-1)</th><th>Δ Margin (pp)</th></tr></thead><tbody>';
+  let html = '<thead><tr><th>Client</th><th>Industry</th><th>Rev (M-2)</th><th>Rev (M-1)</th><th>GM (M-2)</th><th>GM (M-1)</th><th>Δ (pp)</th></tr></thead><tbody>';
   MARGIN_WATCH.forEach(m=>{
-    html += `<tr><td>${m.name}</td><td>${m.industry}</td><td>${fmtUSD(m.rev_m2)}</td><td>${fmtUSD(m.rev_m1)}</td>
-      <td><span class="pill ${gmClass(m.gm_m2)}">${fmtPct(m.gm_m2)}</span></td>
-      <td><span class="pill ${gmClass(m.gm_m1)}">${fmtPct(m.gm_m1)}</span></td>
-      <td class="neg">${m.delta.toFixed(1)}</td></tr>`;
+    html += `<tr><td>${m.name}</td><td>${m.industry}</td><td>${fmtUSD(m.rev_m2)}</td><td>${fmtUSD(m.rev_m1)}</td><td><span class="pill ${gmClass(m.gm_m2)}">${fmtPct(m.gm_m2)}</span></td><td><span class="pill ${gmClass(m.gm_m1)}">${fmtPct(m.gm_m1)}</span></td><td class="neg">${m.delta.toFixed(1)}</td></tr>`;
   });
   html += '</tbody>';
   document.getElementById('marginTable').innerHTML = html;
 })();
 
 /* ---------------- DAILY TREND CHARTS ---------------- */
-const bdLabels = Array.from({length:22}, (_,i)=>'BD '+(i+1));
+const maxBd = Math.max(DAILY.july.length ? DAILY.july[DAILY.july.length-1].bd : 0, DAILY.august[DAILY.august.length-1].bd);
+const bdLabels = Array.from({length:maxBd}, (_,i)=>`BD ${i+1}`);
 
-function seriesByBd(arr, key){
-  const out = new Array(22).fill(null);
-  arr.forEach(pt=>{ if(pt.bd>=1) out[pt.bd-1] = pt[key]; });
-  // forward-fill for readability
+function seriesByBd(rows){
+  const out = new Array(maxBd).fill(null);
+  rows.forEach(r=>{ if(r.bd>=1 && r.bd<=maxBd) out[r.bd-1] = r; });
+  // forward-fill so intraday non-BD rows don't leave gaps mid-series
   let last=null;
-  for(let i=0;i<out.length;i++){ if(out[i]===null) out[i]=last; else last=out[i]; }
+  for(let i=0;i<out.length;i++){ if(out[i]===null){ out[i]=last; } else { last=out[i]; } }
   return out;
 }
+const julySeries = seriesByBd(DAILY.july);
+const augSeries = seriesByBd(DAILY.august);
 
 new Chart(document.getElementById('cumRevChart'), {
   type:'line',
   data:{
     labels: bdLabels,
     datasets:[
-      {label:'Jul 26', data: seriesByBd(DAILY.july,'cum_rev'), borderColor:'#8b949e', backgroundColor:'transparent', tension:.25, pointRadius:0},
-      {label:'Aug 26', data: seriesByBd(DAILY.august,'cum_rev'), borderColor:'#58a6ff', backgroundColor:'rgba(88,166,255,.1)', fill:true, tension:.25, pointRadius:0},
+      {label:'Jul 26', data: julySeries.map(r=>r?r.cum_rev:null), borderColor:'#8b949e', backgroundColor:'transparent', tension:.25, pointRadius:0, borderDash:[4,3]},
+      {label:'Aug 26 (MTD)', data: augSeries.map(r=>r?r.cum_rev:null), borderColor:'#58a6ff', backgroundColor:'rgba(88,166,255,.10)', fill:true, tension:.25, pointRadius:0},
     ]
   },
   options:{
     plugins:{legend:{labels:{boxWidth:12}}, tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${fmtUSD(c.parsed.y)}`}}},
-    scales:{ y:{ticks:{callback:v=>fmtUSDShort(v)}, grid:{color:'#21262d'}}, x:{grid:{display:false}} },
-    interaction:{mode:'index', intersect:false}
+    scales:{ y:{ticks:{callback:v=>fmtUSDShort(v)}, grid:{color:'#21262d'}}, x:{grid:{display:false}} }
   }
 });
 
@@ -571,16 +600,16 @@ new Chart(document.getElementById('cumGmChart'), {
   data:{
     labels: bdLabels,
     datasets:[
-      {label:'Jul 26', data: seriesByBd(DAILY.july,'cum_gm'), borderColor:'#8b949e', backgroundColor:'transparent', tension:.25, pointRadius:0},
-      {label:'Aug 26', data: seriesByBd(DAILY.august,'cum_gm'), borderColor:'#3fb950', backgroundColor:'rgba(63,185,80,.1)', fill:true, tension:.25, pointRadius:0},
+      {label:'Jul 26', data: julySeries.map(r=>r?r.cum_gm:null), borderColor:'#8b949e', backgroundColor:'transparent', tension:.25, pointRadius:0, borderDash:[4,3]},
+      {label:'Aug 26 (MTD)', data: augSeries.map(r=>r?r.cum_gm:null), borderColor:'#3fb950', backgroundColor:'rgba(63,185,80,.10)', fill:true, tension:.25, pointRadius:0},
     ]
   },
   options:{
     plugins:{legend:{labels:{boxWidth:12}}, tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${c.parsed.y.toFixed(1)}%`}}},
-    scales:{ y:{min:0, max:100, ticks:{callback:v=>v+'%'}, grid:{color:'#21262d'}}, x:{grid:{display:false}} },
-    interaction:{mode:'index', intersect:false}
+    scales:{ y:{min:0, max:100, ticks:{callback:v=>v+'%'}, grid:{color:'#21262d'}}, x:{grid:{display:false}} }
   }
 });
 </script>
+
 </body>
 </html>
