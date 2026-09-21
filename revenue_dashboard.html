@@ -73,8 +73,8 @@
 
 <header>
   <h1>Ocrolus Revenue Intelligence</h1>
-  <div class="sub">As of <b>18 Sep 2026</b> &nbsp;·&nbsp; Revenue data complete through <b>16 Sep 2026</b>
-    &nbsp;·&nbsp; Current month projected on business days (<b>11 of 21</b> elapsed)</div>
+  <div class="sub">As of <b>21 Sep 2026</b> &nbsp;·&nbsp; Revenue data complete through <b>20 Sep 2026</b>
+    &nbsp;·&nbsp; Current month projected on business days (<b>13 of 21</b> elapsed)</div>
 </header>
 
 <div class="tabs" id="tabs"></div>
@@ -198,9 +198,9 @@
 
 <script>
 /* ================== EMBEDDED DATA ================== */
-const AS_OF = "18 Sep 2026";
-const DATA_THROUGH = "16 Sep 2026";
-const BD_ELAPSED = 11, BD_TOTAL = 21;
+const AS_OF = "21 Sep 2026";
+const DATA_THROUGH = "20 Sep 2026";
+const BD_ELAPSED = 13, BD_TOTAL = 21;
 const PROJ = BD_TOTAL / BD_ELAPSED;
 
 const MONTHS = ["2026-07-01","2026-08-01","2026-09-01"];
@@ -235,12 +235,12 @@ const IND = [
   ["2026-08-01","Other Lending",4,2925,81.2],
   ["2026-08-01","Professional Services",37,129681,71.5],
   ["2026-08-01","Small Business Lending",148,2884308,80.1],
-  ["2026-09-01","Banking/KYC",2,1380,77.1],
-  ["2026-09-01","Consumer",43,197471,66.0],
-  ["2026-09-01","Mortgage",184,627419,47.0],
-  ["2026-09-01","Other Lending",4,2404,84.6],
-  ["2026-09-01","Professional Services",32,63811,73.1],
-  ["2026-09-01","Small Business Lending",142,1622781,81.6]
+  ["2026-09-01","Banking/KYC",2,1588,76.1],
+  ["2026-09-01","Consumer",44,225932,65.7],
+  ["2026-09-01","Mortgage",185,743325,46.5],
+  ["2026-09-01","Other Lending",4,2534,83.9],
+  ["2026-09-01","Professional Services",34,74536,71.2],
+  ["2026-09-01","Small Business Lending",138,1850895,80.6]
 ];
 
 /* Top 10 by ARR — Jun 2026 */
@@ -279,54 +279,54 @@ const TOP_REV = [
   ["2026-08-01","Zillow - Encompass - Production","Mortgage",101688,13.1,8],
   ["2026-08-01","Kalamata Capital Group","Small Business Lending",101310,94.8,9],
   ["2026-08-01","Lendr","Small Business Lending",75079,80.7,10],
-  ["2026-09-01","Expansion Capital Group","Small Business Lending",466868,83.8,1],
-  ["2026-09-01","Rapid Finance (Production)","Small Business Lending",459491,91.5,2],
-  ["2026-09-01","OnDeck","Small Business Lending",270230,79.5,3],
-  ["2026-09-01","ForwardLine - Production Bank Statements","Small Business Lending",157292,90.0,4],
-  ["2026-09-01","Pearl Capital Business Funding","Small Business Lending",156889,85.9,5],
-  ["2026-09-01","Fora Financial","Small Business Lending",112489,87.4,6],
-  ["2026-09-01","Zillow - Encompass - Production","Mortgage",102694,-0.9,7],
-  ["2026-09-01","Marlin Leasing Production","Small Business Lending",100802,84.8,8],
-  ["2026-09-01","Kalamata Capital Group","Small Business Lending",85716,94.8,9],
-  ["2026-09-01","Kapitus (strategic funding source)","Small Business Lending",76892,57.6,10]
+  ["2026-09-01","Expansion Capital Group","Small Business Lending",460401,83.5,1],
+  ["2026-09-01","Rapid Finance (Production)","Small Business Lending",455947,91.3,2],
+  ["2026-09-01","OnDeck","Small Business Lending",266781,78.9,3],
+  ["2026-09-01","Pearl Capital Business Funding","Small Business Lending",161432,85.8,4],
+  ["2026-09-01","ForwardLine - Production Bank Statements","Small Business Lending",156973,89.9,5],
+  ["2026-09-01","Fora Financial","Small Business Lending",110119,87.3,6],
+  ["2026-09-01","Zillow - Encompass - Production","Mortgage",101233,-2.7,7],
+  ["2026-09-01","Marlin Leasing Production","Small Business Lending",98272,84.6,8],
+  ["2026-09-01","Kalamata Capital Group","Small Business Lending",85338,94.4,9],
+  ["2026-09-01","Kapitus (strategic funding source)","Small Business Lending",75245,57.0,10]
 ];
 
 /* client, industry, jul, aug, sep_projected */
 const ALERTS = [
-  ["Express Capital Funding","Small Business Lending",5587,107,63],
-  ["Conductiv, Inc. - Production","Banking/KYC",6149,1601,2005],
-  ["Nova Credit","Consumer",131900,36298,33579]
+  ["Express Capital Funding","Small Business Lending",5587,107,61],
+  ["Conductiv, Inc. - Production","Banking/KYC",6149,1601,2031],
+  ["Nova Credit","Consumer",131900,36298,34931]
 ];
 
 /* client, industry, rev_jul, rev_aug, rev_sep_mtd, gm_jul, gm_aug, gm_sep, delta_pp */
 const MARGIN = [
-  ["First Community Mortgage (FCM Partners) POC","Mortgage",32348,28263,14055,-60.5,-68.5,-54.9,-8.0],
-  ["Rural First","Mortgage",21262,18984,9479,19.4,11.5,20.1,-7.9],
-  ["VALID8 Production","Professional Services",57921,62160,24124,68.7,62.8,58.5,-5.9],
-  ["Senior Planning","Consumer",13914,10399,2556,57.1,51.9,52.1,-5.2],
-  ["Arsenal POC 2025","Small Business Lending",13881,13141,5929,69.6,64.7,72.2,-4.9],
-  ["Audit Sight (Production)","Professional Services",18162,20132,14873,85.4,80.8,83.7,-4.6],
-  ["SBG Funding","Small Business Lending",26543,26858,14251,73.7,69.6,72.9,-4.1],
-  ["Argyle - Billing","Consumer",18143,18764,10259,59.3,55.8,58.3,-3.5],
-  ["Zillow Home Loans","Mortgage",68020,67727,32285,26.7,23.7,24.5,-3.0],
-  ["National Funding","Small Business Lending",12255,10427,17551,82.3,79.5,91.0,-2.8],
-  ["FiServ - Dev","Small Business Lending",13970,12798,6641,84.7,82.0,82.8,-2.7],
-  ["Dragin","Small Business Lending",42468,39348,20870,-17.3,-19.5,-18.6,-2.2],
-  ["GVA BOX","Small Business Lending",13677,13371,297,78.3,76.4,76.7,-1.9],
-  ["AnnieMac Home Mortgage","Mortgage",35316,33648,17501,76.5,75.1,66.3,-1.4],
-  ["Lendr","Small Business Lending",78206,75079,33374,82.0,80.7,77.0,-1.3],
-  ["IOU Financial Production","Small Business Lending",20645,17056,7352,80.7,79.5,80.3,-1.2],
-  ["Better Mortgage - Production","Mortgage",52376,45271,23809,30.8,29.7,37.3,-1.1],
-  ["Greenbox Capital Sandbox","Small Business Lending",15631,14057,7449,59.7,58.7,64.0,-1.0],
-  ["Funding Metrics Production","Small Business Lending",133576,103486,38089,70.3,69.3,71.5,-1.0],
-  ["Best Egg - Production","Consumer",38821,37123,16548,70.0,69.1,72.2,-0.9],
-  ["Flinks Production","Consumer",19030,18026,9958,13.9,13.1,9.1,-0.8],
-  ["SoFi","Consumer",23434,22204,10856,70.7,70.0,73.6,-0.7],
-  ["Marlin Leasing Production","Small Business Lending",104675,104167,52801,85.0,84.4,84.8,-0.6],
-  ["Plaid Production","Consumer",69094,63419,28160,64.0,63.4,66.5,-0.6],
-  ["Idea Financial","Small Business Lending",29628,27028,14299,81.0,80.5,82.0,-0.5],
-  ["Newtek Production","Small Business Lending",14624,13738,7962,87.7,87.2,88.0,-0.5],
-  ["Expansion Capital Group","Small Business Lending",249179,233716,244550,73.6,73.1,83.8,-0.5]
+  ["First Community Mortgage (FCM Partners) POC","Mortgage",32348,28263,16582,-60.5,-68.5,-54.6,-8.0],
+  ["Rural First","Mortgage",21262,18984,11162,19.4,11.5,20.9,-7.9],
+  ["VALID8 Production","Professional Services",57921,62160,29043,68.7,62.8,57.8,-5.9],
+  ["Senior Planning","Consumer",13914,10399,2664,57.1,51.9,50.4,-5.2],
+  ["Arsenal POC 2025","Small Business Lending",13881,13141,6891,69.6,64.7,71.5,-4.9],
+  ["Audit Sight (Production)","Professional Services",18162,20132,17132,85.4,80.8,80.2,-4.6],
+  ["SBG Funding","Small Business Lending",26543,26858,16728,73.7,69.6,72.3,-4.1],
+  ["Argyle - Billing","Consumer",18143,18764,12346,59.3,55.8,57.4,-3.5],
+  ["Zillow Home Loans","Mortgage",68020,67727,38885,26.7,23.7,24.6,-3.0],
+  ["National Funding","Small Business Lending",12255,10427,18478,82.3,79.5,90.3,-2.8],
+  ["FiServ - Dev","Small Business Lending",13970,12798,7813,84.7,82.0,82.3,-2.7],
+  ["Dragin","Small Business Lending",42468,39348,24091,-17.3,-19.5,-20.6,-2.2],
+  ["GVA BOX","Small Business Lending",13677,13371,431,78.3,76.4,76.7,-1.9],
+  ["AnnieMac Home Mortgage","Mortgage",35316,33648,21308,76.5,75.1,65.4,-1.4],
+  ["Lendr","Small Business Lending",78206,75079,38646,82.0,80.7,76.8,-1.3],
+  ["IOU Financial Production","Small Business Lending",20645,17056,8650,80.7,79.5,80.0,-1.2],
+  ["Better Mortgage - Production","Mortgage",52376,45271,28068,30.8,29.7,36.3,-1.1],
+  ["Funding Metrics Production","Small Business Lending",133576,103486,42617,70.3,69.3,70.9,-1.0],
+  ["Greenbox Capital Sandbox","Small Business Lending",15631,14057,8904,59.7,58.7,63.5,-1.0],
+  ["Best Egg - Production","Consumer",38821,37123,19989,70.0,69.1,71.6,-0.9],
+  ["Flinks Production","Consumer",19030,18026,12,13.9,13.1,null,-0.8],
+  ["SoFi","Consumer",23434,22204,14014,70.7,70.0,73.1,-0.7],
+  ["Plaid Production","Consumer",69094,63419,33871,64.0,63.4,65.8,-0.6],
+  ["Marlin Leasing Production","Small Business Lending",104675,104167,60835,85.0,84.4,84.6,-0.6],
+  ["Idea Financial","Small Business Lending",29628,27028,16634,81.0,80.5,81.3,-0.5],
+  ["Newtek Production","Small Business Lending",14624,13738,9037,87.7,87.2,87.8,-0.5],
+  ["Expansion Capital Group","Small Business Lending",249179,233716,285010,73.6,73.1,83.5,-0.5]
 ];
 
 /* date, is_business_day, revenue, gm_pct */
@@ -342,12 +342,13 @@ const DAILY = [
   ["2026-08-25",1,218775,71.1],["2026-08-26",1,210250,71.1],["2026-08-27",1,206987,71.4],
   ["2026-08-28",1,167095,70.9],["2026-08-29",0,22609,67.1],["2026-08-30",0,21401,67.9],
   ["2026-08-31",1,217580,71.4],
-  ["2026-09-01",1,224210,71.7],["2026-09-02",1,224150,71.5],["2026-09-03",1,215083,71.5],
-  ["2026-09-04",1,159472,69.7],["2026-09-05",0,21949,68.6],["2026-09-06",0,16969,68.6],
-  ["2026-09-07",0,32301,70.5],["2026-09-08",1,231145,71.9],["2026-09-09",1,224606,72.0],
-  ["2026-09-10",1,232737,72.3],["2026-09-11",1,186873,71.5],["2026-09-12",0,23480,68.3],
-  ["2026-09-13",0,20869,68.3],["2026-09-14",1,239476,72.6],["2026-09-15",1,231210,70.6],
-  ["2026-09-16",1,230738,72.1]
+  ["2026-09-01",1,220403,71.3],["2026-09-02",1,218970,70.7],["2026-09-03",1,209404,70.6],
+  ["2026-09-04",1,156281,69.4],["2026-09-05",0,22161,68.4],["2026-09-06",0,16977,68.0],
+  ["2026-09-07",0,32075,69.9],["2026-09-08",1,225991,71.5],["2026-09-09",1,219344,71.2],
+  ["2026-09-10",1,228072,71.6],["2026-09-11",1,181833,70.5],["2026-09-12",0,23635,67.9],
+  ["2026-09-13",0,20866,67.7],["2026-09-14",1,229588,71.3],["2026-09-15",1,225851,69.7],
+  ["2026-09-16",1,226401,71.4],["2026-09-17",1,216864,65.4],["2026-09-18",1,181687,72.7],
+  ["2026-09-19",0,23769,68.2],["2026-09-20",0,18636,67.6]
 ];
 
 /* ================== HELPERS ================== */
