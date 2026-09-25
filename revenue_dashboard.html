@@ -94,8 +94,8 @@ tbody tr:last-child td{border-bottom:none}
     <div class="sub">Revenue, gross margin, ARR and client risk signals</div>
   </div>
   <div style="text-align:right">
-    <div class="badge">As of 24 Sep 2026</div>
-    <div class="sub" id="asof-note">Revenue data complete through 22 Sep 2026</div>
+    <div class="badge">As of 25 Sep 2026</div>
+    <div class="sub" id="asof-note">Revenue data complete through 23 Sep 2026</div>
   </div>
 </header>
 
@@ -238,8 +238,8 @@ const MONTHS = [
    rev:4781158, gp:3252704, gm:68.0, orgs:424},
   {key:"2026-08", label:"Aug 2026", short:"Aug", open:false, bdEl:21, bdTot:21,
    rev:4616663, gp:3235501, gm:70.1, orgs:421},
-  {key:"2026-09", label:"Sep 2026", short:"Sep", open:true,  bdEl:15, bdTot:21,
-   rev:3316995, gp:2335287, gm:70.4, orgs:411}
+  {key:"2026-09", label:"Sep 2026", short:"Sep", open:true,  bdEl:16, bdTot:21,
+   rev:3599540, gp:2550070, gm:70.8, orgs:416}
 ];
 
 const ARR_TREND = [
@@ -267,12 +267,12 @@ const INDUSTRY = [
   {m:"2026-08", ind:"Professional Services",  orgs:37,  rev:129681,  gm:71.5},
   {m:"2026-08", ind:"Banking/KYC",            orgs:2,   rev:2641,    gm:73.8},
   {m:"2026-08", ind:"Other Lending",          orgs:4,   rev:2925,    gm:81.2},
-  {m:"2026-09", ind:"Small Business Lending", orgs:140, rev:2121935, gm:81.0},
-  {m:"2026-09", ind:"Mortgage",               orgs:186, rev:849774,  gm:45.4},
-  {m:"2026-09", ind:"Consumer",               orgs:44,  rev:254292,  gm:65.1},
-  {m:"2026-09", ind:"Professional Services",  orgs:35,  rev:86608,   gm:71.3},
-  {m:"2026-09", ind:"Banking/KYC",            orgs:2,   rev:1703,    gm:75.3},
-  {m:"2026-09", ind:"Other Lending",          orgs:4,   rev:2683,    gm:83.2}
+  {m:"2026-09", ind:"Small Business Lending", orgs:144, rev:2320698, gm:81.3},
+  {m:"2026-09", ind:"Mortgage",               orgs:186, rev:897693,  gm:45.4},
+  {m:"2026-09", ind:"Consumer",               orgs:44,  rev:283057,  gm:65.4},
+  {m:"2026-09", ind:"Professional Services",  orgs:36,  rev:93523,   gm:71.5},
+  {m:"2026-09", ind:"Banking/KYC",            orgs:2,   rev:1817,    gm:75.9},
+  {m:"2026-09", ind:"Other Lending",          orgs:4,   rev:2752,    gm:83.7}
 ];
 
 const ARR_BY_IND = [
@@ -322,51 +322,52 @@ const TOP_REV = {
   {n:"Kalamata Capital Group",            ind:"Small Business Lending", rev:101310, gm:94.8},
   {n:"Lendr",                             ind:"Small Business Lending", rev:75079,  gm:80.7}],
  "2026-09":[
-  {n:"Expansion Capital Group",           ind:"Small Business Lending", rev:456896, gm:83.1},
-  {n:"Rapid Finance (Production)",        ind:"Small Business Lending", rev:452253, gm:91.2},
-  {n:"OnDeck",                            ind:"Small Business Lending", rev:263635, gm:78.5},
-  {n:"Pearl Capital Business Funding",    ind:"Small Business Lending", rev:164441, gm:85.6},
-  {n:"ForwardLine - Production Bank Statements", ind:"Small Business Lending", rev:157870, gm:89.7},
-  {n:"Fora Financial",                    ind:"Small Business Lending", rev:110270, gm:87.0},
-  {n:"Zillow - Encompass - Production",   ind:"Mortgage",               rev:99977,  gm:-6.3},
-  {n:"Marlin Leasing Production",         ind:"Small Business Lending", rev:97686,  gm:84.3},
-  {n:"Kalamata Capital Group",            ind:"Small Business Lending", rev:84858,  gm:94.5},
-  {n:"Kapitus (strategic funding source)",ind:"Small Business Lending", rev:76188,  gm:56.2}]
+  {n:"Expansion Capital Group",           ind:"Small Business Lending", rev:455894, gm:83.3},
+  {n:"Rapid Finance (Production)",        ind:"Small Business Lending", rev:451574, gm:91.3},
+  {n:"OnDeck",                            ind:"Small Business Lending", rev:263792, gm:78.7},
+  {n:"Pearl Capital Business Funding",    ind:"Small Business Lending", rev:164782, gm:85.8},
+  {n:"ForwardLine - Production Bank Statements", ind:"Small Business Lending", rev:158172, gm:89.9},
+  {n:"Fora Financial",                    ind:"Small Business Lending", rev:110329, gm:87.1},
+  {n:"Zillow - Encompass - Production",   ind:"Mortgage",               rev:98880,  gm:-7.2},
+  {n:"Marlin Leasing Production",         ind:"Small Business Lending", rev:98284,  gm:84.6},
+  {n:"Kalamata Capital Group",            ind:"Small Business Lending", rev:85193,  gm:94.6},
+  {n:"Kapitus (strategic funding source)",ind:"Small Business Lending", rev:75939,  gm:56.6}]
 };
 
 const DROPS = [
-  {n:"Express Capital Funding",     ind:"Small Business Lending", m2:5587,   m1:107,   cur:69},
-  {n:"Conductiv, Inc. - Production",ind:"Banking/KYC",            m2:6149,   m1:1601,  cur:1919},
-  {n:"Nova Credit",                 ind:"Consumer",               m2:131900, m1:36298, cur:34009}
+  {n:"Express Capital Funding",     ind:"Small Business Lending", m2:5587,   m1:107,   cur:70},
+  {n:"Conductiv, Inc. - Production",ind:"Banking/KYC",            m2:6149,   m1:1601,  cur:1883},
+  {n:"Nova Credit",                 ind:"Consumer",               m2:131900, m1:36298, cur:33525}
 ];
 
 const MARGINS = [
-  {n:"First Community Mortgage (FCM Partners) POC", ind:"Mortgage", rm2:32348, rm1:28263, rc:18535, g2:-60.5, g1:-68.5, gc:-60.4, d:-8.0},
-  {n:"Rural First", ind:"Mortgage", rm2:21262, rm1:18984, rc:13016, g2:19.4, g1:11.5, gc:21.1, d:-7.9},
-  {n:"VALID8 Production", ind:"Professional Services", rm2:57921, rm1:62160, rc:32706, g2:68.7, g1:62.8, gc:56.0, d:-5.9},
-  {n:"Senior Planning", ind:"Consumer", rm2:13914, rm1:10399, rc:2740, g2:57.1, g1:51.9, gc:49.7, d:-5.2},
-  {n:"Arsenal POC 2025", ind:"Small Business Lending", rm2:13881, rm1:13141, rc:7815, g2:69.6, g1:64.7, gc:71.0, d:-4.9},
-  {n:"Audit Sight (Production)", ind:"Professional Services", rm2:18162, rm1:20132, rc:19094, g2:85.4, g1:80.8, gc:80.9, d:-4.6},
-  {n:"SBG Funding", ind:"Small Business Lending", rm2:26543, rm1:26858, rc:19159, g2:73.7, g1:69.6, gc:71.8, d:-4.1},
-  {n:"Argyle - Billing", ind:"Consumer", rm2:18143, rm1:18764, rc:14307, g2:59.3, g1:55.8, gc:57.0, d:-3.5},
-  {n:"Zillow Home Loans", ind:"Mortgage", rm2:68020, rm1:67727, rc:43648, g2:26.7, g1:23.7, gc:24.2, d:-3.0},
-  {n:"National Funding", ind:"Small Business Lending", rm2:12255, rm1:10427, rc:19668, g2:82.3, g1:79.5, gc:89.5, d:-2.8},
-  {n:"FiServ - Dev", ind:"Small Business Lending", rm2:13970, rm1:12798, rc:8961, g2:84.7, g1:82.0, gc:82.3, d:-2.7},
-  {n:"Dragin", ind:"Small Business Lending", rm2:42468, rm1:39348, rc:27485, g2:-17.3, g1:-19.5, gc:-23.8, d:-2.2},
-  {n:"GVA BOX", ind:"Small Business Lending", rm2:13677, rm1:13371, rc:545, g2:78.3, g1:76.4, gc:75.6, d:-1.9},
-  {n:"AnnieMac Home Mortgage", ind:"Mortgage", rm2:35316, rm1:33648, rc:24120, g2:76.5, g1:75.1, gc:64.7, d:-1.4},
-  {n:"Lendr", ind:"Small Business Lending", rm2:78206, rm1:75079, rc:45352, g2:82.0, g1:80.7, gc:77.3, d:-1.3},
-  {n:"IOU Financial Production", ind:"Small Business Lending", rm2:20645, rm1:17056, rc:9944, g2:80.7, g1:79.5, gc:79.4, d:-1.2},
-  {n:"Better Mortgage - Production", ind:"Mortgage", rm2:52376, rm1:45271, rc:31699, g2:30.8, g1:29.7, gc:34.0, d:-1.1},
-  {n:"Greenbox Capital Sandbox", ind:"Small Business Lending", rm2:15631, rm1:14057, rc:10267, g2:59.7, g1:58.7, gc:62.8, d:-1.0},
-  {n:"Funding Metrics Production", ind:"Small Business Lending", rm2:133576, rm1:103486, rc:46490, g2:70.3, g1:69.3, gc:70.1, d:-1.0},
-  {n:"Best Egg - Production", ind:"Consumer", rm2:38821, rm1:37123, rc:22740, g2:70.0, g1:69.1, gc:71.2, d:-0.9},
-  {n:"SoFi", ind:"Consumer", rm2:23434, rm1:22204, rc:16341, g2:70.7, g1:70.0, gc:72.6, d:-0.7},
-  {n:"Plaid Production", ind:"Consumer", rm2:69094, rm1:63419, rc:37919, g2:64.0, g1:63.4, gc:65.4, d:-0.6},
-  {n:"Marlin Leasing Production", ind:"Small Business Lending", rm2:104675, rm1:104167, rc:69776, g2:85.0, g1:84.4, gc:84.3, d:-0.6},
-  {n:"Idea Financial", ind:"Small Business Lending", rm2:29628, rm1:27028, rc:19135, g2:81.0, g1:80.5, gc:80.8, d:-0.5},
-  {n:"Expansion Capital Group", ind:"Small Business Lending", rm2:249179, rm1:233716, rc:326354, g2:73.6, g1:73.1, gc:83.1, d:-0.5},
-  {n:"Newtek Production", ind:"Small Business Lending", rm2:14624, rm1:13738, rc:10166, g2:87.7, g1:87.2, gc:87.8, d:-0.5}
+  {n:"First Community Mortgage (FCM Partners) POC", ind:"Mortgage", rm2:32348, rm1:28263, rc:19626, g2:-60.5, g1:-68.5, gc:-60.5, d:-8.0},
+  {n:"Rural First", ind:"Mortgage", rm2:21262, rm1:18984, rc:13573, g2:19.4, g1:11.5, gc:19.9, d:-7.9},
+  {n:"VALID8 Production", ind:"Professional Services", rm2:57921, rm1:62160, rc:36842, g2:68.7, g1:62.8, gc:56.8, d:-5.9},
+  {n:"Senior Planning", ind:"Consumer", rm2:13914, rm1:10399, rc:2906, g2:57.1, g1:51.9, gc:50.4, d:-5.2},
+  {n:"Arsenal POC 2025", ind:"Small Business Lending", rm2:13881, rm1:13141, rc:8391, g2:69.6, g1:64.7, gc:71.4, d:-4.9},
+  {n:"Audit Sight (Production)", ind:"Professional Services", rm2:18162, rm1:20132, rc:20353, g2:85.4, g1:80.8, gc:82.2, d:-4.6},
+  {n:"SBG Funding", ind:"Small Business Lending", rm2:26543, rm1:26858, rc:20306, g2:73.7, g1:69.6, gc:72.2, d:-4.1},
+  {n:"Argyle - Billing", ind:"Consumer", rm2:18143, rm1:18764, rc:15113, g2:59.3, g1:55.8, gc:57.6, d:-3.5},
+  {n:"Zillow Home Loans", ind:"Mortgage", rm2:68020, rm1:67727, rc:45545, g2:26.7, g1:23.7, gc:24.7, d:-3.0},
+  {n:"National Funding", ind:"Small Business Lending", rm2:12255, rm1:10427, rc:20101, g2:82.3, g1:79.5, gc:89.5, d:-2.8},
+  {n:"FiServ - Dev", ind:"Small Business Lending", rm2:13970, rm1:12798, rc:9635, g2:84.7, g1:82.0, gc:82.8, d:-2.7},
+  {n:"Dragin", ind:"Small Business Lending", rm2:42468, rm1:39348, rc:29527, g2:-17.3, g1:-19.5, gc:-21.8, d:-2.2},
+  {n:"GVA BOX", ind:"Small Business Lending", rm2:13677, rm1:13371, rc:593, g2:78.3, g1:76.4, gc:76.4, d:-1.9},
+  {n:"AnnieMac Home Mortgage", ind:"Mortgage", rm2:35316, rm1:33648, rc:25436, g2:76.5, g1:75.1, gc:65.0, d:-1.4},
+  {n:"Lendr", ind:"Small Business Lending", rm2:78206, rm1:75079, rc:48208, g2:82.0, g1:80.7, gc:77.4, d:-1.3},
+  {n:"IOU Financial Production", ind:"Small Business Lending", rm2:20645, rm1:17056, rc:10780, g2:80.7, g1:79.5, gc:79.9, d:-1.2},
+  {n:"Better Mortgage - Production", ind:"Mortgage", rm2:52376, rm1:45271, rc:33420, g2:30.8, g1:29.7, gc:34.2, d:-1.1},
+  {n:"Greenbox Capital Sandbox", ind:"Small Business Lending", rm2:15631, rm1:14057, rc:10922, g2:59.7, g1:58.7, gc:63.4, d:-1.0},
+  {n:"Funding Metrics Production", ind:"Small Business Lending", rm2:133576, rm1:103486, rc:48932, g2:70.3, g1:69.3, gc:70.4, d:-1.0},
+  {n:"Best Egg - Production", ind:"Consumer", rm2:38821, rm1:37123, rc:23902, g2:70.0, g1:69.1, gc:71.8, d:-0.9},
+  {n:"Flinks Production", ind:"Consumer", rm2:19030, rm1:18026, rc:14044, g2:13.9, g1:13.1, gc:4.7, d:-0.8},
+  {n:"SoFi", ind:"Consumer", rm2:23434, rm1:22204, rc:17334, g2:70.7, g1:70.0, gc:73.1, d:-0.7},
+  {n:"Marlin Leasing Production", ind:"Small Business Lending", rm2:104675, rm1:104167, rc:74883, g2:85.0, g1:84.4, gc:84.6, d:-0.6},
+  {n:"Plaid Production", ind:"Consumer", rm2:69094, rm1:63419, rc:39821, g2:64.0, g1:63.4, gc:66.0, d:-0.6},
+  {n:"Expansion Capital Group", ind:"Small Business Lending", rm2:249179, rm1:233716, rc:347348, g2:73.6, g1:73.1, gc:83.3, d:-0.5},
+  {n:"Idea Financial", ind:"Small Business Lending", rm2:29628, rm1:27028, rc:20776, g2:81.0, g1:80.5, gc:81.1, d:-0.5},
+  {n:"Newtek Production", ind:"Small Business Lending", rm2:14624, rm1:13738, rc:10630, g2:87.7, g1:87.2, gc:87.9, d:-0.5}
 ];
 
 /* daily: [dayOfMonth, revenue, gm%, businessDaysElapsed] */
@@ -380,11 +381,11 @@ const DAILY_PRIOR = {label:"Aug 2026", bdTot:21, rows:[
  [31,217580,71.4,21]]};
 
 const DAILY_CUR = {label:"Sep 2026", bdTot:21, rows:[
- [1,220980,70.8,1],[2,219484,70.2,2],[3,209967,70.1,3],[4,156640,68.8,4],[5,22172,67.8,4],
- [6,16981,67.5,4],[7,32115,69.4,4],[8,226417,70.9,5],[9,220084,70.7,6],[10,228890,71.1,7],
- [11,185615,70.4,8],[12,23615,67.3,8],[13,20871,67.1,8],[14,230583,70.9,9],[15,226428,69.2,10],
- [16,226882,70.8,11],[17,214269,70.8,12],[18,184012,72.5,13],[19,23805,67.7,13],[20,18759,67.1,13],
- [21,188695,69.7,14],[22,219732,70.8,15]]};
+ [1,225544,71.1,1],[2,224678,70.8,2],[3,215092,70.7,3],[4,159788,69.0,4],[5,22154,68.1,4],
+ [6,16959,67.8,4],[7,32296,69.7,4],[8,231734,71.1,5],[9,225184,71.2,6],[10,234025,71.6,7],
+ [11,188895,70.9,8],[12,23613,67.6,8],[13,20840,67.4,8],[14,234823,71.3,9],[15,231466,69.8,10],
+ [16,230665,71.3,11],[17,218878,71.0,12],[18,183719,72.0,13],[19,23814,67.9,13],[20,18762,67.3,13],
+ [21,190967,70.1,14],[22,223740,71.3,15],[23,221906,71.7,16]]};
 
 /* ===================== HELPERS ===================== */
 const IND_COLORS = {
