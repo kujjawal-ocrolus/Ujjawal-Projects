@@ -21,7 +21,7 @@ th{color:#8b949e;font-weight:600}td.n,th.n{text-align:right}
 .note{color:#8b949e;font-size:12px;margin-top:8px}.sw{margin-bottom:12px;display:flex;gap:6px}
 canvas{max-height:320px}
 </style></head><body>
-<header><h1>Ocrolus Revenue Intelligence Dashboard</h1><div class="sub">As of Nov 4, 2026 · Revenue in USD · Current month (Nov) has only 2 days of data — treat as early/partial</div></header>
+<header><h1>Ocrolus Revenue Intelligence Dashboard</h1><div class="sub">As of Nov 5, 2026 · Revenue in USD · Current month (Nov) has data through Nov 3 (2 business days) — treat as early/partial</div></header>
 <nav id="nav"></nav>
 
 <div class="tab" id="t0">
@@ -38,7 +38,7 @@ canvas{max-height:320px}
 <div class="tab" id="t1">
  <div class="card"><h3>Top 10 Clients by ARR (Jun 2026)</h3><table id="arrTbl"></table></div>
  <div class="card" style="margin-top:16px"><h3>Top 10 Clients by Revenue</h3><div class="sw" id="revSw"></div><table id="revTbl"></table>
- <div class="note">Open months projected to full month using business-day progress. Nov 2026 is extremely early (2 days) so ranks are provisional.</div></div>
+ <div class="note">Open months projected to full month using business-day progress. Nov 2026 is early (2 business days) so ranks are provisional.</div></div>
 </div>
 
 <div class="tab" id="t2">
@@ -56,24 +56,24 @@ canvas{max-height:320px}
   <div class="card"><h3>Cumulative Revenue — Business-Day Aligned</h3><canvas id="cCum"></canvas></div>
   <div class="card"><h3>Daily Gross Margin % — Business-Day Aligned</h3><canvas id="cGm"></canvas></div>
  </div>
- <div class="note">Weekends/holidays carry weight 0 and fold into the preceding business day. November has 2 days so far.</div>
+ <div class="note">Weekends/holidays carry weight 0 and fold into the preceding business day. November has 2 business days so far (data through Nov 3).</div>
 </div>
 
 <script>
 const ARR=[["Dec '25",44998140,401],["Jan '26",48964915,410],["Feb '26",49814910,408],["Mar '26",49632152,406],["Apr '26",48397374,414],["May '26",51475807,414],["Jun '26",54469215,408]];
 const IND={"Sep '26":{"Banking":[1647,72.7],"Banking/KYC":[475,82],"Consumer":[367718,63.9],"Mortgage":[1082492,37.7],"Other Lending":[3463,81.8],"Professional Services":[141886,69.4],"Small Business Lending":[2122547,72.6]},
 "Oct '26":{"Banking/KYC":[2627,73.3],"Consumer":[384204,63.7],"Mortgage":[1047829,39.4],"Other Lending":[2249,83.3],"Professional Services":[122494,72.3],"Small Business Lending":[3012093,83.4]},
-"Nov '26 (MTD)":{"Banking/KYC":[4,-252.4],"Consumer":[3637,28.6],"Mortgage":[4606,-117.1],"Other Lending":[6,8.4],"Professional Services":[40,-437.4],"Small Business Lending":[7605,-49.7]}};
+"Nov '26 (MTD)":{"Banking/KYC":[388,77.6],"Consumer":[30476,60.4],"Mortgage":[104973,42],"Other Lending":[113,88.8],"Professional Services":[10766,60.4],"Small Business Lending":[329524,87.9]}};
 const MON=Object.keys(IND);
 const TOPREV={"Sep '26":[["Expansion Capital Group","Small Business Lending",255426,72.9],["OnDeck","Small Business Lending",247663,76.4],["Rapid Finance (Production)","Small Business Lending",201201,80],["Marlin Leasing Production","Small Business Lending",92902,82.9],["Zillow - Encompass - Production","Mortgage",92304,-31.5],["Kapitus (strategic funding source)","Small Business Lending",71625,46.8],["Pearl Capital Business Funding","Small Business Lending",67322,63.7],["Channel Partners Production","Small Business Lending",64450,86.1],["The Business Backer","Small Business Lending",61794,86.1],["Basepoint Production","Small Business Lending",60284,87.9]],
 "Oct '26":[["Rapid Finance (Production)","Small Business Lending",679793,95.2],["OnDeck","Small Business Lending",279167,79.5],["Expansion Capital Group","Small Business Lending",201926,69.4],["Pearl Capital Business Funding","Small Business Lending",190908,92.1],["Fora Financial","Small Business Lending",180861,92.8],["Kalamata Capital Group","Small Business Lending",146858,95.8],["ForwardLine - Production Bank Statements","Small Business Lending",102107,85.7],["Marlin Leasing Production","Small Business Lending",93432,84.3],["Zillow - Encompass - Production","Mortgage",89172,-7.3],["Kapitus (strategic funding source)","Small Business Lending",80102,58.5]],
-"Nov '26 (MTD, projected)":[["Zillow Home Loans","Mortgage",32375,24],["The Business Backer","Small Business Lending",26751,86.1],["OnDeck","Small Business Lending",19462,-39.7],["Rapid Finance (Production)","Small Business Lending",17316,0.2],["Expansion Capital Group","Small Business Lending",13080,-222.6],["Zillow - Encompass - Production","Mortgage",11951,-276.5],["Plaid Production","Consumer",11211,40.9],["SoFi","Consumer",9602,60],["Channel Partners Production","Small Business Lending",8936,80.1],["Fundbox Production","Small Business Lending",8159,92.5]]};
+"Nov '26 (MTD, projected)":[["Rapid Finance (Production)","Small Business Lending",678987,96.5],["OnDeck","Small Business Lending",280580,83.8],["Expansion Capital Group","Small Business Lending",252581,79.3],["Fora Financial","Small Business Lending",194916,95],["Pearl Capital Business Funding","Small Business Lending",187118,95.6],["Kalamata Capital Group","Small Business Lending",162476,98.2],["Basepoint Production","Small Business Lending",113960,96],["Zillow - Encompass - Production","Mortgage",104026,13.5],["Marlin Leasing Production","Small Business Lending",95534,86.7],["Kapitus (strategic funding source)","Small Business Lending",82640,71.4]]};
 const ARRTOP=[["Enova International, Inc.","Small Business Lending",3378041],["Zillow Group","Mortgage",2549728],["Rapid Financial Services, LLC (dba Rapid Finance)","Small Business Lending",2366898],["Expansion Capital Group, LLC","Small Business Lending",1915333],["Samson Funding","Small Business Lending",1584438],["Square Advance","Small Business Lending",1512114],["BasePoint Capital","Small Business Lending",1439103],["Marlin Capital Solutions","Small Business Lending",1290156],["Funding Metrics LLC","Small Business Lending",1240370],["BasePoint Capital","Small Business Lending",960000]];
-const DROP=[["Lower","Mortgage",7222,225,null],["Glassratner Advisory & Capital Group, LLC","Professional Services",20248,759,null],["Better Mortgage (BSIC) - Production","Mortgage",5664,264,37],["Funding Metrics Production","Small Business Lending",53774,24415,352],["Bluevine PROD","Small Business Lending",52810,24391,null],["Uplinq","Small Business Lending",11713,5575,null]];
+const DROP=[["Lower","Mortgage",7222,225,null],["Glassratner Advisory & Capital Group, LLC","Professional Services",20248,759,6993],["Better Mortgage (BSIC) - Production","Mortgage",5664,264,268],["Funding Metrics Production","Small Business Lending",53774,24415,27787],["Bluevine PROD","Small Business Lending",52810,24391,25465],["Uplinq","Small Business Lending",11713,5575,1332]];
 const MARG=[["AnnieMac Home Mortgage","Mortgage",31360,28596,63.9,33.3,-30.6],["Boom Pay - Production","Consumer",33483,25951,56.7,43.7,-13],["All Western","Mortgage",22932,20750,72.9,64.3,-8.6],["Nova Credit","Consumer",31671,31574,24.6,16.5,-8.1],["USA Mortgage - Encompass - Production","Mortgage",22539,20646,55.3,48.8,-6.5],["SoFi","Consumer",26560,25757,75.3,68.8,-6.5],["Sofi - Encompass - Production","Mortgage",38959,39819,54.2,49.8,-4.4],["Assurance - Encompass - Production","Mortgage",15596,15065,71.7,67.5,-4.2],["Expansion Capital Group","Small Business Lending",255426,201926,72.9,69.4,-3.5],["Argyle - Billing","Consumer",18870,20737,56.6,53.4,-3.2],["Plaid Production","Consumer",49997,51764,65,63,-2],["BHG Production Account - ","Small Business Lending",16383,19519,62.5,60.8,-1.7],["Rural First","Mortgage",16371,16968,13.4,12.1,-1.3],["National Funding","Small Business Lending",22143,16975,86.5,85.3,-1.2],["Veterans United Home Loans - Production","Mortgage",50540,48408,28.8,27.7,-1.1],["Best Egg - Production","Consumer",29502,28994,70.4,69.7,-0.7]];
 const OCT=[[218105,72.4],[184882,73.3],[28962,71.8],[23379,69.8],[261413,73.4],[228126,73.4],[222284,72.1],[211315,72.3],[166610,70.5],[27384,71.4],[21580,70.3],[158884,70.5],[216942,71.4],[206496,70.4],[205024,70.9],[174419,70.3],[20085,65.6],[17585,65.6],[221580,71.3],[209262,71.3],[205321,71.3],[194996,70.8],[157190,68.8],[18687,63.9],[17988,65.2],[209302,71.6],[202287,69.6],[195949,71.5],[188692,73],[138366,70.1],[18401,68.5]];
 const OCTW=[1,1,0,0,1,1,1,1,1,0,0,1,1,1,1,1,0,0,1,1,1,1,1,0,0,1,1,1,1,1,0];
-const NOV=[[3645,34.5,0],[12253,-78.1,1]];
+const NOV=[[19073,72.9,0],[227271,75.8,1],[229896,75.1,1]];
 
 const f=n=>n==null?'—':'$'+Math.round(n).toLocaleString();
 const fm=n=>n>=1e6?'$'+(n/1e6).toFixed(2)+'M':n>=1e3?'$'+(n/1e3).toFixed(0)+'K':'$'+n;
